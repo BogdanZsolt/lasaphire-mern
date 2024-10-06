@@ -1,0 +1,93 @@
+{
+  "menus": [
+    {
+      "id": 1,
+      "text": "About",
+      "link": "",
+      "mega": [
+        {
+          "id": 1.1,
+          "text": "Our Herstory",
+          "link": "/herstory",
+          "image": "/images/ecoprint-01-200x200.webp"
+        },
+        {
+          "id": 1.2,
+          "text": "Me Petra",
+          "link": "/mepetra",
+          "image": "/images/pepsz-yogaban-200x200.webp"
+        },
+        {
+          "id": 1.3,
+          "text": "Base Materials",
+          "link": "/base_materials",
+          "image": "/images/ecoprint-04-200x200.webp"
+        },
+        {
+          "id": 1.4,
+          "text": "Values & Intentions",
+          "link": "/values",
+          "image": "/images/our_values-150x150.jpg"
+        },
+        {
+          "id": 1.5,
+          "text": "Frequently Asked Quetions",
+          "link": "/faqs",
+          "image": "/images/ecoprint-06-200x200.webp"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Shop",
+      "link": "/shop"
+    },
+    {
+      "id": 3,
+      "text": "Knowledge",
+      "link": "",
+      "mega": [
+        {
+          "id": 3.1,
+          "text": "Membership",
+          "link": "",
+          "image": "/images/pepsz-yogaban-200x200.webp"
+        },
+        {
+          "id": "3.2",
+          "text": "Online Courses",
+          "link": "",
+          "image": "/images/ecoprint-04-200x200.webp"
+        },
+        {
+          "id": "3.3",
+          "text": "Retreats & Workshop",
+          "link": "",
+          "image": "/images/ecoprint-01-200x200.webp"
+        },
+        {
+          "id": "3.4",
+          "text": "PantherStuff Blog",
+          "link": "",
+          "image": "/images/ecoprint-05-200x200.webp"
+        },
+        {
+          "id": "3.5",
+          "text": "Library",
+          "link": "",
+          "image": "/images/ecoprint-06-200x200.webp"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Blog",
+      "link": "/blog"
+    },
+    {
+      "id": 5,
+      "text": "Contact",
+      "link": "/contact"
+    }
+  ]
+}

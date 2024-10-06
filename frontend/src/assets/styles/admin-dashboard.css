@@ -1,0 +1,8 @@
+.sidebar .dropdown-menu__container {
+  position: relative;
+}
+
+.sidebar .dropdown-menu__container .dropdown-menu {
+  top: -2rem;
+  left: 4rem;
+}
