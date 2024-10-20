@@ -13,28 +13,50 @@ const ImageList = ({ images, setImages }) => {
   const [selected, setSelected] = useState('');
 
   const removeItem = (value) => {
-    const newImages = images.filter((item) => item !== value);
-    setImages(newImages);
+    if (typeof images === 'object') {
+      const newImages = images.filter((item) => item !== value);
+      setImages(newImages);
+    } else if (typeof images === 'string') {
+      setImages('');
+    }
   };
 
   useEffect(() => {
     if (active === '') {
-      images.length > 0 ? setActive(images[0]) : setActive('');
+      if (typeof images === 'object') {
+        images.length > 0 ? setActive(images[0]) : setActive('');
+      } else if (typeof images === 'string') {
+        setActive(images);
+      }
     }
     if (active !== '' && !images.includes(active)) {
-      if (images.length > 0) {
-        setActive(images[0]);
-      } else {
-        setActive('');
+      if (typeof images === 'object') {
+        if (images.length > 0) {
+          setActive(images[0]);
+        } else {
+          setActive('');
+        }
+      } else if (typeof images === 'string') {
+        setActive(images);
       }
     }
     if (url !== '') {
-      setImages((images) => [...images, url]);
-      setUrl('');
+      if (typeof images === 'object') {
+        setImages((images) => [...images, url]);
+        setUrl('');
+      } else if (typeof images === 'string') {
+        setImages(url);
+        setUrl('');
+      }
     }
     if (selected !== '') {
-      setImages((images) => [...images, selected]);
-      setSelected('');
+      if (typeof images === 'object') {
+        setImages((images) => [...images, selected]);
+        setSelected('');
+      } else if (typeof images === 'string') {
+        setImages(selected);
+        setSelected('');
+      }
     }
   }, [active, images, setImages, url, selected]);
 
@@ -49,23 +71,43 @@ const ImageList = ({ images, setImages }) => {
         )}
       </div>
       <div className="image-list-wrapper">
-        {images.length > 0 && images[0] !== '' && (
-          <>
-            {images.map((item, index) => (
+        {console.log(typeof images)}
+        {typeof images === 'object'
+          ? images.length > 0 &&
+            images[0] !== '' && (
+              <>
+                {images.map((item, index) => (
+                  <div
+                    onClick={() => setActive(item)}
+                    className={`image-list-item ${
+                      active === item ? 'active' : ''
+                    }`}
+                    key={index}
+                  >
+                    <span>{item}</span>
+                    <RiCloseLine
+                      className="image-list-item__remove"
+                      onClick={() => removeItem(item)}
+                    />
+                  </div>
+                ))}
+              </>
+            )
+          : typeof images === 'string' &&
+            images !== '' && (
               <div
-                onClick={() => setActive(item)}
-                className={`image-list-item ${active === item ? 'active' : ''}`}
-                key={index}
+                onClick={() => setActive(images)}
+                className={`image-list-item ${
+                  active === images ? 'active' : ''
+                }`}
               >
-                <span>{item}</span>
+                <span>{images}</span>
                 <RiCloseLine
                   className="image-list-item__remove"
-                  onClick={() => removeItem(item)}
+                  onClick={() => removeItem(images)}
                 />
               </div>
-            ))}
-          </>
-        )}
+            )}
       </div>
       <AddImages
         addImgShow={addShow}

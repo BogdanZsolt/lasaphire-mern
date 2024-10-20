@@ -10,7 +10,7 @@ const productsPopOption = [
 const productPopOption = [
   { path: 'user', select: ['name'] },
   { path: 'category', select: ['title', 'translations'] },
-  { path: 'sizes', select: ['title'] },
+  { path: 'ingredients', select: ['name', 'description', 'translations'] },
 ];
 const productCreateInit = (req, res, next) => {
   req.body.user = req.user._id;
@@ -22,7 +22,6 @@ const productCreateInit = (req, res, next) => {
   req.body.countInStock = 0;
   req.body.rating = 0;
   req.body.numReviews = 0;
-  req.body.colors = ['#ffffff'];
   req.body.translations = {
     hu: {
       name: 'Egyszerű termék',
@@ -131,12 +130,10 @@ const updateProduct = asyncHandler(async (req, res) => {
     thumbnails,
     description,
     category,
-    collections,
     beforePrice,
     currentPrice,
     countInStock,
-    colors,
-    sizes,
+    ingredients,
     translations,
   } = req.body;
 
@@ -147,12 +144,10 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.thumbnails = thumbnails || product.thumbnails;
     product.description = description || product.description;
     product.category = category || product.category;
-    product.collections = collections || product.collections;
     product.beforePrice = beforePrice || product.beforePrice;
     product.currentPrice = currentPrice || product.currentPrice;
     product.countInStock = countInStock || product.countInStock;
-    product.colors = colors || product.colors;
-    product.sizes = sizes || product.sizes;
+    product.ingredients = ingredients || product.ingredients;
     product.translations = translations || product.translations;
 
     const updatedProduct = await product.save();
@@ -290,45 +285,10 @@ const getProductsMinMaxPrice = asyncHandler(async (req, res) => {
   }
 });
 
-const getProductsAllColors = asyncHandler(async (req, res) => {
-  try {
-    const allColors = await Product.aggregate([
-      {
-        $group: {
-          _id: null,
-          colors: { $addToSet: '$colors' },
-        },
-      },
-      {
-        $addFields: {
-          colors: {
-            $reduce: {
-              input: '$colors',
-              initialValue: [],
-              in: {
-                $concatArrays: ['$$value', '$$this'],
-              },
-            },
-          },
-        },
-      },
-    ]);
-    const filtered = allColors[0].colors.filter(
-      (val, index) => allColors[0].colors.indexOf(val) === index
-    );
-    allColors[0].colors = [...filtered];
-    res.status(200).json(allColors);
-  } catch (err) {
-    res.status(404);
-    throw new Error('Resource not found');
-  }
-});
-
 export {
   productCreateInit,
   getProductStats,
   getProductsMinMaxPrice,
-  getProductsAllColors,
   getProducts,
   getProductById,
   createProduct,

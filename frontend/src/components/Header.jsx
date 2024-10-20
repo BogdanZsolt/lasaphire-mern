@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import Menu from './Menu';
-import logo from '../assets/logo-200x200.png';
+import logo from '../assets/logo-200x200-1.png';
 // import SearchBox from './SearchBox';
 import LanguageSelector from './LanguageSelector';
 import { useTranslation } from 'react-i18next';

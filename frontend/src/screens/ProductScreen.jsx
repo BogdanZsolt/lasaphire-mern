@@ -32,10 +32,9 @@ import Meta from '../components/Meta';
 import Banner from '../components/Banner';
 import ThumbsGallery from '../components/ThumbsGallery';
 import { Trans, useTranslation } from 'react-i18next';
-import SelectColor from '../components/SelectColor';
-import SelectSize from '../components/SelectSize';
 import { toCurrency, uuid } from '../utils/converter';
 import Editor from '../components/Editor.jsx';
+import Ingredients from '../components/Ingredients.jsx';
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
@@ -61,8 +60,6 @@ const ProductScreen = () => {
   const [beforePrice, setBeforePrice] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [shippingPrice, setShippingPrice] = useState(0);
-  const [color, setColor] = useState('');
-  const [size, setSize] = useState('');
 
   const [activeTab, setActiveTab] = useState('description');
 
@@ -94,8 +91,6 @@ const ProductScreen = () => {
         currentPrice,
         currentPrice_hu,
         thumbnail,
-        color,
-        size,
         qty,
         countInStock,
       })
@@ -127,7 +122,6 @@ const ProductScreen = () => {
           : product.translations?.hu?.currentPrice || product.currentPrice
       );
       setShippingPrice(i18n.language === 'en' ? 100 : 20000);
-      setColor(product.colors[0]);
       // setSize(product.sizes[0]);
     }
   }, [product, i18n.language]);
@@ -235,22 +229,6 @@ const ProductScreen = () => {
                       </Row>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <Row>{t('colors')}</Row>
-                      <SelectColor
-                        colors={product.colors}
-                        color={color}
-                        setColor={setColor}
-                      />
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <Row>{t('size')}</Row>
-                      <SelectSize
-                        sizes={product.sizes}
-                        size={size}
-                        setSize={setSize}
-                      />
-                    </ListGroup.Item>
-                    <ListGroup.Item>
                       <Trans values={{ count: product.countInStock }}>
                         {t('instock')}{' '}
                       </Trans>
@@ -349,8 +327,8 @@ const ProductScreen = () => {
                 <Tab eventKey="description" title={t('productDetails')}>
                   <Editor content={product.description} editable={false} />
                 </Tab>
-                <Tab eventKey="custom" title={t('custom')}>
-                  Tab content for Profile
+                <Tab eventKey="ingredients" title={t('ingredients')}>
+                  <Ingredients ingredients={product.ingredients} />
                 </Tab>
                 <Tab
                   eventKey="reviews"

@@ -48,12 +48,6 @@ const productSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'ProductCategory',
     },
-    collections: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ProductCollection',
-      },
-    ],
     beforePrice: Number,
     currentPrice: {
       type: Number,
@@ -76,17 +70,6 @@ const productSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
-    colors: {
-      type: [String],
-      required: true,
-      default: [],
-    },
-    sizes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ProductSize',
-      },
-    ],
     translations: {
       hu: {
         name: { type: String },
@@ -95,6 +78,12 @@ const productSchema = new mongoose.Schema(
         currentPrice: { type: Number },
       },
     },
+    ingredients: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Ingredient',
+      },
+    ],
   },
   {
     timestamps: true,

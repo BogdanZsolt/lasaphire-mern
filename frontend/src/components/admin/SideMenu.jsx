@@ -26,11 +26,6 @@ const SideMenu = () => {
               <Nav.Link>Product Collections</Nav.Link>
             </LinkContainer>
           </Nav.Item>
-          <Nav.Item>
-            <LinkContainer to="/admin/productsizelist" className="ps-3">
-              <Nav.Link>Product Sizes</Nav.Link>
-            </LinkContainer>
-          </Nav.Item>
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="posts">

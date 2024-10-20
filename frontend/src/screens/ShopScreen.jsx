@@ -28,7 +28,6 @@ import {
   useGetProductsMinMaxPriceQuery,
 } from '../slices/productsApiSlice.js';
 import { useGetProductCategoriesQuery } from '../slices/productCategoriesApiSlice';
-import { useGetProductCollectionsQuery } from '../slices/productCollectionsApiSlice';
 
 const ShopScreen = () => {
   let { pageNumber, keyword, productCategory, productCollection } = useParams();
@@ -47,8 +46,6 @@ const ShopScreen = () => {
   const [show, setShow] = useState(false);
   const [page, setPage] = useState(pageNumber);
   const [pages, setPages] = useState(1);
-  const [colors, setColors] = useState([]);
-  const [sizes, setSizes] = useState([]);
 
   const { data: minmax, isLoading: isMinMaxLoading } =
     useGetProductsMinMaxPriceQuery();
@@ -61,8 +58,6 @@ const ShopScreen = () => {
     sort,
     category_in: category.length > 0 ? category : undefined,
     collections_in: collection.length > 0 ? collection : undefined,
-    sizes_in: sizes.length > 0 ? sizes : undefined,
-    colors_in: colors.length > 0 ? colors : undefined,
     page,
     limit: 8,
     currentPrice_gte:
@@ -89,12 +84,6 @@ const ShopScreen = () => {
     error: catError,
   } = useGetProductCategoriesQuery({ sort: 'title' });
 
-  const {
-    data: collections,
-    isLoading: isCollLoading,
-    error: collError,
-  } = useGetProductCollectionsQuery({ sort: 'title' });
-
   useEffect(() => {
     if (products) {
       products.pages < 1 ? setPages(1) : setPages(products.pages);
@@ -105,10 +94,22 @@ const ShopScreen = () => {
   useEffect(() => {
     if (minmax) {
       setMinPrice(
-        i18n.language === 'en' ? minmax[0].minPrice : minmax[0].minPrice_hu
+        i18n.language === 'en'
+          ? minmax[0]?.minPrice
+            ? minmax[0]?.minPrice
+            : 0
+          : minmax[0]?.minPrice_hu
+          ? minmax[0]?.minPrice_hu
+          : 0
       );
       setMaxPrice(
-        i18n.language === 'en' ? minmax[0].maxPrice : minmax[0].maxPrice_hu
+        i18n.language === 'en'
+          ? minmax[0]?.maxPrice
+            ? minmax[0]?.maxPrice
+            : 0
+          : minmax[0]?.maxPrice_hu
+          ? minmax[0]?.maxPrice_hu
+          : 0
       );
     }
   }, [minmax, i18n.language]);
@@ -141,15 +142,6 @@ const ShopScreen = () => {
         catError && (
           <Message variant="danger">
             {catError?.data?.message || catError.error}
-          </Message>
-        )
-      )}
-      {isCollLoading ? (
-        <Loader />
-      ) : (
-        collError && (
-          <Message variant="danger">
-            {collError?.data?.message || collError.error}
           </Message>
         )
       )}
@@ -190,30 +182,23 @@ const ShopScreen = () => {
                   <Offcanvas.Body>
                     {minmax && (
                       <FilterSidebar
-                        size={sizes}
-                        setSize={setSizes}
                         categories={categories}
                         category={category}
                         setCategory={setCategory}
-                        collections={collections}
-                        collection={collection}
-                        setCollection={setCollection}
                         min={
                           i18n.language === 'en'
-                            ? minmax[0].minPrice
-                            : minmax[0].minPrice_hu
+                            ? minmax[0]?.minPrice
+                            : minmax[0]?.minPrice_hu
                         }
                         minPrice={minPrice}
                         setMinPrice={setMinPrice}
                         max={
                           i18n.language === 'en'
-                            ? minmax[0].maxPrice
-                            : minmax[0].maxPrice_hu
+                            ? minmax[0]?.maxPrice
+                            : minmax[0]?.maxPrice_hu
                         }
                         maxPrice={maxPrice}
                         setMaxPrice={setMaxPrice}
-                        colors={colors}
-                        setColors={setColors}
                       />
                     )}
                   </Offcanvas.Body>

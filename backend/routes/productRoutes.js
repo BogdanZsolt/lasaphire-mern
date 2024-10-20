@@ -4,7 +4,6 @@ import {
   productCreateInit,
   getProductStats,
   getProductsMinMaxPrice,
-  getProductsAllColors,
   getProducts,
   getProductById,
   createProduct,
@@ -22,7 +21,6 @@ router
 router.route('/top').get(getTopProducts);
 router.route('/stats').get(getProductStats);
 router.route('/minmax').get(getProductsMinMaxPrice);
-router.route('/allcolors').get(getProductsAllColors);
 router
   .route('/:id')
   .get(getProductById)

@@ -30,8 +30,7 @@ const Product = ({ product }) => {
 
   const addToCartHandler = (e) => {
     e.preventDefault();
-    const { _id, name, currentPrice, thumbnails, colors, countInStock } =
-      product;
+    const { _id, name, currentPrice, thumbnails, countInStock } = product;
     const cartId = uuid();
     const name_hu = product.translations?.hu?.name || product.name;
     const currentPrice_hu =
@@ -49,7 +48,6 @@ const Product = ({ product }) => {
         currentPrice,
         currentPrice_hu,
         thumbnail,
-        color: colors[0],
         qty,
         countInStock,
       })

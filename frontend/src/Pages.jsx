@@ -4,7 +4,6 @@ export const App = lazy(() => import('./App.jsx'));
 export const MainScreen = lazy(() => import('./screens/MainScreen.jsx'));
 export const HomeScreen = lazy(() => import('./screens/HomeScreen.jsx'));
 export const ProductScreen = lazy(() => import('./screens/ProductScreen.jsx'));
-export const SupplyScreen = lazy(() => import('./screens/SupplyScreen.jsx'));
 export const LoginScreen = lazy(() => import('./screens/LoginScreen.jsx'));
 export const RegisterScreen = lazy(() =>
   import('./screens/RegisterScreen.jsx')
@@ -26,21 +25,12 @@ export const PaymentScreen = lazy(() => import('./screens/PaymentScreen.jsx'));
 export const HerStory = lazy(() => import('./screens/HerStoryScreen.jsx'));
 export const MePetraScreen = lazy(() => import('./screens/MePetraScreen.jsx'));
 export const ValuesScreen = lazy(() => import('./screens/ValuesScreen.jsx'));
-export const RawMaterialsScreen = lazy(() =>
-  import('./screens/RawMaterialsScreen.jsx')
+export const IngredientsScreen = lazy(() =>
+  import('./screens/IngredientsScreen.jsx')
 );
 export const FaqsScreen = lazy(() => import('./screens/FaqsScreen.jsx'));
 export const ContactScreen = lazy(() => import('./screens/ContactScreen.jsx'));
 export const ShopScreen = lazy(() => import('./screens/ShopScreen.jsx'));
-export const SupplyStoreScreen = lazy(() =>
-  import('./screens/SupplyStoreScreen.jsx')
-);
-export const MembershipScreen = lazy(() =>
-  import('./screens/MembershipScreen.jsx')
-);
-export const OnlineCoursesScreen = lazy(() =>
-  import('./screens/OnlineCoursesScreen.jsx')
-);
 export const BlogScreen = lazy(() => import('./screens/BlogScreen.jsx'));
 export const PostScreen = lazy(() => import('./screens/PostScreen.jsx'));
 export const AuthorScreen = lazy(() => import('./screens/AuthorScreen.jsx'));
@@ -76,35 +66,17 @@ export const ProductCategoryListScreen = lazy(() =>
 export const ProductCatEditScreen = lazy(() =>
   import('./screens/admin/ProductCatEditScreen.jsx')
 );
-export const ProductCollectionListScreen = lazy(() =>
-  import('./screens/admin/ProductCollectionListScreen.jsx')
+export const IngredientListScreen = lazy(() =>
+  import('./screens/admin/IngredientListScreen.jsx')
 );
-export const ProductCollectionEditScreen = lazy(() =>
-  import('./screens/admin/ProductCollectionEditScreen.jsx')
+export const IngredientEditScreen = lazy(() =>
+  import('./screens/admin/IngredientEditScreen.jsx')
 );
-export const ProductSizeListScreen = lazy(() =>
-  import('./screens/admin/ProductSizeListScreen.jsx')
+export const IngredientCategoryListScreen = lazy(() =>
+  import('./screens/admin/IngredientCategoryListScreen.jsx')
 );
-export const ProductSizeEditScreen = lazy(() =>
-  import('./screens/admin/ProductSizeEditScreen.jsx')
-);
-export const SupplyListScreen = lazy(() =>
-  import('./screens/admin/SupplyListScreen.jsx')
-);
-export const SupplyEditScreen = lazy(() =>
-  import('./screens/admin/SupplyEditScreen.jsx')
-);
-export const SupplyCategoryListScreen = lazy(() =>
-  import('./screens/admin/SupplyCategoryListScreen.jsx')
-);
-export const SupplyCatEditScreen = lazy(() =>
-  import('./screens/admin/SupplyCatEditScreen.jsx')
-);
-export const SupplySizeListScreen = lazy(() =>
-  import('./screens/admin/SupplySizeListScreen.jsx')
-);
-export const SupplySizeEditScreen = lazy(() =>
-  import('./screens/admin/SupplySizeEditScreen.jsx')
+export const IngredientCategoryEditScreen = lazy(() =>
+  import('./screens/admin/IngredientCategoryEditScreen.jsx')
 );
 export const PostListScreen = lazy(() =>
   import('./screens/admin/PostListScreen.jsx')
@@ -141,12 +113,6 @@ export const UserListScreen = lazy(() =>
 );
 export const UserEditScreen = lazy(() =>
   import('./screens/admin/UserEditScreen.jsx')
-);
-export const MembershipPlanListScreen = lazy(() =>
-  import('./screens/admin/MembershipPlanListScreen.jsx')
-);
-export const MembershipPlanEditScreen = lazy(() =>
-  import('./screens/admin/MembershipPlanEditScreen.jsx')
 );
 export const OrderListScreen = lazy(() =>
   import('./screens/admin/OrderListScreen.jsx')

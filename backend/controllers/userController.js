@@ -28,8 +28,6 @@ const authUser = asyncHandler(async (req, res, next) => {
       email: user.email,
       isEmailVerified: user.isEmailVerified,
       isAdmin: user.isAdmin,
-      isPremium: user.isPremium,
-      premiumExpiresAt: user.premiumExpiresAt,
     });
   })(req, res, next);
 });
@@ -90,8 +88,6 @@ const checkAuthenticated = asyncHandler(async (req, res) => {
         email: user.email,
         isEmailVerified: user.isEmailVerified,
         isAdmin: user.isAdmin,
-        isPremium: user.isPremium,
-        premiumExpiresAt: user.premiumExpiresAt,
       });
     }
   } catch (err) {
@@ -127,34 +123,6 @@ const checkIsAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Check if the user's plan is premium
-// @route   GET /api/users/checkpremium
-// @access  Public
-const checkIsPremium = asyncHandler(async (req, res) => {
-  const token = req.cookies['jwt'];
-  if (!token) {
-    return res.status(200).json({ isPremium: false });
-  }
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    // find the user
-    const user = await User.findById(decoded.userId);
-    if (!user) {
-      return res.status(200).json({ isPremium: false });
-    } else {
-      let isPremium = false;
-      if (user.isPremium || user.isAdmin) {
-        isPremium = true;
-      }
-      res.status(200).json({
-        isPremium: isPremium,
-      });
-    }
-  } catch (err) {
-    return res.status(401).json({ isPremium: false, err });
-  }
-});
-
 // @desc    Register user
 // @route   POST /api/users
 // @access  Public
@@ -174,8 +142,6 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     isEmailVerified: false,
-    isPremium: true,
-    premiumExpiresAt: null,
     password,
   });
 
@@ -220,8 +186,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
       isEmailVerified: user.isEmailVerified,
       authMethod: user.authMethod,
       isAdmin: user.isAdmin,
-      isPremium: user.isPremium,
-      premiumExpiresAt: user.premiumExpiresAt,
     });
   } else {
     res.status(404);
@@ -251,8 +215,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isEmailVerified: updateUser.isEmailVerified,
       isAdmin: updatedUser.isAdmin,
-      isPremium: updateUser.isPremium,
-      premiumExpiresAt: updateUser.premiumExpiresAt,
       authMethod: updateUser.authMethod,
     });
   } else {
@@ -490,7 +452,6 @@ const resetPassword = asyncHandler(async (req, res) => {
 export {
   checkAuthenticated,
   checkIsAdmin,
-  checkIsPremium,
   authUser,
   googleAuthUser,
   googleAuthUserCallback,

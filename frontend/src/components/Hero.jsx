@@ -1,32 +1,33 @@
 import { Button } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import { useTranslation } from 'react-i18next';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-fade';
 
 const Hero = () => {
+  const { t } = useTranslation(['home']);
+
   const heros = [
     {
+      image: 'image_6483441-4-1024x768-1.jpeg',
+      title: t('heroTitle'),
+      description: t('heroDescription'),
+      buttonText: t('checkItOut'),
+    },
+    {
       image: 'pepsz-zafival.jpg',
-      title: 'Fugiat quos consequatur',
-      description:
-        'Quasi enim repellendus mollitia, inventore cumque eaque fuga?',
-      buttonText: 'praesentium',
+      title: t('heroTitle'),
+      description: t('heroDescription'),
+      buttonText: t('explore'),
     },
     {
-      image: 'ecoprint-02.webp',
-      title: 'Rem obcaecati id pariatur',
-      description:
-        'Distinctio facilis voluptatem mollitia dolore nesciunt minus odit',
-      buttonText: 'Laudantium',
-    },
-    {
-      image: 'ecoprint-03.webp',
-      title: 'adipisicing elit',
-      description: 'Dolor sit amet consectetur alias magni necessitatibus.',
-      buttonText: 'Voluptas',
+      image: 'hero-03.jpg',
+      title: t('heroTitle'),
+      description: t('heroDescription'),
+      buttonText: t('getTheDeal'),
     },
   ];
 
@@ -59,7 +60,9 @@ const Hero = () => {
                     variant="success"
                     className="text-primary btn-lasaphire"
                   >
-                    {hero.buttonText}
+                    <span className="fs-4 fw-500 text-white text-uppercase">
+                      {hero.buttonText}
+                    </span>
                   </Button>
                 </div>
               </div>

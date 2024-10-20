@@ -25,11 +25,15 @@ const ProductListScreen = () => {
     limit: 20,
   });
 
-  const [createProduct, { isLoading: loadingCreate }] =
-    useCreateProductMutation();
+  const [
+    createProduct,
+    { isLoading: isLoadingCreate, isError: isErrorCreate, error: errorCreate },
+  ] = useCreateProductMutation();
 
-  const [deleteProduct, { isLoading: loadingDelete }] =
-    useDeleteProductMutation();
+  const [
+    deleteProduct,
+    { isLoading: isLoadingDelete, isError: isErrorDelete, error: errorDelete },
+  ] = useDeleteProductMutation();
 
   const deleteHandler = async (id) => {
     if (window.confirm('Are you sure?')) {
@@ -60,20 +64,32 @@ const ProductListScreen = () => {
       <Row className="text-center">
         <h2 className="fs-1 fw-semibold">Products</h2>
       </Row>
-      <Row className="align-items-center">
-        <Col className="text-end">
-          <Button className="btn-sm m-3" onClick={createProductHandler}>
-            <FaEdit /> Create Product
+      <Row className="justify-content-end align-items-center">
+        <Col xs={3}>
+          <Button
+            className="btn m-3 d-flex justify-content-center align-items-center"
+            onClick={createProductHandler}
+          >
+            <FaEdit className="me-2" />
+            <span>Create Product</span>
           </Button>
         </Col>
       </Row>
 
-      {loadingCreate && <Loader />}
-      {loadingDelete && <Loader />}
+      {isLoadingCreate ? (
+        <Loader />
+      ) : (
+        isErrorCreate && toast.error(errorCreate?.data?.message)
+      )}
+      {isLoadingDelete ? (
+        <Loader />
+      ) : (
+        isErrorDelete && toast.error(errorDelete?.data?.message)
+      )}
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant="danger">{error.data.message}</Message>
       ) : (
         <>
           <Table striped hover responsive className="table-sm">

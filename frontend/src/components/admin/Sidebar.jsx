@@ -19,7 +19,6 @@ import {
   BsEnvelopePlus,
 } from 'react-icons/bs';
 import { AiOutlineProduct } from 'react-icons/ai';
-import { RxComponent1 } from 'react-icons/rx';
 import { logout } from '../../slices/authSlice';
 import { useLogoutMutation } from '../../slices/usersApiSlice';
 
@@ -100,39 +99,26 @@ const Sidebar = () => {
                       <span>Product Collections</span>
                     </Link>
                   </Nav.Item>
-                  <Nav.Item className="ms-4 p-2">
-                    <Link
-                      to="/admin/productsizelist"
-                      className="text-primary my-2"
-                    >
-                      <span>Product Sizes</span>
-                    </Link>
-                  </Nav.Item>
                 </Nav>
               </Collapse>
             </div>
             <div className="d-block d-md-none dropdown-menu__container">
               <Dropdown.Menu show={open === 'products'}>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/productlist">
                     <span>All Products</span>
                   </Link>
                 </Dropdown.Item>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/productcategorylist">
                     <span>
                       <span>Product Categories</span>
                     </span>
                   </Link>
                 </Dropdown.Item>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/productcollectionlist">
                     <span>Product Collections</span>
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Link to="/admin/productsizelist">
-                    <span>Product Sizes</span>
                   </Link>
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -142,60 +128,55 @@ const Sidebar = () => {
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
-              onClick={() => setOpen(open === 'supplies' ? '' : 'supplies')}
-              aria-controls="supplies-collapse"
+              onClick={() =>
+                setOpen(open === 'ingredients' ? '' : 'ingredients')
+              }
+              aria-controls="ingredients-collapse"
               aria-expanded={open}
-              title="Supplies"
+              title="Ingredients"
             >
-              <RxComponent1 className="fs-4" />
+              <AiOutlineProduct className="fs-4" />
               <span className="ms-2 fs-4 d-none d-md-inline-flex">
-                Supplies
+                Ingredients
               </span>
             </Dropdown.Toggle>
             <div className="d-none d-md-block">
-              <Collapse in={open === 'supplies'}>
-                <Nav id="supplies-collapse" className="flex-nowrap flex-column">
+              <Collapse in={open === 'ingredients'}>
+                <Nav
+                  id="ingredients-collapse"
+                  className="flex-nowrap flex-column"
+                >
                   <Nav.Item className="ms-4 p-2">
-                    <Link to="/admin/supplylist" className="text-primary my-2">
-                      <span>All Supplies</span>
+                    <Link
+                      to="/admin/ingredientlist"
+                      className="text-primary my-2"
+                    >
+                      <span>All Ingredients</span>
                     </Link>
                   </Nav.Item>
                   <Nav.Item className="ms-4 p-2">
                     <Link
-                      to="/admin/supplycategorylist"
+                      to="/admin/ingredientcategorylist"
                       className="text-primary my-2"
                     >
-                      <span>Supply Categories</span>
-                    </Link>
-                  </Nav.Item>
-                  <Nav.Item className="ms-4 p-2">
-                    <Link
-                      to="/admin/supplysizelist"
-                      className="text-primary my-2"
-                    >
-                      <span>Supply Sizes</span>
+                      <span>Ingredient Categories</span>
                     </Link>
                   </Nav.Item>
                 </Nav>
               </Collapse>
             </div>
             <div className="d-block d-md-none dropdown-menu__container">
-              <Dropdown.Menu show={open === 'supplies'}>
-                <Dropdown.Item>
-                  <Link to="/admin/supplylist">
-                    <span>All Supplies</span>
+              <Dropdown.Menu show={open === 'ingredients'}>
+                <Dropdown.Item as="div">
+                  <Link to="/admin/ingredientlist">
+                    <span>All Ingredients</span>
                   </Link>
                 </Dropdown.Item>
-                <Dropdown.Item>
-                  <Link to="/admin/supplycategorylist">
+                <Dropdown.Item as="div">
+                  <Link to="/admin/ingredientcategorylist">
                     <span>
-                      <span>Supply Categories</span>
+                      <span>Ingredient Categories</span>
                     </span>
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Link to="/admin/supplysizelist">
-                    <span>Supply Sizes</span>
                   </Link>
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -239,19 +220,19 @@ const Sidebar = () => {
             </div>
             <div className="d-block d-md-none dropdown-menu__container">
               <Dropdown.Menu show={open === 'posts'}>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/postlist">
                     <span>All Posts</span>
                   </Link>
                 </Dropdown.Item>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/postcategorylist">
                     <span>
                       <span>Post Categories</span>
                     </span>
                   </Link>
                 </Dropdown.Item>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/commentlist">
                     <span>
                       <span>Comments</span>
@@ -293,12 +274,12 @@ const Sidebar = () => {
             </div>
             <div className="d-block d-md-none dropdown-menu__container">
               <Dropdown.Menu show={open === 'faqs'}>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/faqlist">
                     <span>All Faqs</span>
                   </Link>
                 </Dropdown.Item>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/faqcategorylist">
                     <span>Faq Categories</span>
                   </Link>
@@ -330,38 +311,14 @@ const Sidebar = () => {
             </div>
             <div className="d-block d-md-none dropdown-menu__container">
               <Dropdown.Menu show={open === 'users'}>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/userlist">
                     <span>All users</span>
                   </Link>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </div>
-            <div className="d-none d-md-block">
-              <Collapse in={open === 'users'}>
-                <Nav id="users-collapse" className="flex-nowrap flex-column">
-                  <Nav.Item className="ms-4 p-2">
-                    <Link
-                      className="text-primary my-2"
-                      to="/admin/membershipplan"
-                    >
-                      <span>membership plans</span>
-                    </Link>
-                  </Nav.Item>
-                </Nav>
-              </Collapse>
-            </div>
-            <div className="d-block d-md-none dropdown-menu__container">
-              <Dropdown.Menu show={open === 'users'}>
-                <Dropdown.Item>
-                  <Link to="/admin/membershipplan">
-                    <span>membership plans</span>
-                  </Link>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </div>
           </Nav.Item>
-
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
@@ -385,7 +342,7 @@ const Sidebar = () => {
             </div>
             <div className="d-block d-md-none dropdown-menu__container">
               <Dropdown.Menu show={open === 'orders'}>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/orderlist">
                     <span>All orders</span>
                   </Link>
@@ -419,7 +376,7 @@ const Sidebar = () => {
             </div>
             <div className="d-block d-md-none dropdown-menu__container">
               <Dropdown.Menu show={open === 'messages'}>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/messagelist">
                     <span>All messages</span>
                   </Link>
@@ -461,7 +418,7 @@ const Sidebar = () => {
             </div>
             <div className="d-block d-md-none dropdown-menu__container">
               <Dropdown.Menu show={open === 'subscribers'}>
-                <Dropdown.Item>
+                <Dropdown.Item as="div">
                   <Link to="/admin/subscriberlist">
                     <span>All subscribers</span>
                   </Link>

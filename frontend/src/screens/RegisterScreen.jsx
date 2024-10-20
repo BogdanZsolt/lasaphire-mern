@@ -128,7 +128,7 @@ const RegisterScreen = () => {
             {/* Google login button */}
             <Col className="d-flex justify-content-end align-items-center">
               <Link
-                to="http://localhost:5000/api/users/auth/google"
+                to="http://localhost:5500/api/users/auth/google"
                 className="btn btn-secondary d-flex justify-content-center align-items-center"
               >
                 <div>

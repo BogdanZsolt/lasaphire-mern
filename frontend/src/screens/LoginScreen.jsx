@@ -49,8 +49,6 @@ const LoginScreen = () => {
             email: res.email,
             isEmailVerified: res.isEmailVerified,
             isAdmin: res.isAdmin,
-            isPremium: res.isPremium,
-            premiumExpiresAt: res.premiumExpiresAt,
           })
         );
         navigate('/');
@@ -143,7 +141,7 @@ const LoginScreen = () => {
               <a
                 href={
                   import.meta.env.VITE_ENV === 'developer'
-                    ? 'http://localhost:5000/api/users/auth/google'
+                    ? 'http://localhost:5500/api/users/auth/google'
                     : 'https://pantherstuff.com/api/users/auth/google'
                 }
                 className="btn btn-secondary d-flex justify-content-center align-items-center"

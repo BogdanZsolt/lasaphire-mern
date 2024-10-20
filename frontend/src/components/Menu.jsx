@@ -7,8 +7,6 @@ import Message from './Message';
 import Loader from './Loader';
 import { BsFillCaretDownFill } from 'react-icons/bs';
 import { useGetProductCategoriesQuery } from '../slices/productCategoriesApiSlice';
-import { useGetProductCollectionsQuery } from '../slices/productCollectionsApiSlice';
-import { useGetSupplyCategoriesQuery } from '../slices/supplyCategoriesApiSlice';
 
 // import mainMenus from './menus.json';
 
@@ -21,22 +19,8 @@ const Menu = () => {
     error,
   } = useGetProductCategoriesQuery({ sort: 'title' });
 
-  const {
-    data: collections,
-    isLoading: collectionLoading,
-    error: collectionError,
-  } = useGetProductCollectionsQuery({ sort: 'title' });
-
-  const {
-    data: supplyCategories,
-    isLoading: isSupplyCatLoading,
-    error: supplyCategoryError,
-  } = useGetSupplyCategoriesQuery({ sort: 'title' });
-
   const [show, setShow] = useState('');
   const [categoriesSubMenu, setCategoriesSubMenu] = useState([]);
-  const [collectionsSubMenu, setCollectionsSubMenu] = useState([]);
-  const [supplyCategoriesMenu, setSupplyCategoriesMenu] = useState([]);
 
   useEffect(() => {
     if (categories) {
@@ -55,40 +39,6 @@ const Menu = () => {
     }
   }, [categories, i18n.language]);
 
-  useEffect(() => {
-    if (supplyCategories) {
-      let supplyCatMenu = [];
-      supplyCategories.data.map((supplyCategory, index) => {
-        let item = {};
-        item.id = `3.1.${++index}`;
-        item.text =
-          i18n.language === 'en'
-            ? supplyCategory.title
-            : supplyCategory.translations?.hu?.title || supplyCategory.title;
-        item.link = `/supplystore/category/${supplyCategory._id}`;
-        supplyCatMenu = [...supplyCatMenu, item];
-      });
-      setSupplyCategoriesMenu(supplyCatMenu);
-    }
-  }, [supplyCategories, i18n.language]);
-
-  useEffect(() => {
-    if (collections) {
-      let collMenu = [];
-      collections.data.map((collection, index) => {
-        let item = {};
-        item.id = `2.2.${++index}`;
-        item.text =
-          i18n.language === 'en'
-            ? collection.title
-            : collection.translations?.hu?.title || collection.title;
-        item.link = `/shop/collection/${collection._id}`;
-        collMenu = [...collMenu, item];
-      });
-      setCollectionsSubMenu(collMenu);
-    }
-  }, [collections, i18n.language]);
-
   const menus = [
     {
       id: 1,
@@ -99,7 +49,7 @@ const Menu = () => {
           id: 1.1,
           text: t('ourHerStory'),
           link: '/herstory',
-          image: '/images/ecoprint-01-200x200.webp',
+          image: '/images/ourStory-menu-200x200.jpg',
         },
         {
           id: 1.2,
@@ -109,9 +59,9 @@ const Menu = () => {
         },
         {
           id: 1.3,
-          text: t('rawMaterials'),
-          link: '/base_materials',
-          image: '/images/ecoprint-04-200x200.webp',
+          text: t('ingredients'),
+          link: '/ingredients',
+          image: '/images/ingredients-menu-200x200.jpg',
         },
         {
           id: 1.4,
@@ -123,7 +73,7 @@ const Menu = () => {
           id: 1.5,
           text: t('faqs'),
           link: '/faqs',
-          image: '/images/ecoprint-06-200x200.webp',
+          image: '/images/faq-menu-200x200.jpg',
         },
       ],
     },
@@ -137,69 +87,15 @@ const Menu = () => {
           text: t('categories'),
           column: categoriesSubMenu,
         },
-        {
-          id: 2.2,
-          text: t('collections'),
-          column: collectionsSubMenu,
-        },
       ],
     },
     {
       id: 3,
-      text: t('supplyStore'),
-      link: '/supplystore',
-      megaTable: [
-        {
-          id: 3.1,
-          text: t('categories'),
-          column: supplyCategoriesMenu,
-        },
-      ],
-    },
-    {
-      id: 4,
-      text: t('knowledge'),
-      link: '',
-      megaCard: [
-        {
-          id: 4.1,
-          text: t('membership'),
-          link: '/membership',
-          image: '/images/pepsz-yogaban-200x200.webp',
-        },
-        {
-          id: '4.2',
-          text: t('onlineCourses'),
-          link: '/onlinecourses',
-          image: '/images/ecoprint-04-200x200.webp',
-        },
-        {
-          id: '4.3',
-          text: t('retreatsAndWorkshop'),
-          link: '',
-          image: '/images/ecoprint-01-200x200.webp',
-        },
-        {
-          id: '4.4',
-          text: t('blog'),
-          link: '/blog',
-          image: '/images/ecoprint-05-200x200.webp',
-        },
-        {
-          id: '4.5',
-          text: t('library'),
-          link: '',
-          image: '/images/ecoprint-06-200x200.webp',
-        },
-      ],
-    },
-    {
-      id: 5,
       text: t('blog'),
       link: '/blog',
     },
     {
-      id: 6,
+      id: 4,
       text: t('contact'),
       link: '/contact',
     },
@@ -216,20 +112,6 @@ const Menu = () => {
 
   return (
     <>
-      {collectionLoading ? (
-        <Loader />
-      ) : (
-        collectionError && (
-          <Message variant="danger">{collectionError.data.Message}</Message>
-        )
-      )}
-      {isSupplyCatLoading ? (
-        <Loader />
-      ) : (
-        supplyCategoryError && (
-          <Message variant="danger">{supplyCategoryError.data.Message}</Message>
-        )
-      )}
       {isLoading ? (
         <Loader />
       ) : error ? (

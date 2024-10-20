@@ -2,14 +2,11 @@
   "about": "Rólunk",
   "ourHerStory": "Történetünk",
   "mePetra": "Én Petra",
-  "rawMaterials": "Alapanyagok",
+  "ingredients": "Hatóanyagok",
   "valuesAndIntentions": "Értékek és Szándékok",
   "faqs": "Gyakran Ismételt Kérdések",
   "shop": "Bolt",
   "categories": "Kategóriák",
-  "collections": "Kollekciók",
-  "supplyStore": "Kelléktár",
-  "knowledge": "Tudás",
   "membership": "Tagság",
   "onlineCourses": "Online tanfolyamok",
   "retreatsAndWorkshop": "Elvonulások és műhely",
@@ -23,5 +20,6 @@
   "signIn": "Bejelentkezés",
   "cart": "Bevásárlókosár",
   "wishlist": "Kívánság lista",
+  "all": "Összes",
   "": ""
 }

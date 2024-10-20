@@ -79,13 +79,13 @@ const extensions = [
 
 // const content = ``;
 
-const Editor = ({ content, onDataChange, editable }) => {
+const Editor = ({ content, onDataChange, editable, className }) => {
   const editor = useEditor({
     editable,
     extensions,
     editorProps: {
       attributes: {
-        class: 'tiptap-editor',
+        class: `tiptap-editor ${className}`,
       },
     },
     onUpdate: ({ editor }) => {

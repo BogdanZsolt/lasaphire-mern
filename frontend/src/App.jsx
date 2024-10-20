@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   AdminScreen,
   AuthorScreen,
-  RawMaterialsScreen,
+  IngredientsScreen,
   BlogScreen,
   CartScreen,
   CategoryPostScreen,
@@ -36,33 +36,22 @@ import {
   PostScreen,
   ProductCatEditScreen,
   ProductCategoryListScreen,
-  ProductCollectionEditScreen,
-  ProductCollectionListScreen,
   ProductEditScreen,
   ProductListScreen,
   ProductScreen,
-  ProductSizeEditScreen,
-  ProductSizeListScreen,
-  SupplyListScreen,
-  SupplyEditScreen,
-  SupplyCategoryListScreen,
-  SupplyCatEditScreen,
-  SupplySizeListScreen,
-  SupplySizeEditScreen,
+  IngredientListScreen,
+  IngredientEditScreen,
+  IngredientCategoryListScreen,
+  IngredientCategoryEditScreen,
   ProfileScreen,
   AccountVerification,
   ProtectRoute,
   RegisterScreen,
   ShippingScreen,
   ShopScreen,
-  SupplyStoreScreen,
-  MembershipScreen,
-  OnlineCoursesScreen,
   SubscriberListScreen,
   UserEditScreen,
   UserListScreen,
-  MembershipPlanListScreen,
-  MembershipPlanEditScreen,
   ValuesScreen,
   WishListScreen,
   AdminOrderScreen,
@@ -70,7 +59,6 @@ import {
   FaqEditScreen,
   FaqCategoryListScreen,
   FaqCategoryEditScreen,
-  SupplyScreen,
   PremiumRoute,
 } from './Pages';
 import Root from './components/Root';
@@ -102,8 +90,8 @@ const App = () => {
               element: <MePetraScreen />,
             },
             {
-              path: 'base_materials',
-              element: <RawMaterialsScreen />,
+              path: 'ingredients',
+              element: <IngredientsScreen />,
             },
             {
               path: 'values',
@@ -137,65 +125,11 @@ const App = () => {
                   path: 'category/:productCategory/page/:pageNumber',
                   element: <ShopScreen />,
                 },
-                {
-                  path: 'collection/:productCollection',
-                  element: <ShopScreen />,
-                },
-                {
-                  path: 'collection/:productCollection/page/:pageNumber',
-                  element: <ShopScreen />,
-                },
               ],
             },
             {
               path: 'product/:id',
               element: <ProductScreen />,
-            },
-            {
-              path: 'supplystore',
-              element: <SupplyStoreScreen />,
-              children: [
-                {
-                  path: 'search/:keyword',
-                  element: <SupplyStoreScreen />,
-                },
-                {
-                  path: 'page/:pageNumber',
-                  element: <SupplyStoreScreen />,
-                },
-                {
-                  path: 'search/:keyword/page/:pageNumber',
-                  element: <SupplyStoreScreen />,
-                },
-                {
-                  path: 'category/:supplyCategory',
-                  element: <SupplyStoreScreen />,
-                },
-                {
-                  path: 'category/:supplyCategory/page/:pageNumber',
-                  element: <SupplyStoreScreen />,
-                },
-                {
-                  path: 'collection/:supplyCollection',
-                  element: <SupplyStoreScreen />,
-                },
-                {
-                  path: 'collection/:supplyCollection/page/:pageNumber',
-                  element: <SupplyStoreScreen />,
-                },
-              ],
-            },
-            {
-              path: 'supply/:id',
-              element: <SupplyScreen />,
-            },
-            {
-              path: 'membership',
-              element: <MembershipScreen />,
-            },
-            {
-              path: 'membership/:id',
-              element: <MembershipScreen />,
             },
             {
               path: 'blog',
@@ -291,12 +225,6 @@ const App = () => {
                 {
                   path: '',
                   element: <PremiumRoute />,
-                  children: [
-                    {
-                      path: 'onlinecourses',
-                      element: <OnlineCoursesScreen />,
-                    },
-                  ],
                 },
               ],
             },
@@ -331,48 +259,28 @@ const App = () => {
               element: <ProductCatEditScreen />,
             },
             {
-              path: 'productcollectionlist',
-              element: <ProductCollectionListScreen />,
+              path: 'ingredientlist',
+              element: <IngredientListScreen />,
             },
             {
-              path: 'productcollection/:id/edit',
-              element: <ProductCollectionEditScreen />,
+              path: 'ingredientlist/page/:pagenumber',
+              element: <IngredientListScreen />,
             },
             {
-              path: 'productsizelist',
-              element: <ProductSizeListScreen />,
+              path: 'ingredient/:id/edit',
+              element: <IngredientEditScreen />,
             },
             {
-              path: 'productsize/:id/edit',
-              element: <ProductSizeEditScreen />,
+              path: 'ingredientcategorylist',
+              element: <IngredientCategoryListScreen />,
             },
             {
-              path: 'supplylist',
-              element: <SupplyListScreen />,
+              path: 'ingredientcategorylist/page/:pagenumber',
+              element: <IngredientCategoryListScreen />,
             },
             {
-              path: 'supplylist/page/:pageNumber',
-              element: <SupplyListScreen />,
-            },
-            {
-              path: 'supply/:id/edit',
-              element: <SupplyEditScreen />,
-            },
-            {
-              path: 'supplycategorylist',
-              element: <SupplyCategoryListScreen />,
-            },
-            {
-              path: 'supplycategory/:id/edit',
-              element: <SupplyCatEditScreen />,
-            },
-            {
-              path: 'supplysizelist',
-              element: <SupplySizeListScreen />,
-            },
-            {
-              path: 'supplysize/:id/edit',
-              element: <SupplySizeEditScreen />,
+              path: 'ingredientcategory/:id/edit',
+              element: <IngredientCategoryEditScreen />,
             },
             {
               path: 'postlist',
@@ -423,14 +331,6 @@ const App = () => {
               element: <UserEditScreen />,
             },
             {
-              path: 'membershipplan',
-              element: <MembershipPlanListScreen />,
-            },
-            {
-              path: 'membershipplan/:id/edit',
-              element: <MembershipPlanEditScreen />,
-            },
-            {
               path: 'orderlist',
               element: <OrderListScreen />,
             },
@@ -469,7 +369,9 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(isAuthenticated(data));
+    if (data) {
+      dispatch(isAuthenticated(data));
+    }
   }, [data, dispatch]);
 
   return (

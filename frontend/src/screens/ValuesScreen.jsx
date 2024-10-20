@@ -27,7 +27,7 @@ const HerStoryScreen = () => {
     <>
       <Banner
         title={t('valuesAndIntentions')}
-        src="/images/ars_poetica_pexels_videos_video_by_David_Bartus_540p_1.mp4"
+        src="/images/Walking-along-the-beach.mp4"
         alt="Values & Intentions"
         video
       />

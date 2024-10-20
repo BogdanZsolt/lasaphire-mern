@@ -10,7 +10,7 @@ const HerStoryScreen = () => {
     <>
       <Banner
         title={t('ourHerStory')}
-        src="/images/ecoprint-02.webp"
+        src="/images/ourStory-banner-1280x360.jpg"
         alt="Our History"
       />
       <Container>

@@ -1,8 +1,6 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Order from '../models/orderModel.js';
-import Plan from '../models/planModel.js';
 import Product from '../models/productModel.js';
-import Supply from '../models/supplyModel.js';
 import User from '../models/userModel.js';
 import { getAll } from './handlerFactory.js';
 import { calcPrices } from '../utils/calcPrices.js';
@@ -32,17 +30,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const productItemsFromDB = await Product.find({
       _id: { $in: orderItems.map((x) => x._id) },
     });
-    const supplyItemsFromDB = await Supply.find({
-      _id: { $in: orderItems.map((x) => x._id) },
-    });
-    const planItemsFromDB = await Plan.find({
-      _id: { $in: orderItems.map((x) => x._id) },
-    });
-    const itemsFromDB = [
-      ...productItemsFromDB,
-      ...supplyItemsFromDB,
-      ...planItemsFromDB,
-    ];
+    const itemsFromDB = [...productItemsFromDB];
 
     // map over the order items and use the price from our items from database
     const dbOrderItems = orderItems.map((itemFromClient) => {

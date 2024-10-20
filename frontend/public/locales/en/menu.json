@@ -2,14 +2,11 @@
   "about": "About",
   "ourHerStory": "Our Herstory",
   "mePetra": "Me Petra",
-  "rawMaterials": "Raw Materials",
+  "ingredients": "Ingredients",
   "valuesAndIntentions": "Values & Intentions",
   "faqs": "Frequently Asked Quetions",
   "shop": "Shop",
   "categories": "Categories",
-  "collections": "Collections",
-  "supplyStore": "Supply Store",
-  "knowledge": "Knowledge",
   "membership": "Membership",
   "onlineCourses": "Online Courses",
   "retreatsAndWorkshop": "Retreats & Workshop",
@@ -23,5 +20,6 @@
   "signIn": "Sign In",
   "cart": "Shopping Cart",
   "wishlist": "Wish List",
+  "all": "All",
   "": ""
 }

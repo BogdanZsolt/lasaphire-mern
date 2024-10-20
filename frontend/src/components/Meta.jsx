@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
 const Meta = ({
-  title = 'Welcome to PantherStuff',
+  title = "Welcome to La'Saphire",
   description = 'We sell the best eco-print, organic clothes.',
   keywords = 'clothes, ecoprint, organic',
 }) => {

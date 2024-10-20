@@ -5,19 +5,15 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormContainer from '../../components/FormContainer';
 import ImageList from '../../components/ImageList';
-import SelectSizes from '../../components/SelectSizes';
 import { toast } from 'react-toastify';
 import SelectCategory from '../../components/SelectCategory';
-import SelectCollection from '../../components/SelectCollection';
 import LangSelectInput from '../../components/LangSelectInput';
+import LangSelectEditor from '../../components/LangSelectEditor.jsx';
 import {
   useGetProductDetailsQuery,
   useUpdateProductMutation,
 } from '../../slices/productsApiSlice';
-import InputColors from '../../components/InputColors.jsx';
-import LangSelectEditor from '../../components/LangSelectEditor.jsx';
 import { useGetProductCategoriesQuery } from '../../slices/productCategoriesApiSlice';
-import { useGetProductCollectionsQuery } from '../../slices/productCollectionsApiSlice';
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
@@ -26,12 +22,12 @@ const ProductEditScreen = () => {
   const [thumbnails, setThumbnails] = useState([]);
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState(null);
-  const [collection, setCollection] = useState(null);
+  // const [collection, setCollection] = useState(null);
   const [beforePrice, setBeforePrice] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [countInStock, setCountInStock] = useState(0);
-  const [colors, setColors] = useState(['']);
-  const [sizes, setSizes] = useState([]);
+  // const [colors, setColors] = useState(['']);
+  // const [sizes, setSizes] = useState([]);
   const [active, setActive] = useState('');
   const [transNameHu, setTransNameHu] = useState('');
   const [transDescHu, setTransDescHu] = useState('');
@@ -54,12 +50,6 @@ const ProductEditScreen = () => {
     error: catError,
   } = useGetProductCategoriesQuery({ sort: 'title' });
 
-  const {
-    data: collections,
-    isLoading: isCollLoading,
-    error: collError,
-  } = useGetProductCollectionsQuery({ sort: 'title' });
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,12 +58,9 @@ const ProductEditScreen = () => {
       setThumbnails(product.thumbnails);
       setDescription(product.description);
       setCategory(product?.category?._id || '');
-      setCollection(product?.collections || []);
       setBeforePrice(product.beforePrice || 0);
       setCurrentPrice(product.currentPrice || 0);
       setCountInStock(product.countInStock);
-      setColors(product.colors);
-      setSizes(product.sizes);
       setTransNameHu(product.translations?.hu?.name || product.name);
       setTransDescHu(
         product.translations?.hu?.description || product.description
@@ -96,12 +83,9 @@ const ProductEditScreen = () => {
         thumbnails,
         description,
         category,
-        collections: collection,
         beforePrice,
         currentPrice,
         countInStock,
-        colors,
-        sizes,
         translations: {
           hu: {
             name: transNameHu,
@@ -128,15 +112,6 @@ const ProductEditScreen = () => {
         catError && (
           <Message variant="danger">
             {catError?.data?.message || catError.error}
-          </Message>
-        )
-      )}
-      {isCollLoading ? (
-        <Loader />
-      ) : (
-        collError && (
-          <Message variant="danger">
-            {collError?.data?.message || collError.error}
           </Message>
         )
       )}
@@ -185,26 +160,9 @@ const ProductEditScreen = () => {
                 <div className="col-md-6">
                   <Form.Group controlId="collection" className="my-2">
                     <Form.Label>Collection</Form.Label>
-                    <SelectCollection
-                      collections={collections}
-                      collection={collection}
-                      setCollection={setCollection}
-                      multi
-                    />
                   </Form.Group>
                 </div>
               </div>
-
-              <Form.Group controlId="sizes" className="my-2">
-                <Form.Label>Sizes</Form.Label>
-                <SelectSizes productSize={sizes} setProductSize={setSizes} />
-              </Form.Group>
-
-              {/* COLORS INPUT PLACEHOLDER */}
-              <Form.Group controlId="colors" className="my-2">
-                <Form.Label>Colors</Form.Label>
-                <InputColors colors={colors} setColors={setColors} />
-              </Form.Group>
 
               <div className="row">
                 <div className="col-md-6">
@@ -243,15 +201,6 @@ const ProductEditScreen = () => {
                   onChange={(e) => setCountInStock(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-
-              {/* <Form.Group controlId="body" className="my-2">
-                <Form.Label>Description</Form.Label>
-                <Editor
-                  content={description}
-                  onDataChange={(data) => setDescription(data)}
-                  editable
-                />
-              </Form.Group> */}
 
               <LangSelectEditor
                 label="Description"
