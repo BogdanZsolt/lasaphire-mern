@@ -29,7 +29,7 @@ const CheckoutPay = () => {
       confirmParams: {
         return_url: `${import.meta.env.VITE_URL}/order/complete`,
         // import.meta.env.VITE_ENV === 'developer'
-        //   ? 'http://localhost:3000/order/complete'
+        //   ? 'http://localhost:3100/order/complete'
         //   : 'https://pantherstuff.com/order/complete',
       },
     });
