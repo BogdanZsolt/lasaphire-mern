@@ -29,6 +29,21 @@ export const IngredientsScreen = lazy(() =>
   import('./screens/IngredientsScreen.jsx')
 );
 export const FaqsScreen = lazy(() => import('./screens/FaqsScreen.jsx'));
+export const NinetyDaysProgramScreen = lazy(() =>
+  import('./screens/NinetyDaysProgramScreen.jsx')
+);
+export const YoutubeChannelScreen = lazy(() =>
+  import('./screens/YoutubeChannelScreen.jsx')
+);
+export const HolisticScreen = lazy(() =>
+  import('./screens/HolisticScreen.jsx')
+);
+export const NaturalBeautyScreen = lazy(() =>
+  import('./screens/NaturalBeautyScreen.jsx')
+);
+export const SophiaCircleScreens = lazy(() =>
+  import('./screens/SophiaCircleScreens.jsx')
+);
 export const ContactScreen = lazy(() => import('./screens/ContactScreen.jsx'));
 export const ShopScreen = lazy(() => import('./screens/ShopScreen.jsx'));
 export const BlogScreen = lazy(() => import('./screens/BlogScreen.jsx'));

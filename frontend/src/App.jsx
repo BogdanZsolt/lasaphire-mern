@@ -60,6 +60,11 @@ import {
   FaqCategoryListScreen,
   FaqCategoryEditScreen,
   PremiumRoute,
+  NinetyDaysProgramScreen,
+  YoutubeChannelScreen,
+  HolisticScreen,
+  SophiaCircleScreens,
+  NaturalBeautyScreen,
 } from './Pages';
 import Root from './components/Root';
 import Loader from './components/Loader';
@@ -100,6 +105,30 @@ const App = () => {
             {
               path: 'faqs',
               element: <FaqsScreen />,
+            },
+            {
+              path: '90daysprogram',
+              element: <NinetyDaysProgramScreen />,
+            },
+            {
+              path: '90daysprogram',
+              element: <NinetyDaysProgramScreen />,
+            },
+            {
+              path: 'youtubechannel',
+              element: <YoutubeChannelScreen />,
+            },
+            {
+              path: 'holistic',
+              element: <HolisticScreen />,
+            },
+            {
+              path: 'naturalbeauty',
+              element: <NaturalBeautyScreen />,
+            },
+            {
+              path: 'sophiecircle',
+              element: <SophiaCircleScreens />,
             },
             {
               path: 'shop',

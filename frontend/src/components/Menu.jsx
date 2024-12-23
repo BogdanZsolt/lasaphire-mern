@@ -79,23 +79,60 @@ const Menu = () => {
     },
     {
       id: 2,
+      text: t('faceYoga'),
+      link: '',
+      megaCard: [
+        {
+          id: 2.1,
+          text: t('90dayProgram'),
+          link: '/90daysProgram',
+          image: '/images/ourStory-menu-200x200.jpg',
+        },
+        {
+          id: 2.2,
+          text: t('youtubeChannel'),
+          link: '/youtubechannel',
+          image: '/images/ingredients-menu-200x200.jpg',
+        },
+        {
+          id: 2.3,
+          text: t('holistic'),
+          link: '/holistic',
+          image: '/images/pepsz-yogaban-200x200.webp',
+        },
+        {
+          id: 2.4,
+          text: t('naturalBeauty'),
+          link: '/naturalbeauty',
+          image: '/images/our_values-150x150.jpg',
+        },
+        {
+          id: 2.5,
+          text: t('sophiaCircle'),
+          link: '/sophiecircle',
+          image: '/images/faq-menu-200x200.jpg',
+        },
+      ],
+    },
+    {
+      id: 3,
       text: t('shop'),
       link: '/shop',
       megaTable: [
         {
-          id: 2.1,
+          id: 3.1,
           text: t('categories'),
           column: categoriesSubMenu,
         },
       ],
     },
     {
-      id: 3,
+      id: 4,
       text: t('blog'),
       link: '/blog',
     },
     {
-      id: 4,
+      id: 5,
       text: t('contact'),
       link: '/contact',
     },
