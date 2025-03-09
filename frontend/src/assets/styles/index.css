@@ -30,8 +30,10 @@
 }
 
 .ps-navbar.scroll-nav .navbar-brand {
-  border-radius: var(--bs-border-radius-sm);
+  border: 2px solid rgba(var(--bs-primary-rgb), 0.6);
+  border-radius: var(--bs-border-radius-pill);
   transition: var(--transition-background);
+  overflow: hidden;
 }
 
 .ps-navbar.scroll-nav .navbar-brand {
@@ -516,7 +518,6 @@ footer > img {
 }
 
 footer .footer-logo {
-  display: block;
   position: relative;
   width: 150px;
   aspect-ratio: 1/1;
@@ -524,7 +525,7 @@ footer .footer-logo {
   margin-right: auto;
   background-color: rgba(var(--bs-primary-rgb), 0.1);
   border: 2px solid rgba(var(--bs-primary-rgb), 0.6);
-  border-radius: var(--bs-border-radius-sm);
+  border-radius: var(--bs-border-radius-pill);
   overflow: hidden;
   backdrop-filter: blur(10px);
   box-shadow: var(--bs-box-shadow-lg);

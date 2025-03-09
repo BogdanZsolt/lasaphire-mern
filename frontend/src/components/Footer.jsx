@@ -17,7 +17,7 @@ const Footer = () => {
       />
       <Container>
         <Row className="justify-content-center">
-          <div className="footer-logo">
+          <div className="footer-logo d-none d-md-block">
             <Link to="/">
               <img src={logo} alt="" />
             </Link>
