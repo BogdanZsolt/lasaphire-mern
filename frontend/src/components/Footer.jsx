@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import SocialMenu from './SocialMenu.jsx';
+import logo from '../assets/logo-200x200-1.png';
 
 const Footer = () => {
   const { t } = useTranslation('footer');
@@ -18,7 +19,7 @@ const Footer = () => {
         <Row className="justify-content-center">
           <div className="footer-logo">
             <Link to="/">
-              <img src="/src/assets/logo-200x200-1.png" alt="" />
+              <img src={logo} alt="" />
             </Link>
           </div>
           <ul className="footer-menu">
