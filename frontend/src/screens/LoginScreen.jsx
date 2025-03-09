@@ -39,7 +39,6 @@ const LoginScreen = () => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
-      console.log(res);
       if (res) {
         dispatch(
           isAuthenticated({

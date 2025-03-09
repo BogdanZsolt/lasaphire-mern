@@ -21,9 +21,16 @@ const orderSchema = new mongoose.Schema(
           required: true,
           refPath: 'model_type',
         },
-        model_type: { type: String, enum: ['Product', 'Supply', 'Plan'] },
+        model_type: { type: String, enum: ['Product', 'Plan'] },
+        toBeDelivered: { type: Boolean, required: true, default: false },
       },
     ],
+    billingAddress: {
+      address: { type: String, required: true },
+      city: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
+    },
     shippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
@@ -68,6 +75,11 @@ const orderSchema = new mongoose.Schema(
     },
     paidAt: {
       type: Date,
+    },
+    hasToBeDelivered: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
     isDelivered: {
       type: Boolean,

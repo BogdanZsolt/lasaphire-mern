@@ -1,5 +1,6 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Order from '../models/orderModel.js';
+import Plan from '../models/planModel.js';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 import { getAll } from './handlerFactory.js';
@@ -20,7 +21,23 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // @route   POST /api/orders
 // @access  Private
 const addOrderItems = asyncHandler(async (req, res) => {
-  const { language, orderItems, shippingAddress, paymentMethod } = req.body;
+  const {
+    language,
+    orderItems,
+    shippingAddress,
+    billingAddress,
+    paymentMethod,
+  } = req.body;
+
+  const toBeDeliveredSum = (items) => {
+    let toBeDelivered = false;
+    items.map((item) => {
+      if (item.toBeDelivered) {
+        toBeDelivered = true;
+      }
+    });
+    return toBeDelivered;
+  };
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
@@ -30,7 +47,11 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const productItemsFromDB = await Product.find({
       _id: { $in: orderItems.map((x) => x._id) },
     });
-    const itemsFromDB = [...productItemsFromDB];
+    const planItemsFromDB = await Plan.find({
+      _id: { $in: orderItems.map((x) => x._id) },
+    });
+
+    const itemsFromDB = [...productItemsFromDB, ...planItemsFromDB];
 
     // map over the order items and use the price from our items from database
     const dbOrderItems = orderItems.map((itemFromClient) => {
@@ -50,16 +71,17 @@ const addOrderItems = asyncHandler(async (req, res) => {
               ).toFixed(0),
         _id: undefined,
         type: undefined,
+        toBeDelivered: itemFromClient.toBeDelivered,
         model_type:
           itemFromClient.type === 'product'
             ? 'Product'
-            : itemFromClient.type === 'supply'
-            ? 'Supply'
             : itemFromClient.type === 'membership'
             ? 'Plan'
             : undefined,
       };
     });
+
+    const hasToBeDelivered = toBeDeliveredSum(dbOrderItems);
 
     const taxRate = language === 'en' ? 0.15 : 0.27;
     const freeShipping = language === 'en' ? 100 : 20000;
@@ -70,7 +92,8 @@ const addOrderItems = asyncHandler(async (req, res) => {
       dbOrderItems,
       taxRate,
       freeShipping,
-      shipping
+      shipping,
+      hasToBeDelivered
     );
 
     const order = new Order({
@@ -78,11 +101,13 @@ const addOrderItems = asyncHandler(async (req, res) => {
       user: req.user._id,
       language,
       shippingAddress,
+      billingAddress,
       paymentMethod,
       itemsPrice,
       taxPrice,
       shippingPrice,
       totalPrice,
+      hasToBeDelivered,
     });
 
     const createdOrder = await order.save();

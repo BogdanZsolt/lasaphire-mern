@@ -18,6 +18,7 @@ export const CartScreen = lazy(() => import('./screens/CartScreen.jsx'));
 export const WishListScreen = lazy(() =>
   import('./screens/WishListScreen.jsx')
 );
+export const BillingScreen = lazy(() => import('./screens/BillingScreen.jsx'));
 export const ShippingScreen = lazy(() =>
   import('./screens/ShippingScreen.jsx')
 );
@@ -41,11 +42,11 @@ export const HolisticScreen = lazy(() =>
 export const NaturalBeautyScreen = lazy(() =>
   import('./screens/NaturalBeautyScreen.jsx')
 );
-export const SophiaCircleScreens = lazy(() =>
-  import('./screens/SophiaCircleScreens.jsx')
-);
 export const ContactScreen = lazy(() => import('./screens/ContactScreen.jsx'));
 export const ShopScreen = lazy(() => import('./screens/ShopScreen.jsx'));
+export const SophiaCircleScreen = lazy(() =>
+  import('./screens/SophiaCircleScreen/SophiaCircleScreen.jsx')
+);
 export const BlogScreen = lazy(() => import('./screens/BlogScreen.jsx'));
 export const PostScreen = lazy(() => import('./screens/PostScreen.jsx'));
 export const AuthorScreen = lazy(() => import('./screens/AuthorScreen.jsx'));
@@ -60,9 +61,19 @@ export const OrderScreen = lazy(() => import('./screens/OrderScreen.jsx'));
 export const PaymentCompleteScreen = lazy(() =>
   import('./screens/PaymentCompleteScreen.jsx')
 );
-export const ProfileScreen = lazy(() => import('./screens/ProfileScreen.jsx'));
+export const ProfileScreen = lazy(() =>
+  import('./screens/ProfileScreen/ProfileScreen.jsx')
+);
 export const AccountVerification = lazy(() =>
   import('./components/AccountVerification.jsx')
+);
+export const PrivacyScreen = lazy(() => import('./screens/PrivacyScreen.jsx'));
+export const SccScreen = lazy(() => import('./screens/SccScreen.jsx'));
+export const ShippingGuaranteeScreen = lazy(() =>
+  import('./screens/ShippingGuaranteeScreen.jsx')
+);
+export const OrderPaymentScreen = lazy(() =>
+  import('./screens/OrderPaymentScreen.jsx')
 );
 
 // Admin Pages
@@ -128,6 +139,12 @@ export const UserListScreen = lazy(() =>
 );
 export const UserEditScreen = lazy(() =>
   import('./screens/admin/UserEditScreen.jsx')
+);
+export const MembershipPlanListScreen = lazy(() =>
+  import('./screens/admin/MembershipPlanListScreen.jsx')
+);
+export const MembershipPlanEditScreen = lazy(() =>
+  import('./screens/admin/MembershipPlanEditScreen.jsx')
 );
 export const OrderListScreen = lazy(() =>
   import('./screens/admin/OrderListScreen.jsx')

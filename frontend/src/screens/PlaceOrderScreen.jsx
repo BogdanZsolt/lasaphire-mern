@@ -29,12 +29,21 @@ const PlaceOrderScreen = () => {
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
-    if (!cart.shippingAddress.address) {
+    if (!cart.billingAddress.address) {
+      navigate('/billing');
+    }
+    if (cart.hasToBeDelivered && !cart.shippingAddress.address) {
       navigate('/shipping');
     } else if (!cart.paymentMethod) {
       navigate('/payment');
     }
-  }, [cart.paymentMethod, cart.shippingAddress.address, navigate]);
+  }, [
+    cart.paymentMethod,
+    cart.hasToBeDelivered,
+    cart.shippingAddress.address,
+    cart.billingAddress.address,
+    navigate,
+  ]);
 
   const createItems = (items) => {
     let newItems = [];
@@ -45,6 +54,7 @@ const PlaceOrderScreen = () => {
       newItem.name = i18n.language === 'en' ? item.name : item.name_hu;
       newItem.qty = item.qty;
       newItem.thumbnail = item.thumbnail;
+      newItem.toBeDelivered = item.toBeDelivered;
       newItem.currentPrice =
         i18n.language === 'en' ? item.currentPrice : item.currentPrice_hu;
       newItems = [...newItems, newItem];
@@ -57,10 +67,12 @@ const PlaceOrderScreen = () => {
       const res = await createOrder({
         language: i18n.language,
         orderItems: createItems(cart.cartItems),
+        billingAddress: cart.billingAddress,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice:
           i18n.language === 'en' ? cart.itemsPrice : cart.itemsPrice_hu,
+        hasToBeDelivered: cart.hasToBeDelivered,
         shippingPrice:
           i18n.language === 'en' ? cart.shippingPrice : cart.shippingPrice_hu,
         taxPrice: i18n.language === 'en' ? cart.taxPrice : cart.taxPrice_hu,
@@ -83,14 +95,26 @@ const PlaceOrderScreen = () => {
           <Col md={8}>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>{t('shipping')}</h2>
+                <h2>{t('billing')}</h2>
                 <p>
                   <strong>{t('address')}: </strong>
-                  {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
-                  {cart.shippingAddress.postalCode},{' '}
-                  {cart.shippingAddress.country}
+                  {cart.billingAddress.address}, {cart.billingAddress.city}{' '}
+                  {cart.billingAddress.postalCode},{' '}
+                  {cart.billingAddress.country}
                 </p>
               </ListGroup.Item>
+
+              {cart.hasToBeDelivered && (
+                <ListGroup.Item>
+                  <h2>{t('shipping')}</h2>
+                  <p>
+                    <strong>{t('address')}: </strong>
+                    {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
+                    {cart.shippingAddress.postalCode},{' '}
+                    {cart.shippingAddress.country}
+                  </p>
+                </ListGroup.Item>
+              )}
 
               <ListGroup.Item>
                 <h2>{t('paymentMethod')}</h2>

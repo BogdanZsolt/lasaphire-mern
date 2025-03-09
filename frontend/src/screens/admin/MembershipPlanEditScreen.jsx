@@ -24,6 +24,7 @@ const MembershipPlanEditScreen = () => {
   const [transNameHu, setTransNameHu] = useState('');
   const [transFeaturesHu, setTransFeaturesHu] = useState([]);
   const [transPriceHu, setTransPriceHu] = useState(0);
+  const [toBeDelivered, setToBeDelivered] = useState(false);
 
   const {
     data: plan,
@@ -47,6 +48,7 @@ const MembershipPlanEditScreen = () => {
       setTransNameHu(plan.translations?.hu?.name || plan.name);
       setTransFeaturesHu(plan.translations?.hu?.features || plan.features);
       setTransPriceHu(plan.translations?.hu?.currentPrice || plan.currentPrice);
+      setToBeDelivered(plan.toBeDelivered);
     }
   }, [plan]);
 
@@ -65,7 +67,7 @@ const MembershipPlanEditScreen = () => {
           hu: {
             name: transNameHu,
             features: transFeaturesHu,
-            price: transPriceHu,
+            currentPrice: transPriceHu * 1,
           },
         },
       }).unwrap();
@@ -148,14 +150,28 @@ const MembershipPlanEditScreen = () => {
               setSecLang={setTransPriceHu}
             />
 
-            <Form.Group controlId="recommended" className="my-4">
-              <Form.Check
-                type="checkbox"
-                label="Recommended"
-                checked={recommended}
-                onChange={(e) => setRecommended(e.target.checked)}
-              ></Form.Check>
-            </Form.Group>
+            <Row>
+              <Col md={6}>
+                <Form.Group controlId="recommended" className="my-4">
+                  <Form.Check
+                    type="checkbox"
+                    label="Recommended"
+                    checked={recommended}
+                    onChange={(e) => setRecommended(e.target.checked)}
+                  ></Form.Check>
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="toBeDelivered" className="my-4">
+                  <Form.Check
+                    type="checkbox"
+                    label="To be delivered"
+                    checked={toBeDelivered}
+                    onChange={(e) => setToBeDelivered(e.target.checked)}
+                  ></Form.Check>
+                </Form.Group>
+              </Col>
+            </Row>
 
             <Button type="submit" variant="primary" className="my-2">
               Update

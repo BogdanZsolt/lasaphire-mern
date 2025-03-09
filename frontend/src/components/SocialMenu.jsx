@@ -1,28 +1,29 @@
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { RiFacebookLine, RiInstagramLine, RiYoutubeLine } from 'react-icons/ri';
+// import { RiFacebookLine, RiInstagramLine, RiYoutubeLine } from 'react-icons/ri';
+import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const SocialMenu = () => {
   const { t } = useTranslation(['contact']);
   return (
     <div className="social-menu">
       <Button
-        href="https://www.facebook.com/pantherstuff"
+        href="https://www.facebook.com/lasaphireskincare"
         variant="secondary"
         target="_blank"
         title={t('socialTitleFacebook')}
         className="btn"
       >
-        <RiFacebookLine />
+        <FaFacebookF />
       </Button>
       <Button
-        href="https://www.instagram.com/pantherstuff_ecoprint"
+        href="https://www.instagram.com"
         variant="secondary"
         target="_blank"
         title={t('socialTitleInsta')}
         className="btn"
       >
-        <RiInstagramLine />
+        <FaInstagram />
       </Button>
       <Button
         href="https://youtube.com"
@@ -31,7 +32,7 @@ const SocialMenu = () => {
         title={t('socialTitleYoutube')}
         className="btn"
       >
-        <RiYoutubeLine />
+        <FaYoutube />
       </Button>
     </div>
   );

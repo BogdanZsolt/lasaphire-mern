@@ -62,7 +62,7 @@ const OrderScreen = () => {
                 <Col md={8}>
                   <ListGroup variant="flush">
                     <ListGroup.Item>
-                      <h2>{t('shipping')}</h2>
+                      <h2>{t('billing')}</h2>
                       <p>
                         <strong>{t('name')}: </strong> {order.user.name}
                       </p>
@@ -71,19 +71,39 @@ const OrderScreen = () => {
                       </p>
                       <p>
                         <strong>{t('address')}: </strong>
-                        {order.shippingAddress.address},{' '}
-                        {order.shippingAddress.city}{' '}
-                        {order.shippingAddress.postalCode},{' '}
-                        {order.shippingAddress.country}
+                        {order.billingAddress.address},{' '}
+                        {order.billingAddress.city}{' '}
+                        {order.billingAddress.postalCode},{' '}
+                        {order.billingAddress.country}
                       </p>
-                      {order.isDelivered ? (
-                        <Message variant="success">
-                          Delivered on{order.deliveredAt}
-                        </Message>
-                      ) : (
-                        <Message variant="danger">{t('notDelivered')}</Message>
-                      )}
                     </ListGroup.Item>
+                    {order.hasToBeDelivered && (
+                      <ListGroup.Item>
+                        <h2>{t('shipping')}</h2>
+                        <p>
+                          <strong>{t('name')}: </strong> {order.user.name}
+                        </p>
+                        <p>
+                          <strong>{t('email')}: </strong> {order.user.email}
+                        </p>
+                        <p>
+                          <strong>{t('address')}: </strong>
+                          {order.shippingAddress.address},{' '}
+                          {order.shippingAddress.city}{' '}
+                          {order.shippingAddress.postalCode},{' '}
+                          {order.shippingAddress.country}
+                        </p>
+                        {order.isDelivered ? (
+                          <Message variant="success">
+                            Delivered on{order.deliveredAt}
+                          </Message>
+                        ) : (
+                          <Message variant="danger">
+                            {t('notDelivered')}
+                          </Message>
+                        )}
+                      </ListGroup.Item>
+                    )}
 
                     <ListGroup.Item>
                       <h2>{t('paymentMethod')}</h2>

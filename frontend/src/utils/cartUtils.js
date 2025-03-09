@@ -2,6 +2,16 @@ export const addDecimals = (num, dec = 2) => {
   return (Math.round(num * 100) / 100).toFixed(dec);
 };
 
+export const isToBeDelivered = (items) => {
+  let isToBeDelivered = false;
+  items.map((item) => {
+    if (item.toBeDelivered) {
+      isToBeDelivered = true;
+    }
+  });
+  return isToBeDelivered;
+};
+
 export const updateCart = (state) => {
   // Calculate items price
   state.itemsPrice = addDecimals(
@@ -19,10 +29,15 @@ export const updateCart = (state) => {
     ),
     0
   );
+  // Sets whether there is anything in the cart that needs to be delivered
+  state.hasToBeDelivered = isToBeDelivered(state.cartItems);
   // Calculate shipping price (If order is over $100 then free, else $10 shipping)
-  state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 10, 2);
+  state.shippingPrice = addDecimals(
+    state.hasToBeDelivered ? (state.itemsPrice > 100 ? 0 : 10) : 0,
+    2
+  );
   state.shippingPrice_hu = addDecimals(
-    state.itemsPrice_hu > 20000 ? 0 : 1990,
+    state.hasToBeDelivered ? (state.itemsPrice_hu > 20000 ? 0 : 1990) : 0,
     0
   );
 

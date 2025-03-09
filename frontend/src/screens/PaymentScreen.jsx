@@ -16,13 +16,16 @@ const PaymentScreen = () => {
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
-  const { shippingAddress } = cart;
+  const { billingAddress, hasToBeDelivered, shippingAddress } = cart;
 
   useEffect(() => {
-    if (!shippingAddress) {
+    if (!billingAddress) {
+      navigate('/billing');
+    }
+    if (hasToBeDelivered && !shippingAddress) {
       navigate('/shipping');
     }
-  }, [shippingAddress, navigate]);
+  }, [billingAddress, hasToBeDelivered, shippingAddress, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -35,7 +38,7 @@ const PaymentScreen = () => {
       <Banner title={t('paymentMethod')} />
       <Container>
         <FormContainer>
-          <CheckoutSteps step1 step2 step3 />
+          <CheckoutSteps step1 step2 step3 step4 />
           {/* <h1>Payment Method</h1> */}
           <Form onSubmit={submitHandler}>
             <Form.Group>

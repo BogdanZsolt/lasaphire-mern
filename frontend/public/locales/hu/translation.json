@@ -6,6 +6,7 @@
   "subtotal": "Részösszeg ({{count}}) tétel",
   "proceedToCheckout": "Tovább a kijelentkezéshez",
   "signIn": "Bejelentkezés",
+  "billing": "Számlázás",
   "shipping": "Szállítás",
   "address": "Cím",
   "enterAddress": "Adja meg a címet",
@@ -53,5 +54,10 @@
   "transactionId": "A tranzakció azonosítója",
   "amount": "Összeg",
   "weAlsoSentTheTransactionDetails": "A tranzakció adatait elküldtük emailben is, hogy kérdés esetén tudjon hivatkozni rájuk.",
+  "noAddressField": "A cím megadása kötelező",
+  "noCityField": "A város megadása kötelező",
+  "noPostalCodeField": "Az irányítószám megadása kötelező",
+  "noCountryField": "Az ország megadása kötelező",
+  "allFieldsMandatory": "Minden mező kötelező",
   "": ""
 }

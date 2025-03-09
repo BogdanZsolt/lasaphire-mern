@@ -20,7 +20,8 @@ const MembershipTable = () => {
   const dispatch = useDispatch();
 
   const addToCartHandler = (plan) => {
-    const { _id, name, currentPrice, recommended, thumbnail } = plan;
+    const { _id, name, currentPrice, recommended, thumbnail, toBeDelivered } =
+      plan;
     const cartId = uuid();
     const name_hu = plan.translations?.hu?.name || name;
     const currentPrice_hu = plan.translations?.hu?.currentPrice || currentPrice;
@@ -29,7 +30,6 @@ const MembershipTable = () => {
     if (currentPrice === 0) {
       return navigate('/register');
     }
-    console.log(_id);
     dispatch(
       addToCart({
         cartId,
@@ -42,6 +42,7 @@ const MembershipTable = () => {
         currentPrice_hu,
         recommended,
         qty,
+        toBeDelivered,
       })
     );
     // return navigate('/cart');

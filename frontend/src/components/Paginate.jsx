@@ -9,7 +9,6 @@ const Paginate = ({
   keyword = '',
   pageName = !isAdmin ? 'shop' : 'productlist',
   productCategory,
-  productCollection,
 }) => {
   const createLink = () => {
     let lnk;
@@ -20,9 +19,6 @@ const Paginate = ({
       }
       if (productCategory !== '' && productCategory !== undefined) {
         lnk = lnk + `/category/${productCategory}`;
-      }
-      if (productCollection !== '' && productCollection !== undefined) {
-        lnk = lnk + `/collection/${productCollection}`;
       }
     } else {
       lnk = `/admin/${pageName}`;

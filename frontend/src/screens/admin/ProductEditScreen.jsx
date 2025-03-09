@@ -9,11 +9,13 @@ import { toast } from 'react-toastify';
 import SelectCategory from '../../components/SelectCategory';
 import LangSelectInput from '../../components/LangSelectInput';
 import LangSelectEditor from '../../components/LangSelectEditor.jsx';
+import SelectIngredients from '../../components/SelectIngredients.jsx';
 import {
   useGetProductDetailsQuery,
   useUpdateProductMutation,
 } from '../../slices/productsApiSlice';
 import { useGetProductCategoriesQuery } from '../../slices/productCategoriesApiSlice';
+import { useGetIngredientsQuery } from '../../slices/ingredientsApiSlice.js';
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
@@ -22,17 +24,16 @@ const ProductEditScreen = () => {
   const [thumbnails, setThumbnails] = useState([]);
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState(null);
-  // const [collection, setCollection] = useState(null);
   const [beforePrice, setBeforePrice] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [countInStock, setCountInStock] = useState(0);
-  // const [colors, setColors] = useState(['']);
-  // const [sizes, setSizes] = useState([]);
+  const [toBeDelivered, setToBeDelivered] = useState(false);
   const [active, setActive] = useState('');
   const [transNameHu, setTransNameHu] = useState('');
   const [transDescHu, setTransDescHu] = useState('');
   const [transBeforePriceHu, setTransBeforePriceHu] = useState(0);
   const [transCurrentPriceHu, setTransCurrentPriceHu] = useState(0);
+  const [ingredients, setIngredients] = useState([]);
 
   const {
     data: product,
@@ -50,6 +51,13 @@ const ProductEditScreen = () => {
     error: catError,
   } = useGetProductCategoriesQuery({ sort: 'title' });
 
+  const {
+    data: ingredientList,
+    isLoading: isLoadingIngredients,
+    isError: isErrorIngredients,
+    error: errorIngredients,
+  } = useGetIngredientsQuery({ sort: 'title' });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,6 +69,7 @@ const ProductEditScreen = () => {
       setBeforePrice(product.beforePrice || 0);
       setCurrentPrice(product.currentPrice || 0);
       setCountInStock(product.countInStock);
+      setToBeDelivered(product.toBeDelivered);
       setTransNameHu(product.translations?.hu?.name || product.name);
       setTransDescHu(
         product.translations?.hu?.description || product.description
@@ -71,6 +80,10 @@ const ProductEditScreen = () => {
       setTransCurrentPriceHu(
         product.translations?.hu?.currentPrice || product.currentPrice
       );
+      setIngredients(() => {
+        return product.ingredients?.map((ingredient) => ingredient._id);
+      });
+      // setIngredients(product.ingredients);
     }
   }, [product]);
 
@@ -86,6 +99,8 @@ const ProductEditScreen = () => {
         beforePrice,
         currentPrice,
         countInStock,
+        toBeDelivered,
+        ingredients,
         translations: {
           hu: {
             name: transNameHu,
@@ -103,6 +118,8 @@ const ProductEditScreen = () => {
     }
   };
 
+  console.log(ingredients);
+
   return (
     <>
       {loadingUpdate && <Loader />}
@@ -114,6 +131,12 @@ const ProductEditScreen = () => {
             {catError?.data?.message || catError.error}
           </Message>
         )
+      )}
+      {isLoadingIngredients ? (
+        <Loader />
+      ) : (
+        isErrorIngredients &&
+        toast.error(errorIngredients?.data?.message || errorIngredients.error)
       )}
       {isLoading ? (
         <Loader />
@@ -145,24 +168,24 @@ const ProductEditScreen = () => {
                 setActiveImage={setActive}
               />
 
-              <div className="row">
-                <div className="col-md-6">
-                  <Form.Group controlId="category" className="my-2">
-                    <Form.Label>Category</Form.Label>
-                    <SelectCategory
-                      categories={categories}
-                      category={category}
-                      setCategory={setCategory}
-                    />
-                  </Form.Group>
-                </div>
+              <Form.Group controlId="category" className="my-2">
+                <Form.Label>Category</Form.Label>
+                <SelectCategory
+                  categories={categories}
+                  category={category}
+                  setCategory={setCategory}
+                />
+              </Form.Group>
 
-                <div className="col-md-6">
-                  <Form.Group controlId="collection" className="my-2">
-                    <Form.Label>Collection</Form.Label>
-                  </Form.Group>
-                </div>
-              </div>
+              <Form.Group controlId="ingredients" className="my-2">
+                <Form.Label>Ingredients</Form.Label>
+                <SelectIngredients
+                  ingredientList={ingredientList?.data}
+                  ingredients={ingredients}
+                  setIngredients={setIngredients}
+                  multi
+                />
+              </Form.Group>
 
               <div className="row">
                 <div className="col-md-6">
@@ -192,15 +215,30 @@ const ProductEditScreen = () => {
                 </div>
               </div>
 
-              <Form.Group controlId="countInStock" className="my-2">
-                <Form.Label>Count In Stock</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Count in stock"
-                  value={countInStock}
-                  onChange={(e) => setCountInStock(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
+              <div className="row">
+                <div className="col-md-6">
+                  <Form.Group controlId="countInStock" className="my-2">
+                    <Form.Label>Count In Stock</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Count in stock"
+                      value={countInStock}
+                      onChange={(e) => setCountInStock(e.target.value)}
+                    ></Form.Control>
+                  </Form.Group>
+                </div>
+
+                <div className="col-md-6">
+                  <Form.Group controlId="toBeDelivered" className="my-2">
+                    <Form.Check
+                      type="checkbox"
+                      label="To be delivered"
+                      checked={toBeDelivered}
+                      onChange={(e) => setToBeDelivered(e.target.checked)}
+                    ></Form.Check>
+                  </Form.Group>
+                </div>
+              </div>
 
               <LangSelectEditor
                 label="Description"

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import {
   Container,
   Row,
@@ -30,7 +30,7 @@ import {
 import { useGetProductCategoriesQuery } from '../slices/productCategoriesApiSlice';
 
 const ShopScreen = () => {
-  let { pageNumber, keyword, productCategory, productCollection } = useParams();
+  let { pageNumber, keyword, productCategory } = useParams();
 
   if (!pageNumber) {
     pageNumber = 1;
@@ -40,7 +40,6 @@ const ShopScreen = () => {
 
   const [sort, setSort] = useState('-rating,-createdAt');
   const [category, setCategory] = useState([]);
-  const [collection, setCollection] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
   const [show, setShow] = useState(false);
@@ -57,7 +56,6 @@ const ShopScreen = () => {
   } = useGetProductsQuery({
     sort,
     category_in: category.length > 0 ? category : undefined,
-    collections_in: collection.length > 0 ? collection : undefined,
     page,
     limit: 8,
     currentPrice_gte:
@@ -94,22 +92,10 @@ const ShopScreen = () => {
   useEffect(() => {
     if (minmax) {
       setMinPrice(
-        i18n.language === 'en'
-          ? minmax[0]?.minPrice
-            ? minmax[0]?.minPrice
-            : 0
-          : minmax[0]?.minPrice_hu
-          ? minmax[0]?.minPrice_hu
-          : 0
+        i18n.language === 'en' ? minmax[0].minPrice : minmax[0].minPrice_hu
       );
       setMaxPrice(
-        i18n.language === 'en'
-          ? minmax[0]?.maxPrice
-            ? minmax[0]?.maxPrice
-            : 0
-          : minmax[0]?.maxPrice_hu
-          ? minmax[0]?.maxPrice_hu
-          : 0
+        i18n.language === 'en' ? minmax[0].maxPrice : minmax[0].maxPrice_hu
       );
     }
   }, [minmax, i18n.language]);
@@ -118,17 +104,9 @@ const ShopScreen = () => {
     if (productCategory === undefined) {
       setCategory([]);
     } else {
-      setCategory(productCategory);
+      setCategory(productCategory.split(','));
     }
   }, [productCategory]);
-
-  useEffect(() => {
-    if (productCollection === undefined) {
-      setCollection([]);
-    } else {
-      setCollection(productCollection);
-    }
-  }, [productCollection]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -187,15 +165,15 @@ const ShopScreen = () => {
                         setCategory={setCategory}
                         min={
                           i18n.language === 'en'
-                            ? minmax[0]?.minPrice
-                            : minmax[0]?.minPrice_hu
+                            ? minmax[0].minPrice
+                            : minmax[0].minPrice_hu
                         }
                         minPrice={minPrice}
                         setMinPrice={setMinPrice}
                         max={
                           i18n.language === 'en'
-                            ? minmax[0]?.maxPrice
-                            : minmax[0]?.maxPrice_hu
+                            ? minmax[0].maxPrice
+                            : minmax[0].maxPrice_hu
                         }
                         maxPrice={maxPrice}
                         setMaxPrice={setMaxPrice}
@@ -207,10 +185,14 @@ const ShopScreen = () => {
               <Col xs={12} lg={9} xxl={10}>
                 <Row className="align-items-center justify-content-between">
                   <Col>
-                    {t('showingOfResults', {
-                      length: products?.data?.length,
-                      count: products?.count,
-                    })}
+                    <Trans
+                      values={{
+                        length: products?.data?.length,
+                        count: products?.count,
+                      }}
+                    >
+                      {t('showingOfResults')}
+                    </Trans>
                   </Col>
                   <Col
                     sm={7}
@@ -280,8 +262,7 @@ const ShopScreen = () => {
                 <Paginate
                   pages={pages}
                   page={page}
-                  productCategory={productCategory}
-                  productCollection={productCollection}
+                  category={category.join(',')}
                   keyword={keyword ? keyword : ''}
                 />
               </Col>

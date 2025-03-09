@@ -14,12 +14,7 @@ const FeaturedStuff = () => {
     isLoading,
     isError,
     error,
-    isSuccess,
   } = useGetProductDetailsQuery(productId);
-
-  if (isSuccess) {
-    console.log(product);
-  }
 
   return isLoading ? (
     <Loader />

@@ -20,6 +20,7 @@ const productCreateInit = (req, res, next) => {
   req.body.beforePrice = 0;
   req.body.currentPrice = 0;
   req.body.countInStock = 0;
+  req.body.toBeDelivered = true;
   req.body.rating = 0;
   req.body.numReviews = 0;
   req.body.translations = {
@@ -133,6 +134,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     beforePrice,
     currentPrice,
     countInStock,
+    toBeDelivered,
     ingredients,
     translations,
   } = req.body;
@@ -147,6 +149,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.beforePrice = beforePrice || product.beforePrice;
     product.currentPrice = currentPrice || product.currentPrice;
     product.countInStock = countInStock || product.countInStock;
+    product.toBeDelivered = toBeDelivered;
     product.ingredients = ingredients || product.ingredients;
     product.translations = translations || product.translations;
 

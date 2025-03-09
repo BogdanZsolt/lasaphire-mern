@@ -74,7 +74,8 @@ const ProductScreen = () => {
     useCreateReviewMutation();
 
   const addToCartHandler = () => {
-    const { _id, name, currentPrice, thumbnails, countInStock } = product;
+    const { _id, name, currentPrice, thumbnails, countInStock, toBeDelivered } =
+      product;
     const cartId = uuid();
     const name_hu = product.translations?.hu?.name || product.name;
     const currentPrice_hu =
@@ -93,6 +94,7 @@ const ProductScreen = () => {
         thumbnail,
         qty,
         countInStock,
+        toBeDelivered,
       })
     );
     navigate('/cart');
@@ -145,7 +147,7 @@ const ProductScreen = () => {
   };
 
   const addToWishListHandler = () => {
-    const { _id, name, currentPrice, thumbnails } = product;
+    const { _id, name, currentPrice, thumbnails, toBeDelivered } = product;
     const name_hu = product.translations?.hu?.name || product.name;
     const currentPrice_hu =
       product.translations?.hu?.currentPrice || product.currentPrice;
@@ -160,6 +162,7 @@ const ProductScreen = () => {
         currentPrice,
         currentPrice_hu,
         thumbnail,
+        toBeDelivered,
       })
     );
   };

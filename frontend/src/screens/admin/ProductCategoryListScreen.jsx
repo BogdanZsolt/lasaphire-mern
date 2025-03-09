@@ -75,7 +75,6 @@ const ProductCategoryListScreen = () => {
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>TITLE</th>
                 <th>PARENT</th>
                 <th></th>
@@ -84,16 +83,10 @@ const ProductCategoryListScreen = () => {
             <tbody>
               {productCats.data.map((cat) => (
                 <tr key={cat._id}>
-                  <td>{cat._id}</td>
-                  <td className="text-start">
-                    <p className="my-0 py-0">
-                      <b>en: </b>
-                      {cat.title}
-                    </p>
-                    <p className="my-0 py-0">
-                      <b>hu: </b>
-                      {cat.translations?.hu?.title}
-                    </p>
+                  <td
+                    title={`hu: ${cat.translations?.hu?.title}\n\n id: ${cat._id}`}
+                  >
+                    {cat.title}
                   </td>
                   <td>{cat?.parent?.title}</td>
                   <td>

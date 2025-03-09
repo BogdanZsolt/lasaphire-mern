@@ -47,11 +47,14 @@ import {
   AccountVerification,
   ProtectRoute,
   RegisterScreen,
+  BillingScreen,
   ShippingScreen,
   ShopScreen,
   SubscriberListScreen,
   UserEditScreen,
   UserListScreen,
+  MembershipPlanListScreen,
+  MembershipPlanEditScreen,
   ValuesScreen,
   WishListScreen,
   AdminOrderScreen,
@@ -63,8 +66,12 @@ import {
   NinetyDaysProgramScreen,
   YoutubeChannelScreen,
   HolisticScreen,
-  SophiaCircleScreens,
+  SophiaCircleScreen,
   NaturalBeautyScreen,
+  PrivacyScreen,
+  SccScreen,
+  ShippingGuaranteeScreen,
+  OrderPaymentScreen,
 } from './Pages';
 import Root from './components/Root';
 import Loader from './components/Loader';
@@ -127,10 +134,6 @@ const App = () => {
               element: <NaturalBeautyScreen />,
             },
             {
-              path: 'sophiecircle',
-              element: <SophiaCircleScreens />,
-            },
-            {
               path: 'shop',
               element: <ShopScreen />,
               children: [
@@ -159,6 +162,14 @@ const App = () => {
             {
               path: 'product/:id',
               element: <ProductScreen />,
+            },
+            {
+              path: 'sophiecircle',
+              element: <SophiaCircleScreen />,
+            },
+            {
+              path: 'sophiecircle/:id',
+              element: <SophiaCircleScreen />,
             },
             {
               path: 'blog',
@@ -211,6 +222,22 @@ const App = () => {
               element: <ResetPasswordScreen />,
             },
             {
+              path: 'privacy',
+              element: <PrivacyScreen />,
+            },
+            {
+              path: 'scc',
+              element: <SccScreen />,
+            },
+            {
+              path: 'shipping&garantee',
+              element: <ShippingGuaranteeScreen />,
+            },
+            {
+              path: 'order&payment',
+              element: <OrderPaymentScreen />,
+            },
+            {
               path: '',
               element: <ProtectRoute />,
               children: [
@@ -226,7 +253,10 @@ const App = () => {
                   path: 'account-verification/:verifyToken',
                   element: <AccountVerification />,
                 },
-
+                {
+                  path: 'billing',
+                  element: <BillingScreen />,
+                },
                 {
                   path: 'shipping',
                   element: <ShippingScreen />,
@@ -358,6 +388,14 @@ const App = () => {
             {
               path: 'user/:id/edit',
               element: <UserEditScreen />,
+            },
+            {
+              path: 'membershipplan',
+              element: <MembershipPlanListScreen />,
+            },
+            {
+              path: 'membershipplan/:id/edit',
+              element: <MembershipPlanEditScreen />,
             },
             {
               path: 'orderlist',

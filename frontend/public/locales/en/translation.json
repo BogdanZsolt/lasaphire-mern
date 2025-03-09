@@ -6,6 +6,7 @@
   "subtotal": "Subtotal ({{count}}) items ",
   "proceedToCheckout": "Proceed To Checkout",
   "signIn": "Sign In",
+  "billing": "Billing",
   "shipping": "Shipping",
   "address": "Address",
   "enterAddress": "Enter Address",
@@ -53,5 +54,10 @@
   "transactionId": "Transaction ID",
   "amount": "Amount",
   "weAlsoSentTheTransactionDetails": "We also sent the transaction details by email so that you can refer to them in case of questions.",
+  "noAddressField": "Address is required",
+  "noCityField": "City is required",
+  "noPostalCodeField": "Postal code is required",
+  "noCountryField": "Country is required",
+  "allFieldsMandatory": "All fields are Mandatory",
   "": ""
 }

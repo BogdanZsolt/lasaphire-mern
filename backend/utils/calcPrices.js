@@ -7,14 +7,18 @@ export function calcPrices(
   taxRate = 0.15,
   freeShipping = 100,
   shipping = 10,
+  hasToBeDelivered = false,
   fixed = 2
 ) {
   // Calculate the items price
   const itemsPrice = addDecimals(
     orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
-  // Calculate the shipping price
-  const shippingPrice = addDecimals(itemsPrice > freeShipping ? 0 : shipping);
+  let shippingPrice = 0;
+  if (hasToBeDelivered) {
+    // Calculate the shipping price
+    shippingPrice = addDecimals(itemsPrice > freeShipping ? 0 : shipping);
+  }
   // Calculate the tax price
   const taxPrice = addDecimals(Number((taxRate * itemsPrice).toFixed(fixed)));
   // Calculate the total price

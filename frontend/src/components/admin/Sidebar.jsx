@@ -10,7 +10,7 @@ import {
   Navbar,
   Image,
 } from 'react-bootstrap';
-import logo from '../../assets/logo-200x200.png';
+import logo from '../../assets/logo-200x200-1.png';
 import { RiArticleLine, RiQuestionAnswerLine } from 'react-icons/ri';
 import {
   BsSpeedometer2,
@@ -46,7 +46,7 @@ const Sidebar = () => {
       <div className="mt-2 sidebar">
         <Container className="my-3" style={{ minHeight: '2rem' }}>
           <Navbar.Brand href="/" className="bg-primary">
-            <Image src={logo} style={{ width: '3.5rem' }} />
+            <Image src={logo} />
           </Navbar.Brand>
         </Container>
         <hr className="text-primary d-none d-sm-block" />
@@ -91,14 +91,6 @@ const Sidebar = () => {
                       <span>Product Categories</span>
                     </Link>
                   </Nav.Item>
-                  <Nav.Item className="ms-4 p-2">
-                    <Link
-                      to="/admin/productcollectionlist"
-                      className="text-primary my-2"
-                    >
-                      <span>Product Collections</span>
-                    </Link>
-                  </Nav.Item>
                 </Nav>
               </Collapse>
             </div>
@@ -114,11 +106,6 @@ const Sidebar = () => {
                     <span>
                       <span>Product Categories</span>
                     </span>
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item as="div">
-                  <Link to="/admin/productcollectionlist">
-                    <span>Product Collections</span>
                   </Link>
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -288,6 +275,7 @@ const Sidebar = () => {
             </div>
           </Nav.Item>
 
+          {/* users */}
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
@@ -306,6 +294,14 @@ const Sidebar = () => {
                       <span>All users</span>
                     </Link>
                   </Nav.Item>
+                  <Nav.Item className="ms-4 p-2">
+                    <Link
+                      className="text-primary my-2"
+                      to="/admin/membershipplan"
+                    >
+                      <span>membership plans</span>
+                    </Link>
+                  </Nav.Item>
                 </Nav>
               </Collapse>
             </div>
@@ -316,9 +312,16 @@ const Sidebar = () => {
                     <span>All users</span>
                   </Link>
                 </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to="/admin/membershipplan">
+                    <span>membership plans</span>
+                  </Link>
+                </Dropdown.Item>
               </Dropdown.Menu>
             </div>
           </Nav.Item>
+
+          {/* orders */}
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
