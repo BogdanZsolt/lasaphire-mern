@@ -18,6 +18,7 @@ import LanguageSelector from './LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
+import SocialMenu from './SocialMenu';
 
 const Header = () => {
   const { t } = useTranslation(['menu']);
@@ -158,6 +159,9 @@ const Header = () => {
                   </li>
                   <li className="d-flex justify-content-start justify-content-lg -center align-items-center">
                     <LanguageSelector />
+                  </li>
+                  <li className="d-block d-lg-none">
+                    <SocialMenu />
                   </li>
                 </Nav>
               </Offcanvas.Body>
