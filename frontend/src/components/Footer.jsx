@@ -3,6 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import SocialMenu from './SocialMenu.jsx';
 import logo from '../assets/logo-200x200-1.png';
+import CookieConsentBanner from './CookieConsentBanner.jsx';
 
 const Footer = () => {
   const { t } = useTranslation('footer');
@@ -42,6 +43,7 @@ const Footer = () => {
           </div>
         </Row>
       </Container>
+      <CookieConsentBanner />
     </footer>
   );
 };

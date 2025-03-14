@@ -4,5 +4,15 @@
   "scclong": "Standard Contractual Clauses",
   "shipping&guarantee": "Shipping & Guarantee",
   "order&payment": "Order & Payment",
+  "cookieTitle": "Your privacy is important to us",
+  "cookieDescription": "We store and/or access information on a device, for example in the form of cookies, and process personal data, such as unique identifiers and standard information that the device sends for personalized ads and content, ad and content measurement, audience measurement, and service improvement. With your permission, we may also use precise geolocation data and identification information obtained through device scanning. By clicking where appropriate, you can consent to our processing of your data as described above. Alternatively, you can get more detailed information and change your settings before giving or refusing consent. Please note that some processing of your personal data does not necessarily require your consent, but you have the right to object to such processing. Your settings apply to a group of websites. You can change or withdraw your preferences at any time by returning to this page and clicking the \"Privacy\" button at the bottom of the page. Please also note that this website/app uses 1 or more Google services and may collect and store information, including but not limited to information about your visit or usage patterns. In the Google consent section below, you can give or refuse your consent to Google and its third-party labels using your information for the purposes set out below by clicking the appropriate option.",
+  "cookieAdditionalButton": "Additional options",
+  "cookieAcceptButton": "Accept",
+  "cookieAcceptsAll": "Accepts all",
+  "cookieRejectsAll": "Rejects all",
+  "dataProtection": "Data protection",
+  "necessaryCookies": "Necessary Cookies",
+  "analyticsCookies": "Analytics Cookies",
+  "marketingCookies": "Marketing Cookies",
   "": ""
 }

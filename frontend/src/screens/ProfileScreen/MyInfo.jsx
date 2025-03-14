@@ -139,7 +139,7 @@ const MyInfo = ({
                   <Link
                     className="text-danger fw-bold"
                     style={{ cursor: 'pointer' }}
-                    to="/membership"
+                    to="/sophiecircle"
                   />
                 ),
               }}
