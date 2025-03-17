@@ -223,6 +223,21 @@ img.logo {
   gap: 1rem;
 }
 
+.header-social-menu {
+  gap: 0.1rem;
+}
+
+.header-social-menu > a {
+  color: var(--bs-primary);
+  background: inherit;
+  border: none;
+  margin: 0;
+}
+
+.header-social-menu > button svg {
+  filter: drop-shadow(2px 2px 4px var(--bs-black));
+}
+
 /* MOBILE MENU BUTTON */
 .mobile-menu-btn {
   display: flex;
@@ -2198,6 +2213,10 @@ form .nofeedback {
   text-shadow: 2px 2px 4px var(--bs-black);
 }
 
+.data-protection .btn {
+  --bs-btn-font-size: 0.75rem;
+}
+
 /* Media Querys */
 @media (min-width: 481px) {
   .product .image,
@@ -2394,6 +2413,10 @@ form .nofeedback {
 
   .cookie-consent-title {
     align-self: start;
+  }
+
+  .data-protection .btn {
+    --bs-btn-font-size: 1rem;
   }
 }
 

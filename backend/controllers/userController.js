@@ -3,8 +3,13 @@ import asyncHandler from '../middleware/asyncHandler.js';
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 import jwt from 'jsonwebtoken';
-import sendAccVerificationEmail from '../utils/sendAccVerificationEmail.js';
-import sendPasswordResetEmail from '../utils/sendPasswordResetEmail.js';
+import { getAll, getOne } from './handlerFactory.js';
+// import sendAccVerificationEmail from '../utils/sendAccVerificationEmail.js';
+// import sendPasswordResetEmail from '../utils/sendPasswordResetEmail.js';
+import Email from '../utils/email.js';
+
+const usersPopOption = [];
+const userPopOption = [{ path: 'posts' }];
 
 // @desc    Auth user & get token
 // @route   POST /api/users/auth
@@ -28,6 +33,8 @@ const authUser = asyncHandler(async (req, res, next) => {
       email: user.email,
       isEmailVerified: user.isEmailVerified,
       isAdmin: user.isAdmin,
+      isPremium: user.isPremium,
+      premiumExpiresAt: user.premiumExpiresAt,
     });
   })(req, res, next);
 });
@@ -88,6 +95,8 @@ const checkAuthenticated = asyncHandler(async (req, res) => {
         email: user.email,
         isEmailVerified: user.isEmailVerified,
         isAdmin: user.isAdmin,
+        isPremium: user.isPremium,
+        premiumExpiresAt: user.premiumExpiresAt,
       });
     }
   } catch (err) {
@@ -123,6 +132,34 @@ const checkIsAdmin = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Check if the user's plan is premium
+// @route   GET /api/users/checkpremium
+// @access  Public
+const checkIsPremium = asyncHandler(async (req, res) => {
+  const token = req.cookies['jwt'];
+  if (!token) {
+    return res.status(200).json({ isPremium: false });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // find the user
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      return res.status(200).json({ isPremium: false });
+    } else {
+      let isPremium = false;
+      if (user.isPremium || user.isAdmin) {
+        isPremium = true;
+      }
+      res.status(200).json({
+        isPremium: isPremium,
+      });
+    }
+  } catch (err) {
+    return res.status(401).json({ isPremium: false, err });
+  }
+});
+
 // @desc    Register user
 // @route   POST /api/users
 // @access  Public
@@ -142,6 +179,8 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     isEmailVerified: false,
+    isPremium: true,
+    premiumExpiresAt: null,
     password,
   });
 
@@ -186,6 +225,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
       isEmailVerified: user.isEmailVerified,
       authMethod: user.authMethod,
       isAdmin: user.isAdmin,
+      isPremium: user.isPremium,
+      premiumExpiresAt: user.premiumExpiresAt,
     });
   } else {
     res.status(404);
@@ -215,6 +256,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       isEmailVerified: updateUser.isEmailVerified,
       isAdmin: updatedUser.isAdmin,
+      isPremium: updateUser.isPremium,
+      premiumExpiresAt: updateUser.premiumExpiresAt,
       authMethod: updateUser.authMethod,
     });
   } else {
@@ -226,24 +269,12 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @desc    Get users
 // @route   GET /api/users
 // @access  Private/Admin
-const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({}).select('-password');
-  res.status(200).json(users);
-});
+const getUsers = getAll(User, usersPopOption, '-password');
 
 // @desc    Get user by ID
 // @route   GET /api/users/:id
 // @access  Private/Admin
-const getUserByID = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).select('-password');
-
-  if (user) {
-    res.status(200).json(user);
-  } else {
-    res.status(404);
-    throw new Error('User not found');
-  }
-});
+const getUserByID = getOne(User, userPopOption, '-password');
 
 // @desc    Delete user
 // @route   Delete /api/users/:id
@@ -312,6 +343,7 @@ const getAuthor = asyncHandler(async (req, res) => {
 const verifyEmailAccount = asyncHandler(async (req, res) => {
   // find the login user
   const user = await User.findById(req.user);
+  const { language } = req.body;
   // const { origin: originUrl } = req.headers;
 
   if (user) {
@@ -322,11 +354,8 @@ const verifyEmailAccount = asyncHandler(async (req, res) => {
       // resave the user
       await user.save();
       // send the email
-      const info = await sendAccVerificationEmail(
-        user?.email,
-        token,
-        process.env.FRONTEND_URL
-      );
+      const url = `${process.env.FRONTEND_URL}/account-verification/${token}`;
+      const info = await new Email(user, language).accountVerify(url);
       if (!info) {
         res.status(401).json({
           status: 401,
@@ -379,7 +408,7 @@ const verifyEmailAcc = asyncHandler(async (req, res) => {
 // @access  Public
 const forgotPasswordEmailToken = asyncHandler(async (req, res) => {
   // find the user email
-  const { email } = req.body;
+  const { email, language } = req.body;
   // find the user
   const user = await User.findOne({ email });
   // const { origin: originUrl } = req.headers;
@@ -392,11 +421,8 @@ const forgotPasswordEmailToken = asyncHandler(async (req, res) => {
       // resave the user
       await user.save();
       // send the email
-      const info = await sendPasswordResetEmail(
-        user?.email,
-        token,
-        process.env.FRONTEND_URL
-      );
+      const url = `${process.env.FRONTEND_URL}/reset-password/${token}`;
+      const info = await new Email(user, language).sendPasswordReset(url);
       if (!info) {
         res.status(401).json({
           status: 401,
@@ -452,6 +478,7 @@ const resetPassword = asyncHandler(async (req, res) => {
 export {
   checkAuthenticated,
   checkIsAdmin,
+  checkIsPremium,
   authUser,
   googleAuthUser,
   googleAuthUserCallback,

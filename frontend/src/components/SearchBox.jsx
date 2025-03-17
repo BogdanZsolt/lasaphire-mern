@@ -1,37 +1,63 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { useParams, useNavigate } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { Button, Form, InputGroup, Modal } from 'react-bootstrap';
+// import { useParams } from 'react-router-dom';
+import { RiSearchLine } from 'react-icons/ri';
 
 const SearchBox = () => {
-  const navigate = useNavigate();
-  const { keyword: urlKeyword } = useParams();
-  const [keyword, setKeyword] = useState(urlKeyword || '');
+  const [show, setShow] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (keyword.trim()) {
-      setKeyword('');
-      navigate(`/shop/search/${keyword}`);
-    } else {
-      navigate('/');
-    }
+  // const { keyword: urlKeyword } = useParams();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleSearch = () => {
+    console.log('Searching...');
   };
 
   return (
-    <Form onSubmit={submitHandler} className="d-flex">
-      <Form.Control
-        type="text"
-        name="q"
-        onChange={(e) => setKeyword(e.target.value)}
-        value={keyword}
-        placeholder="Search Products..."
-        className="mr-sm-2 ml-sm-5"
-      ></Form.Control>
-      <Button type="submit" variant="outline-light" className="p-2 mx-2">
-        <FaSearch />
-      </Button>
-    </Form>
+    <>
+      <li className="d-flex justify-content-start justify-content-lg-center align-items-center">
+        <div role="button" onClick={handleShow} className="nav-link">
+          <RiSearchLine />
+          <span className="d-inline-bolck d-lg-none">Search</span>
+        </div>
+      </li>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        centered
+        size="xl"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Search</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <InputGroup>
+              <Button
+                variant="outline-secondary"
+                id="button-addon1"
+                onClick={handleSearch}
+              >
+                <RiSearchLine />
+              </Button>
+              <Form.Control type="text" placeholder="Search..." />
+            </InputGroup>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSearch}>
+            Search
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 

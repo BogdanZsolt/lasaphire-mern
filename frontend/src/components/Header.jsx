@@ -19,6 +19,8 @@ import { useTranslation } from 'react-i18next';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 import SocialMenu from './SocialMenu';
+import HeaderSocialMenu from './HeaderSocialMenu';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const { t } = useTranslation(['menu']);
@@ -98,9 +100,18 @@ const Header = () => {
                   className="justify-content-end flex-grow-1 pe-3 right-menu"
                   as="ul"
                 >
-                  {/* <SearchBox /> */}
+                  <SearchBox />
                   {userAuth && userAuth?.isAuthenticated ? (
-                    <NavDropdown title={userAuth.name} id="username" as="li">
+                    <NavDropdown
+                      title={
+                        <>
+                          <RiUserLine className="d-lg-none" />
+                          {userAuth.name}
+                        </>
+                      }
+                      id="username"
+                      as="li"
+                    >
                       {userAuth?.isAdmin && (
                         <LinkContainer to="/admin">
                           <NavDropdown.Item>
@@ -118,7 +129,7 @@ const Header = () => {
                   ) : (
                     <LinkContainer to="/login">
                       <Nav.Link>
-                        <RiUserLine />
+                        <RiUserLine className="d-inline-block d-lg-none" />
                         {t('signIn')}
                       </Nav.Link>
                     </LinkContainer>
@@ -157,9 +168,10 @@ const Header = () => {
                       </Nav.Link>
                     </LinkContainer>
                   </li>
-                  <li className="d-flex justify-content-start justify-content-lg -center align-items-center">
+                  <li className="d-flex justify-content-start justify-content-lg-center align-items-center">
                     <LanguageSelector />
                   </li>
+                  <HeaderSocialMenu />
                   <li className="d-block d-lg-none">
                     <SocialMenu />
                   </li>

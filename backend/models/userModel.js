@@ -42,6 +42,14 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    isPremium: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    premiumExpiresAt: {
+      type: Date,
+    },
     googleId: {
       type: String,
       required: false,

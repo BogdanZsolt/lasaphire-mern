@@ -199,7 +199,7 @@ const CookieConsentBanner = () => {
         </>
       )}
       {!showConsent && (
-        <div className="fixed-bottom">
+        <div className="fixed-bottom data-protection">
           <Button
             variant="primary"
             className="d-flex justify-content-center align-items-center gap-1"
