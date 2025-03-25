@@ -4,6 +4,8 @@
   "filters": "Filters",
   "size": "Size",
   "color": "Color",
+  "search": "Search",
+  "searchPlaceholder": "Search text",
   "categories": "Categories",
   "collections": "Collections",
   "price": "Price",

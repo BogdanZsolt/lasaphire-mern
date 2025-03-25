@@ -4,6 +4,8 @@
   "filters": "Szűrők",
   "size": "Méret",
   "color": "Szín",
+  "search": "Keresés",
+  "searchPlaceholder": "Keresési szöveg",
   "categories": "Kategóriák",
   "collections": "Kollekciók",
   "price": "Ár",

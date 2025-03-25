@@ -74,7 +74,33 @@ const getProducts = asyncHandler(async (req, res) => {
     req.query.limit = req.query.limit || process.env.PAGINATION_LIMIT;
   }
 
-  const features = new APIFeatures(Product.find(), req.query, productsPopOption)
+  const search = req.query.search;
+  const lang = req.query.lang || 'en';
+
+  let sfilter = {};
+  if (search) {
+    if (lang === 'en') {
+      sfilter = {
+        $or: [
+          { name: { $regex: search, $options: 'i' } },
+          { description: { $regex: search, $options: 'i' } },
+        ],
+      };
+    } else if (lang === 'hu') {
+      sfilter = {
+        $or: [
+          { 'translations.hu.name': { $regex: search, $options: 'i' } },
+          { 'translations.hu.description': { $regex: search, $options: 'i' } },
+        ],
+      };
+    }
+  }
+
+  const features = new APIFeatures(
+    Product.find(sfilter),
+    req.query,
+    productsPopOption
+  )
     .filter()
     .sort()
     .limit()
@@ -90,7 +116,7 @@ const getProducts = asyncHandler(async (req, res) => {
 
   if (req.query.page) {
     const counter = new APIFeatures(
-      Product.find(),
+      Product.find(sfilter),
       req.query,
       productsPopOption
     ).filter();

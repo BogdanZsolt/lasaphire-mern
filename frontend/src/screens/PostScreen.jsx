@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 // import parse from 'html-react-parser';
@@ -17,6 +18,9 @@ import SocialShareButtons from '../components/SocialShareButtons.jsx';
 
 const PostScreen = () => {
   const { id: postId } = useParams();
+
+  const { t } = useTranslation('blog');
+
   const {
     data: post,
     refetch,
@@ -91,10 +95,13 @@ const PostScreen = () => {
                 </Col>
                 <Col lg={3} className="mt-3 mt-lg-0">
                   <div>
-                    <SuggestedPosts header="Latest Posts" tags={post?.tags} />
+                    <SuggestedPosts
+                      header={t('latestPosts')}
+                      tags={post?.tags}
+                    />
                   </div>
                   <div className="mt-4">
-                    <h2 className="mb-1">Share on:</h2>
+                    <h2 className="mb-1">{`${t('shareOn')}:`}</h2>
                     <SocialShareButtons
                       url={encodeURI()}
                       // title={encodeURIComponent('Fantasztikus Gombák – film')}

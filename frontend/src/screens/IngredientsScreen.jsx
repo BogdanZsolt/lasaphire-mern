@@ -1,13 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Col,
-  Container,
-  Row,
-  Image,
-  Button,
-  ButtonGroup,
-} from 'react-bootstrap';
+import { Col, Container, Row, Image, InputGroup, Form } from 'react-bootstrap';
 import Banner from '../components/Banner';
 import { useTranslation } from 'react-i18next';
 import Meta from '../components/Meta';
@@ -15,6 +8,7 @@ import { textShortener } from '../utils/tools';
 import Editor from '../components/Editor.jsx';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { RiSearchLine } from 'react-icons/ri';
 import {
   useGetIngredientsQuery,
   useGetIngredientAlphabetsQuery,
@@ -24,74 +18,7 @@ import { toast } from 'react-toastify';
 const IngredientsScreen = () => {
   const { t, i18n } = useTranslation(['menu']);
   const [ltrFilter, setLtrFilter] = useState('');
-
-  const alphabets = {
-    en: [
-      { letter: 'A', hasName: false },
-      { letter: 'B', hasName: false },
-      { letter: 'C', hasName: false },
-      { letter: 'D', hasName: false },
-      { letter: 'E', hasName: false },
-      { letter: 'F', hasName: false },
-      { letter: 'G', hasName: false },
-      { letter: 'H', hasName: false },
-      { letter: 'I', hasName: false },
-      { letter: 'J', hasName: false },
-      { letter: 'K', hasName: false },
-      { letter: 'L', hasName: false },
-      { letter: 'M', hasName: false },
-      { letter: 'N', hasName: false },
-      { letter: 'O', hasName: false },
-      { letter: 'P', hasName: false },
-      { letter: 'Q', hasName: false },
-      { letter: 'R', hasName: false },
-      { letter: 'S', hasName: false },
-      { letter: 'T', hasName: false },
-      { letter: 'U', hasName: false },
-      { letter: 'V', hasName: false },
-      { letter: 'W', hasName: false },
-      { letter: 'X', hasName: false },
-      { letter: 'Y', hasName: false },
-      { letter: 'Z', hasName: false },
-    ],
-    hu: [
-      { letter: 'A', hasName: false },
-      { letter: 'Á', hasName: false },
-      { letter: 'B', hasName: false },
-      { letter: 'C', hasName: false },
-      { letter: 'D', hasName: false },
-      { letter: 'E', hasName: false },
-      { letter: 'É', hasName: false },
-      { letter: 'F', hasName: false },
-      { letter: 'G', hasName: false },
-      { letter: 'H', hasName: false },
-      { letter: 'I', hasName: false },
-      { letter: 'Í', hasName: false },
-      { letter: 'J', hasName: false },
-      { letter: 'K', hasName: false },
-      { letter: 'L', hasName: false },
-      { letter: 'M', hasName: false },
-      { letter: 'N', hasName: false },
-      { letter: 'O', hasName: false },
-      { letter: 'Ó', hasName: false },
-      { letter: 'Ö', hasName: false },
-      { letter: 'Ő', hasName: false },
-      { letter: 'P', hasName: false },
-      { letter: 'Q', hasName: false },
-      { letter: 'R', hasName: false },
-      { letter: 'S', hasName: false },
-      { letter: 'T', hasName: false },
-      { letter: 'U', hasName: false },
-      { letter: 'Ú', hasName: false },
-      { letter: 'Ü', hasName: false },
-      { letter: 'Ű', hasName: false },
-      { letter: 'V', hasName: false },
-      { letter: 'W', hasName: false },
-      { letter: 'X', hasName: false },
-      { letter: 'Y', hasName: false },
-      { letter: 'Z', hasName: false },
-    ],
-  };
+  const [keyword, setKeyword] = useState('');
 
   const {
     data: alpha,
@@ -100,38 +27,36 @@ const IngredientsScreen = () => {
     error: errorAlpha,
   } = useGetIngredientAlphabetsQuery();
 
-  if (alpha) {
-    alphabets.hu.map((item) => {
-      if (alpha[0].hu.includes(item.letter)) {
-        item.hasName = true;
-      }
-    });
-    alphabets.en.map((item) => {
-      if (alpha[0].en.includes(item.letter)) {
-        item.hasName = true;
-      }
-    });
-  }
-
   const {
     data: ingredients,
     isLoading,
     isError,
     error,
   } = useGetIngredientsQuery({
+    search: keyword,
+    lang: i18n.language,
     sort: 'name,createdAt',
-    translations_hu_name_regex: i18n.language === 'en' ? undefined : ltrFilter,
-    name_regex: i18n.language === 'en' ? ltrFilter : undefined,
+    translations_hu_name_regex: keyword
+      ? undefined
+      : i18n.language === 'en'
+      ? undefined
+      : ltrFilter,
+    name_regex: keyword
+      ? undefined
+      : i18n.language === 'en'
+      ? ltrFilter
+      : undefined,
   });
 
-  const alphabetHandler = (ltr) => {
-    console.log(ltr);
-    setLtrFilter(ltr);
+  const handleSelect = (e) => {
+    setLtrFilter(e.target.value);
   };
 
-  if (alpha) {
-    console.log(alpha[0]);
-  }
+  useEffect(() => {
+    keyword ? setLtrFilter('') : setLtrFilter('');
+  }, [keyword]);
+
+  console.log(keyword);
 
   return (
     <>
@@ -153,36 +78,44 @@ const IngredientsScreen = () => {
           <Message variant="danger">{error.data.Message}</Message>
         ) : (
           <>
-            <Row className="mb-3 shadow card-glass-container scrolling">
-              <ButtonGroup
-                className="card-glass"
-                style={{ '--bs-gutter-x': '0' }}
+            <div className="mb-4 d-flex justify-content-between">
+              <Form.Select
+                className="py-0 shadow"
+                style={{ width: 'unset' }}
+                value={ltrFilter}
+                disabled={keyword}
+                // onChange={(e) => setLtrFilter(e.target.value)}
+                onChange={handleSelect}
               >
-                <Button
-                  onClick={() => alphabetHandler('')}
-                  variant="transparent"
-                  className="text-secondary fw-bolder"
-                >
-                  {t('all')}
-                </Button>
-                {alphabets[i18n.language].map((item, idx) => (
-                  <Button
-                    onClick={() => alphabetHandler(item.letter)}
-                    key={idx}
-                    variant="transparent"
-                    disabled={!item.hasName}
-                    className="text-secondary fw-bold"
-                    style={
-                      item.hasName
-                        ? {}
-                        : { background: 'rgba(var(--bs-primary-rgb), 0.75)' }
-                    }
-                  >
-                    {item.letter}
-                  </Button>
+                <option value="">{t('all')}</option>
+                {alpha[0][i18n.language]?.map((ltr) => (
+                  <option key={ltr} value={ltr}>
+                    {ltr}
+                  </option>
                 ))}
-              </ButtonGroup>
-            </Row>
+              </Form.Select>
+              <InputGroup
+                size="lg"
+                className="shadow"
+                style={{ width: 'unset' }}
+              >
+                <InputGroup.Text
+                  style={{
+                    color: 'var(--bs-primary)',
+                    backgroundColor: 'rgba(var(--bs-secondary-rgb),0.7)',
+                  }}
+                >
+                  <RiSearchLine />
+                </InputGroup.Text>
+                <Form.Control
+                  type="search"
+                  placeholder={`${t('search')}...`}
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+                  autoFocus
+                />
+              </InputGroup>
+            </div>
             {ingredients &&
               ingredients.data.map((ingredient) => (
                 <Row

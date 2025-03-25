@@ -1218,13 +1218,19 @@ table th {
   margin-left: 0.25rem;
 }
 
+.search-tab {
+  flex-direction: row;
+}
+
 .product-tab .nav-link,
-.profile-tab .nav-link {
+.profile-tab .nav-link,
+.search-tab .nav-link {
   --bs-nav-link-color: var(--bs-secondary);
 }
 
 .product-tab.nav-tabs .nav-link,
-.profile-tab.nav-tabs .nav-link {
+.profile-tab.nav-tabs .nav-link,
+.search-tab.nav-tabs .nav-link {
   margin-bottom: 0;
   border: none;
   border-bottom: 3px solid transparent;
@@ -1232,7 +1238,8 @@ table th {
 }
 
 .product-tab.nav-tabs .nav-link.active,
-.profile-tab.nav-tabs .nav-link.active {
+.profile-tab.nav-tabs .nav-link.active,
+.search-tab.nav-tabs .nav-link.active {
   border-color: var(--bs-secondary);
 }
 

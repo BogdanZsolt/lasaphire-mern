@@ -38,6 +38,7 @@ const ShopScreen = () => {
 
   const { t, i18n } = useTranslation(['shop']);
 
+  const [searchStr, setSearchStr] = useState('');
   const [sort, setSort] = useState('-rating,-createdAt');
   const [category, setCategory] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
@@ -54,6 +55,8 @@ const ShopScreen = () => {
     isLoading,
     error,
   } = useGetProductsQuery({
+    search: searchStr,
+    lang: i18n.language,
     sort,
     category_in: category.length > 0 ? category : undefined,
     page,
@@ -106,7 +109,7 @@ const ShopScreen = () => {
     } else {
       setCategory(productCategory.split(','));
     }
-  }, [productCategory]);
+  }, [productCategory, i18n.language]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -160,6 +163,8 @@ const ShopScreen = () => {
                   <Offcanvas.Body>
                     {minmax && (
                       <FilterSidebar
+                        searchStr={searchStr}
+                        setSearchStr={setSearchStr}
                         categories={categories}
                         category={category}
                         setCategory={setCategory}

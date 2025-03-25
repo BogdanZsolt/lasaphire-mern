@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import CommentForm from './CommentForm';
 import { toast } from 'react-toastify';
 import Comment from './Comment';
@@ -15,6 +16,7 @@ const CommentsContainer = ({
   logginedUserId = '',
   refetch,
 }) => {
+  const { t } = useTranslation('comment');
   const [createComment] = useCreateCommentMutation();
   const [updateComment] = useUpdateCommentMutation();
   const [deleteComment] = useDeleteCommentMutation();
@@ -69,7 +71,7 @@ const CommentsContainer = ({
   return (
     <div className={`${className}`}>
       <CommentForm
-        btnLabel="Submit"
+        btnLabel={t('submit')}
         formSubmitHandler={(value) => addCommentHandler(value)}
       />
       <div className="mt-4">

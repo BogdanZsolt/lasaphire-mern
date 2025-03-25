@@ -1,19 +1,25 @@
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useGetPostsQuery } from '../slices/postsApiSlice';
+import { useTranslation } from 'react-i18next';
 import Loader from './Loader';
 import Message from './Message';
+import { useGetPostsQuery } from '../slices/postsApiSlice';
 
 const SuggestedPosts = ({ className, header, tags = [] }) => {
+  const { t, i18n } = useTranslation('blog');
+
   const {
     data: posts,
     isLoading,
     error,
   } = useGetPostsQuery({
     sort: '-createdAt',
+    language: i18n.language,
     limit: 3,
-    fields: '_id,user,bannerImage,title,createdAt',
+    fields: '_id,user,bannerImage,title,createdAt,translations',
   });
+
+  console.log(posts);
   return (
     <div className={`w-100 shadow-sm rounded rounded-2 p-2 ${className}`}>
       <h2>{header}</h2>
@@ -59,7 +65,7 @@ const SuggestedPosts = ({ className, header, tags = [] }) => {
           ))}
         </>
       )}
-      <h2>Tags</h2>
+      <h2>{t('tags')}</h2>
       <Row>
         {tags.map((item, index) => (
           <Col key={index}>

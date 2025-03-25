@@ -15,7 +15,7 @@ import { toggleWishList } from '../slices/wishListSlice';
 import { useTranslation } from 'react-i18next';
 import { toCurrency, uuid } from '../utils/converter.js';
 
-const Product = ({ product }) => {
+const Product = ({ product, style, handleClose }) => {
   const { t, i18n } = useTranslation(['shop']);
 
   const dispatch = useDispatch();
@@ -79,8 +79,8 @@ const Product = ({ product }) => {
   };
 
   return (
-    <Card className="my-3 rounded" border="secondary">
-      <Link to={`/product/${product._id}`}>
+    <Card className="my-3 rounded" border="secondary" style={style}>
+      <Link to={`/product/${product._id}`} onClick={handleClose}>
         <Card.Img
           src={product.thumbnails[0]}
           variant="top"
@@ -112,7 +112,7 @@ const Product = ({ product }) => {
         </div>
       </Link>
       <Card.Body>
-        <Link to={`/product/${product._id}`}>
+        <Link to={`/product/${product._id}`} onClick={handleClose}>
           <Card.Title as="div" className="product-title">
             <strong>
               {i18n.language === 'en'

@@ -1,9 +1,12 @@
-import { Accordion, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { Accordion, Row, Form, InputGroup } from 'react-bootstrap';
 import SelectCategory from './SelectCategory';
 import PriceSlider from './PriceSlider';
-import { useTranslation } from 'react-i18next';
+import { RiSearchLine } from 'react-icons/ri';
 
 const FilterSidebar = ({
+  searchStr,
+  setSearchStr,
   categories,
   category,
   setCategory,
@@ -18,15 +21,36 @@ const FilterSidebar = ({
   const { t } = useTranslation(['shop']);
 
   return (
-    <div className={className}>
+    <div className={`w-100 ${className}`}>
       <h3>{t('filters')}</h3>
       <Row>
         <Accordion
-          defaultActiveKey={['categories', 'price']}
+          defaultActiveKey={['search', 'categories', 'price']}
           flush
           alwaysOpen
           style={{ '--bs-accordion-bg': 'transparent' }}
         >
+          <Accordion.Item eventKey="search">
+            <Accordion.Header>{t('search')}</Accordion.Header>
+            <Accordion.Body>
+              <InputGroup>
+                <InputGroup.Text
+                  style={{
+                    color: 'var(--bs-primary)',
+                    backgroundColor: 'rgba(var(--bs-secondary-rgb),0.7)',
+                  }}
+                >
+                  <RiSearchLine />
+                </InputGroup.Text>
+                <Form.Control
+                  type="search"
+                  placeholder={t('searchPlaceholder')}
+                  value={searchStr}
+                  onChange={(e) => setSearchStr(e.target.value)}
+                />
+              </InputGroup>
+            </Accordion.Body>
+          </Accordion.Item>
           <Accordion.Item eventKey="categories">
             <Accordion.Header>{t('categories')}</Accordion.Header>
             <Accordion.Body>

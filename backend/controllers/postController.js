@@ -64,7 +64,40 @@ const getPosts = asyncHandler(async (req, res) => {
     req.query.limit = req.query.limit || process.env.PAGINATION_LIMIT;
   }
 
-  const features = new APIFeatures(Post.find(), req.query, postsPopOption)
+  const search = req.query.search;
+  const lang = req.query.lang || 'en';
+
+  let sFields = {};
+  if (search) {
+    sFields = {
+      $or: [
+        {
+          $and: [
+            { language: { $eq: lang } },
+            { title: { $regex: search, $options: 'i' } },
+          ],
+        },
+        {
+          $and: [
+            { language: { $eq: lang } },
+            { description: { $regex: search, $options: 'i' } },
+          ],
+        },
+        {
+          $and: [
+            { language: { $eq: lang } },
+            { body: { $regex: search, $options: 'i' } },
+          ],
+        },
+      ],
+    };
+  }
+
+  const features = new APIFeatures(
+    Post.find(sFields),
+    req.query,
+    postsPopOption
+  )
     .filter()
     .sort()
     .limit()
@@ -78,7 +111,7 @@ const getPosts = asyncHandler(async (req, res) => {
 
   if (req.query.page) {
     const counter = new APIFeatures(
-      Post.find(),
+      Post.find(sFields),
       req.query,
       postsPopOption
     ).filter();

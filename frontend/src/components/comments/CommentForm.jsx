@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Form, Button } from 'react-bootstrap';
 
 const CommnentForm = ({
@@ -7,6 +8,8 @@ const CommnentForm = ({
   formCancelHandler = null,
   initialText = '',
 }) => {
+  const { t } = useTranslation('comment');
+
   const [comment, setComment] = useState(initialText);
 
   const submitHandler = async (e) => {
@@ -18,13 +21,13 @@ const CommnentForm = ({
   return (
     <Form onSubmit={submitHandler}>
       <Form.Group controlId="comment" className="my-2">
-        <Form.Label>Comment</Form.Label>
+        <Form.Label as="h4">{t('comment')}</Form.Label>
         <Form.Control
           as="textarea"
           row="5"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Leave your comment here..."
+          placeholder={`${t('leaveComment')}...`}
           className="mb-2 bg-transparent"
         ></Form.Control>
         <div className="d-flex align-items-center gap-2">

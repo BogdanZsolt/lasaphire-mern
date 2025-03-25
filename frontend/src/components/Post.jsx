@@ -4,7 +4,16 @@ import { Card, Image } from 'react-bootstrap';
 import { toLocalDate } from '../utils/converter';
 // import { RiArrowRightSLine } from 'react-icons/ri';
 
-const Post = ({ postId, src, category, author, title, description, date }) => {
+const Post = ({
+  postId,
+  src,
+  category,
+  author,
+  title,
+  description,
+  date,
+  handleClose,
+}) => {
   const { t, i18n } = useTranslation(['blog']);
 
   return (
@@ -28,6 +37,7 @@ const Post = ({ postId, src, category, author, title, description, date }) => {
           </div>
           <Link
             to={category?._id ? `/category/${category?._id}` : ''}
+            onClick={handleClose}
             className="text-start"
           >
             <span>
@@ -50,6 +60,7 @@ const Post = ({ postId, src, category, author, title, description, date }) => {
       <Card.Footer>
         <Link
           to={`/post/${postId}`}
+          onClick={handleClose}
           className="lead text-body-emphasis fw-bold text-start"
         >
           {t('continueReading')}...

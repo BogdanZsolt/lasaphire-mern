@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Editor from './Editor';
 
-const Ingredients = ({ ingredients }) => {
-  const { i18n } = useTranslation(['product']);
+const Ingredients = ({ ingredients, close }) => {
+  const { t, i18n } = useTranslation(['product']);
 
   const CustomToggle = ({ children, eventKey }) => {
     const decoratedOnClick = useAccordionButton(eventKey);
@@ -30,15 +30,34 @@ const Ingredients = ({ ingredients }) => {
               </span>
             </CustomToggle>
             <Accordion.Collapse eventKey={ingredient._id}>
-              <Editor
-                content={
-                  18n.language
-                    ? ingredient.description
-                    : ingredient.translations.hu.description ||
-                      ingredient.description
-                }
-                editable={false}
-              />
+              <div>
+                <Editor
+                  content={
+                    18n.language
+                      ? ingredient.description
+                      : ingredient.translations.hu.description ||
+                        ingredient.description
+                  }
+                  editable={false}
+                />
+                {console.log(ingredient.products)}
+                {ingredient.products?.length > 0 && (
+                  <>
+                    <h5 className="m-0 mb-1 fw-semibold">{t('products')}</h5>
+                    <div>
+                      {ingredient.products?.map((product) => (
+                        <Link
+                          to={`/product/${product._id}`}
+                          key={product._id}
+                          onClick={close}
+                        >
+                          <p className="lead fw-bold ps-3">{product.name}</p>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
             </Accordion.Collapse>
           </li>
         ))}

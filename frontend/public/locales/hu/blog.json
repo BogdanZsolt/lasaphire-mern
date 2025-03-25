@@ -1,8 +1,13 @@
 {
   "blog": "Blog",
   "uncategorized": "Kategorizálatlan",
-  "continueReading": "Olvasson tovább",
+  "continueReading": "Olvass tovább",
   "category": "Kategória",
   "author": "Szerző",
+  "search": "Keresés",
+  "thereAreNoItemsToDisplay": "Nincsenek megjeleníthető elemek",
+  "latestPosts": "Legújabb bejegyzések",
+  "shareOn": "Oszd meg",
+  "tags": "Címkék",
   "": ""
 }
