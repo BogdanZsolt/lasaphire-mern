@@ -46,7 +46,7 @@ const OrderListScreen = () => {
               {orders.data.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td>
-                  <td>{order.user && order.user.name}</td>
+                  <td title={`id: ${order.user?._id}`}>{order.user?.name}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
                   <td>{toCurrency(order.language, order.totalPrice)}</td>
                   <td>

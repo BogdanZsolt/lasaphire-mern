@@ -71,7 +71,6 @@ const FaqListScreen = () => {
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>QUESTION</th>
                 <th>AUTHOR NAME</th>
                 <th>CATEGORY</th>
@@ -81,19 +80,29 @@ const FaqListScreen = () => {
             <tbody>
               {faqs.data.map((faq) => (
                 <tr key={faq._id}>
-                  <td>{faq._id}</td>
-                  <td>{faq.question}</td>
+                  <td
+                    title={`hu: ${faq.translations?.hu?.question} \n\n id: ${faq._id}`}
+                  >
+                    {faq.question}
+                  </td>
                   <td>{faq.user.name}</td>
-                  <td>{faq?.category?.title}</td>
+                  <td title={`hu: ${faq.category?.translations?.hu?.title}`}>
+                    {faq?.category?.title}
+                  </td>
                   <td>
                     <LinkContainer to={`/admin/faq/${faq._id}/edit`}>
-                      <Button variant="primary" className="btn-sm mx-2">
+                      <Button
+                        title="Edit"
+                        variant="primary"
+                        className="btn-sm mx-2"
+                      >
                         <span className="d-flex align-items-center justify-content-center">
                           <FaEdit />
                         </span>
                       </Button>
                     </LinkContainer>
                     <Button
+                      title="Delete"
                       variant="danger"
                       className="btn-sm"
                       onClick={() => deleteHandler(faq._id)}

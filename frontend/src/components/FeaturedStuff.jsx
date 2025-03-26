@@ -23,7 +23,7 @@ const FeaturedStuff = () => {
   ) : (
     <div className="row my-4">
       <div className="row justify-content-between">
-        <h5 className="fw-bold fs-2 col">{t('featuredStuff')}</h5>
+        <h2 className="col">{t('featuredStuff')}</h2>
         <Link
           to={`/product/${product._id}`}
           className="col d-flex justify-content-end align-items-center"

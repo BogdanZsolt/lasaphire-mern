@@ -93,9 +93,7 @@ const IngredientListScreen = () => {
         <Table striped hover responsive className="table-sm">
           <thead>
             <tr>
-              <th>ID</th>
               <th>NAME</th>
-              <th>CATEGORY</th>
               <th></th>
             </tr>
           </thead>
@@ -103,20 +101,27 @@ const IngredientListScreen = () => {
             {isSuccess &&
               ingredients.data.map((ingredient) => (
                 <tr key={ingredient._id}>
-                  <td>{ingredient._id}</td>
-                  <td>{ingredient.name}</td>
-                  <td>{ingredient?.category?.title}</td>
+                  <td
+                    title={`hu: ${ingredient.translations?.hu?.name}\n\n id: ${ingredient._id}`}
+                  >
+                    {ingredient.name}
+                  </td>
                   <td>
                     <LinkContainer
                       to={`/admin/ingredient/${ingredient._id}/edit`}
                     >
-                      <Button variant="primary" className="btn-sm mx-2">
+                      <Button
+                        title="Edit"
+                        variant="primary"
+                        className="btn-sm mx-2"
+                      >
                         <span className="d-flex align-items-center justify-content-center py">
                           <FaEdit />
                         </span>
                       </Button>
                     </LinkContainer>
                     <Button
+                      title="Delete"
                       variant="danger"
                       className="btn-sm"
                       onClick={() => deleteIngredientHandler(ingredient._id)}

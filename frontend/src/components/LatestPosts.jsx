@@ -34,7 +34,6 @@ const LatestPosts = () => {
           i18nKey={t('latestPosts')}
           components={{ 1: <Link to={'blog'} /> }}
         />
-        {/* <Link to={`/blog`}>Posts</Link> */}
       </h2>
       {isLoading ? (
         <Loader />

@@ -73,7 +73,6 @@ const FaqCategoryListScreen = () => {
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>TITLE</th>
                 <th></th>
               </tr>
@@ -81,17 +80,25 @@ const FaqCategoryListScreen = () => {
             <tbody>
               {faqCats.data.map((cat) => (
                 <tr key={cat._id}>
-                  <td>{cat._id}</td>
-                  <td>{cat.title}</td>
+                  <td
+                    title={`hu: ${cat.translations?.hu?.title} \n\n id: ${cat._id}`}
+                  >
+                    {cat.title}
+                  </td>
                   <td>
                     <LinkContainer to={`/admin/faqcategory/${cat._id}/edit`}>
-                      <Button variant="primary" className="btn-sm mx-2">
+                      <Button
+                        title="Edit"
+                        variant="primary"
+                        className="btn-sm mx-2"
+                      >
                         <span className="d-flex align-items-center justify-content-center py">
                           <FaEdit />
                         </span>
                       </Button>
                     </LinkContainer>
                     <Button
+                      title="Delete"
                       variant="danger"
                       className="btn-sm"
                       onClick={() => deleteHandler(cat._id)}

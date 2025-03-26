@@ -4,6 +4,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import { toast } from 'react-toastify';
+import { toLocalDate } from '../../utils/converter';
 import {
   useGetPostsQuery,
   useCreatePostMutation,
@@ -69,29 +70,43 @@ const PostListScreen = () => {
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>TITLE</th>
                 <th>AUTHOR NAME</th>
                 <th>CATEGORY</th>
+                <th>LANGUAGE</th>
+                <th>UPLOADED</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {posts.data.map((post) => (
                 <tr key={post._id}>
-                  <td>{post._id}</td>
-                  <td>{post.title}</td>
+                  <td title={`id: ${post._id}`}>{post.title}</td>
                   <td>{post?.user?.name}</td>
-                  <td>{post?.category?.title}</td>
+                  <td
+                    title={`hu: ${
+                      post.category?.translations?.hu?.title ||
+                      post?.category?.title
+                    }`}
+                  >
+                    {post?.category?.title}
+                  </td>
+                  <td>{post.language}</td>
+                  <td>{toLocalDate('en', post.createdAt)}</td>
                   <td>
                     <LinkContainer to={`/admin/post/${post._id}/edit`}>
-                      <Button variant="primary" className="btn-sm mx-2">
+                      <Button
+                        title="Edit"
+                        variant="primary"
+                        className="btn-sm mx-2"
+                      >
                         <span className="d-flex align-items-center justify-content-center">
                           <FaEdit />
                         </span>
                       </Button>
                     </LinkContainer>
                     <Button
+                      title="Delete"
                       variant="danger"
                       className="btn-sm"
                       onClick={() => deleteHandler(post._id)}

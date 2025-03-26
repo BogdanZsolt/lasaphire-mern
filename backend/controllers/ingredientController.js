@@ -79,7 +79,7 @@ const getIngredients = asyncHandler(async (req, res) => {
 
   if (req.query.page) {
     const counter = new APIFeatures(
-      Model.find(sFields),
+      Ingredient.find(sFields),
       req.query,
       ingredientsPopOption
     ).filter();

@@ -141,14 +141,6 @@ const Sidebar = () => {
                       <span>All Ingredients</span>
                     </Link>
                   </Nav.Item>
-                  <Nav.Item className="ms-4 p-2">
-                    <Link
-                      to="/admin/ingredientcategorylist"
-                      className="text-primary my-2"
-                    >
-                      <span>Ingredient Categories</span>
-                    </Link>
-                  </Nav.Item>
                 </Nav>
               </Collapse>
             </div>
@@ -157,13 +149,6 @@ const Sidebar = () => {
                 <Dropdown.Item as="div">
                   <Link to="/admin/ingredientlist">
                     <span>All Ingredients</span>
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item as="div">
-                  <Link to="/admin/ingredientcategorylist">
-                    <span>
-                      <span>Ingredient Categories</span>
-                    </span>
                   </Link>
                 </Dropdown.Item>
               </Dropdown.Menu>

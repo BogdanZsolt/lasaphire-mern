@@ -117,7 +117,14 @@ const ProductListScreen = () => {
                   <td title={`hu: ${product.translations?.hu?.currentPrice}`}>
                     {product.currentPrice}
                   </td>
-                  <td>{product?.category?.title}</td>
+                  <td
+                    title={`hu: ${
+                      product.category?.translations?.hu?.title ||
+                      product?.category?.title
+                    }`}
+                  >
+                    {product?.category?.title}
+                  </td>
                   <td>
                     {product.toBeDelivered ? (
                       <FaCheck className="text-success" />
@@ -127,13 +134,18 @@ const ProductListScreen = () => {
                   </td>
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                      <Button variant="primary" className="btn-sm mx-2">
+                      <Button
+                        title="edit"
+                        variant="primary"
+                        className="btn-sm mx-2"
+                      >
                         <span className="d-flex align-items-center justify-content-center py">
                           <FaEdit />
                         </span>
                       </Button>
                     </LinkContainer>
                     <Button
+                      title="delete"
                       variant="danger"
                       className="btn-sm"
                       onClick={() => deleteHandler(product._id)}

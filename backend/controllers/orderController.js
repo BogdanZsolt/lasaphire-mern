@@ -13,7 +13,7 @@ import {
   createSubscriber,
 } from '../utils/mailerTools.js';
 
-const productsPopOption = [{ path: 'user', select: ['id name'] }];
+const ordersPopOption = [{ path: 'user', select: ['name'] }];
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -317,7 +317,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 // @desc    Get all orders
 // @route   GET /api/orders
 // @access  Private/Admin
-const getOrders = getAll(Order, productsPopOption);
+const getOrders = getAll(Order, ordersPopOption);
 // const getOrders = asyncHandler(async (req, res) => {
 //   const orders = await Order.find({}).populate('user', 'id name');
 //   res.status(200).json(orders);

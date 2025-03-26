@@ -11,7 +11,13 @@ import {
 } from '../../slices/usersApiSlice';
 
 const UserListScreen = () => {
-  const { data: users, refetch, isLoading, error } = useGetUsersQuery();
+  const {
+    data: users,
+    refetch,
+    isLoading,
+    isError,
+    error,
+  } = useGetUsersQuery();
 
   const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
 
@@ -27,6 +33,8 @@ const UserListScreen = () => {
     }
   };
 
+  console.log(users);
+
   return (
     <Container className="mt-5">
       <Row className="text-center">
@@ -35,7 +43,7 @@ const UserListScreen = () => {
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
-      ) : error ? (
+      ) : isError ? (
         <Message variant="danger">
           {error?.data?.Message || error.error}
         </Message>
@@ -44,7 +52,6 @@ const UserListScreen = () => {
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
-                <th className="d-none d-lg-block">ID</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
                 <th>ADMIN</th>
@@ -52,13 +59,9 @@ const UserListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {users.data.map((user) => (
                 <tr key={user._id}>
-                  <td className="d-none d-lg-table-cell">{user._id}</td>
-                  <td className="">
-                    <div>{user.name}</div>
-                    <div className="d-table-cell d-lg-none">{user._id}</div>
-                  </td>
+                  <td title={`id: ${user._id}`}>{user.name}</td>
                   <td>
                     <a href={`mailto: ${user.email}`}>{user.email}</a>
                   </td>
@@ -71,11 +74,16 @@ const UserListScreen = () => {
                   </td>
                   <td>
                     <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                      <Button variant="primary" className="btn-sm">
+                      <Button
+                        title="Edit"
+                        variant="primary"
+                        className="btn-sm mx-2"
+                      >
                         <FaEdit />
                       </Button>
                     </LinkContainer>
                     <Button
+                      title="Delete"
                       variant="danger"
                       className="btn-sm"
                       onClick={() => deleteHandler(user._id)}

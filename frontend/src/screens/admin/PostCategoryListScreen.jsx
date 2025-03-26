@@ -71,7 +71,6 @@ const PostCategoryListScreen = () => {
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>TITLE</th>
                 <th>PARENT</th>
                 <th></th>
@@ -80,9 +79,20 @@ const PostCategoryListScreen = () => {
             <tbody>
               {postCats.data.map((cat) => (
                 <tr key={cat._id}>
-                  <td>{cat._id}</td>
-                  <td>{cat.title}</td>
-                  <td>{cat?.parent?.title}</td>
+                  <td
+                    title={`hu: ${cat.translations?.hu?.title} \n\n id: ${cat._id}`}
+                  >
+                    {cat.title}
+                  </td>
+                  <td
+                    title={
+                      cat.parent
+                        ? `hu: ${cat?.parent?.translations?.hu?.title} \n\n id: ${cat?.parent?._id}`
+                        : null
+                    }
+                  >
+                    {cat?.parent?.title}
+                  </td>
                   <td>
                     <LinkContainer to={`/admin/postcategory/${cat._id}/edit`}>
                       <Button variant="primary" className="btn-sm mx-2">

@@ -28,7 +28,7 @@ const HomeScreens = () => {
         <h2 className="mt-5 fw-bolder">{t('dearVisitorsAndCuriousOnes')}</h2>
         <p className="lead">{t('weWouldLikeToHaveSomePatience')}</p>
         <Link to="/shop">
-          <h3 className="text-secondary fs-1 mt-5">{t('products')}</h3>
+          <h2 className="text-secondary mt-5">{t('products')}</h2>
         </Link>
         <ProductCarousel />
         <FeaturedStuff />

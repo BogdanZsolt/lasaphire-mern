@@ -4,6 +4,7 @@ import { FaCheck, FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
 import Loader from '../../components/Loader.jsx';
 import Message from '../../components/Message';
 import { toast } from 'react-toastify';
+import { toCurrency } from '../../utils/converter.js';
 import {
   useGetPlansQuery,
   useCreatePlanMutation,
@@ -45,14 +46,6 @@ const MembershipPlanListScreen = () => {
     }
   };
 
-  if (plans) {
-    console.log(plans);
-  }
-
-  if (isError) {
-    console.log(error);
-  }
-
   return (
     <>
       <Container className="mt-5">
@@ -91,25 +84,19 @@ const MembershipPlanListScreen = () => {
             <tbody>
               {plans.data.map((plan) => (
                 <tr key={plan._id}>
-                  <td className="text-start" title={`id: ${plan._id}`}>
-                    <p className="my-0 py-0">
-                      <b>en: </b>
-                      {plan.name}
-                    </p>
-                    <p className="my-0 py-0">
-                      <b>hu: </b>
-                      {plan.translations?.hu?.name}
-                    </p>
+                  <td
+                    className="text-start"
+                    title={`hu: ${plan.translations?.hu?.name} \n\n id: ${plan._id}`}
+                  >
+                    {plan.name}
                   </td>
-                  <td>
-                    <p className="my-0 py-0">
-                      <b>en: </b>
-                      {plan.currentPrice}
-                    </p>
-                    <p className="my-0 py-0">
-                      <b>hu: </b>
-                      {plan.translations?.hu?.currentPrice}
-                    </p>
+                  <td
+                    title={`hu: ${toCurrency(
+                      'hu',
+                      plan.translations?.hu?.currentPrice
+                    )}`}
+                  >
+                    {toCurrency('en', plan.currentPrice)}
                   </td>
                   <td>
                     {plan.toBeDelivered ? (
@@ -122,13 +109,18 @@ const MembershipPlanListScreen = () => {
                     <LinkContainer
                       to={`/admin/membershipplan/${plan._id}/edit`}
                     >
-                      <Button variant="primary" className="btn-sm mx-2">
+                      <Button
+                        title="Edit"
+                        variant="primary"
+                        className="btn-sm mx-2"
+                      >
                         <span className="d-flex align-items-center justify-content-center py">
                           <FaEdit />
                         </span>
                       </Button>
                     </LinkContainer>
                     <Button
+                      title="Delete"
                       variant="danger"
                       className="btn-sm"
                       onClick={() => deleteHandler(plan._id)}

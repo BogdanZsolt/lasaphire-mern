@@ -72,8 +72,6 @@ const IngredientEditScreen = () => {
     }
   };
 
-  console.log(ingredient);
-
   return (
     <>
       {isLoadingUpdate ? (
