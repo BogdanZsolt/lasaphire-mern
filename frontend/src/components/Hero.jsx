@@ -40,7 +40,7 @@ const Hero = () => {
         el: '.swiper-pagination',
         clickable: true,
       }}
-      autoplay={{ delay: 10000, disableOnInteraction: false }}
+      // autoplay={{ delay: 10000, disableOnInteraction: false }}
       effect={'fade'}
       className="slider"
     >
@@ -52,19 +52,17 @@ const Hero = () => {
               <div className="overlay"></div>
             </div>
             <div className="title-info">
-              <div className="title-box">
-                <div className="title-wrap">
-                  <h3 className="title">{hero.title}</h3>
-                  <p>{hero.description}</p>
-                  <Button
-                    variant="success"
-                    className="text-primary btn-lasaphire"
-                  >
-                    <span className="fs-4 fw-500 text-white text-uppercase">
-                      {hero.buttonText}
-                    </span>
-                  </Button>
-                </div>
+              <div className="title-wrap">
+                <h3 className="title">{hero.title}</h3>
+                <p>{hero.description}</p>
+                <Button
+                  variant="success"
+                  className="text-primary btn-lasaphire"
+                >
+                  <span className="fw-500 text-white text-uppercase">
+                    {hero.buttonText}
+                  </span>
+                </Button>
               </div>
             </div>
           </div>
