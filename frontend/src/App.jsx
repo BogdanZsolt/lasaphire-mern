@@ -34,6 +34,8 @@ import {
   PostEditScreen,
   PostListScreen,
   PostScreen,
+  HomePageSetup,
+  HeroEditScreen,
   ProductCatEditScreen,
   ProductCategoryListScreen,
   ProductEditScreen,
@@ -294,8 +296,16 @@ const App = () => {
           element: <AdminScreen />,
           children: [
             {
+              path: 'homepagesetup',
+              element: <HomePageSetup />,
+            },
+            {
               path: '',
-              element: <ProductListScreen />,
+              element: <HomePageSetup />,
+            },
+            {
+              path: 'hero/:id/edit',
+              element: <HeroEditScreen />,
             },
             {
               path: 'productlist',

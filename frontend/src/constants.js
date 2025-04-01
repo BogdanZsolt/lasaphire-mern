@@ -7,4 +7,5 @@ export const ORDERS_URL = '/api/orders';
 export const POSTS_URL = '/api/posts';
 export const MATERIALS_URL = '/api/materials';
 export const CATEGORIES_URL = '/api/categories';
+export const HEROS_URL = '/api/heros';
 export const UPLOAD_URL = '/api/upload';

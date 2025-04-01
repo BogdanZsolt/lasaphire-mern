@@ -19,6 +19,7 @@ import {
   BsEnvelopePlus,
 } from 'react-icons/bs';
 import { AiOutlineProduct } from 'react-icons/ai';
+import { CgWebsite } from 'react-icons/cg';
 import { logout } from '../../slices/authSlice';
 import { useLogoutMutation } from '../../slices/usersApiSlice';
 
@@ -27,7 +28,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [open, setOpen] = useState('products');
+  const [open, setOpen] = useState('sitesetup');
 
   const [logoutApiCall] = useLogoutMutation();
 
@@ -51,6 +52,7 @@ const Sidebar = () => {
         </Container>
         <hr className="text-primary d-none d-sm-block" />
         <Nav className="nav nav-pills flex-column">
+          {/* Dashboard */}
           <Nav.Item className="my-1">
             <Link
               className="nav-link d-flex align-items-center text-primary"
@@ -62,6 +64,50 @@ const Sidebar = () => {
               </span>
             </Link>
           </Nav.Item>
+
+          {/* Site setup */}
+          <Nav.Item>
+            <Dropdown.Toggle
+              className="nav-link d-flex align-items-center text-primary"
+              onClick={() => setOpen(open === 'sitesetup' ? '' : 'sitesetup')}
+              aria-controls="sitesetup-collapse"
+              aria-expanded={open}
+              title="Site Setup"
+            >
+              <CgWebsite className="fs-4" />
+              <span className="ms-2 fs-4 d-none d-md-inline-flex">
+                Site setup
+              </span>
+            </Dropdown.Toggle>
+            <div className="d-none d-md-block">
+              <Collapse in={open === 'sitesetup'}>
+                <Nav
+                  id="sitesetup-collapse"
+                  className="flex-nowrap flex-column"
+                >
+                  <Nav.Item className="ms-4 p-2">
+                    <Link
+                      to="/admin/homepagesetup"
+                      className="text-primary my-2"
+                    >
+                      <span>Home page</span>
+                    </Link>
+                  </Nav.Item>
+                </Nav>
+              </Collapse>
+            </div>
+            <div className="d-block d-md-none dropdown-menu__container">
+              <Dropdown.Menu show={open === 'sitesetup'}>
+                <Dropdown.Item as="div">
+                  <Link to="/admin/homepagesetup">
+                    <span>Home page</span>
+                  </Link>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </div>
+          </Nav.Item>
+
+          {/* Products */}
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
@@ -112,6 +158,7 @@ const Sidebar = () => {
             </div>
           </Nav.Item>
 
+          {/* Ingredients */}
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
@@ -155,6 +202,7 @@ const Sidebar = () => {
             </div>
           </Nav.Item>
 
+          {/* Posts */}
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
@@ -215,6 +263,7 @@ const Sidebar = () => {
             </div>
           </Nav.Item>
 
+          {/* FAQs */}
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
@@ -339,6 +388,7 @@ const Sidebar = () => {
             </div>
           </Nav.Item>
 
+          {/* Messages */}
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
@@ -373,6 +423,7 @@ const Sidebar = () => {
             </div>
           </Nav.Item>
 
+          {/* Subscribers */}
           <Nav.Item>
             <Dropdown.Toggle
               className="nav-link d-flex align-items-center text-primary"
@@ -417,6 +468,7 @@ const Sidebar = () => {
         </Nav>
       </div>
 
+      {/* Admin user dropdown menu */}
       <Dropdown className="mb-3">
         <Dropdown.Toggle
           className="btn border-none d-flex align-items-center"

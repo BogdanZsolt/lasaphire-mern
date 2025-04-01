@@ -80,6 +80,15 @@ export const OrderPaymentScreen = lazy(() =>
 export const AdminScreen = lazy(() =>
   import('./screens/admin/AdminScreen.jsx')
 );
+export const HomePageSetup = lazy(() =>
+  import('./screens/admin/HomePageSetup/HomePageSetup.jsx')
+);
+export const HeroListScreen = lazy(() =>
+  import('./screens/admin/HomePageSetup/HeroListScreen.jsx')
+);
+export const HeroEditScreen = lazy(() =>
+  import('./screens/admin/HomePageSetup/HeroEditScreen.jsx')
+);
 export const ProductListScreen = lazy(() =>
   import('./screens/admin/ProductListScreen.jsx')
 );

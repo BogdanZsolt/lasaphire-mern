@@ -2190,7 +2190,7 @@ progress {
   color: var(--bs-body-color);
   background-color: var(--bs-form-control-bg);
   background-clip: padding-box;
-  border: var(--bs-border-width) solid var(--bs-border-color);
+  border: var(--bs-border-width) solid var(--bs-secondary);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -2225,11 +2225,11 @@ progress {
   padding: 0;
 }
 .form-control::-moz-placeholder {
-  color: var(--bs-secondary-color);
+  color: var(--bs-secondary);
   opacity: 1;
 }
 .form-control::placeholder {
-  color: var(--bs-secondary-color);
+  color: var(--bs-secondary);
   opacity: 1;
 }
 .form-control:disabled {
