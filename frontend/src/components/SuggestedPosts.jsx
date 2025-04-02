@@ -19,7 +19,6 @@ const SuggestedPosts = ({ className, header, tags = [] }) => {
     fields: '_id,user,bannerImage,title,createdAt,translations',
   });
 
-  console.log(posts);
   return (
     <div className={`w-100 shadow-sm rounded rounded-2 p-2 ${className}`}>
       <h2>{header}</h2>

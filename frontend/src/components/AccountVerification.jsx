@@ -44,8 +44,6 @@ const AccountVerification = () => {
     navigate('/profile');
   };
 
-  console.log(data);
-
   return (
     <div>
       <Banner title="" src="uploads/image-1724508536083.jpg" />

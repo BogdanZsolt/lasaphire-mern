@@ -56,8 +56,6 @@ const IngredientsScreen = () => {
     keyword ? setLtrFilter('') : setLtrFilter('');
   }, [keyword]);
 
-  console.log(keyword);
-
   return (
     <>
       <Banner

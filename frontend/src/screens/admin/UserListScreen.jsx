@@ -33,8 +33,6 @@ const UserListScreen = () => {
     }
   };
 
-  console.log(users);
-
   return (
     <Container className="mt-5">
       <Row className="text-center">

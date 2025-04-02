@@ -71,7 +71,6 @@ const ImageList = ({ images, setImages }) => {
         )}
       </div>
       <div className="image-list-wrapper">
-        {console.log(typeof images)}
         {typeof images === 'object'
           ? images.length > 0 &&
             images[0] !== '' && (

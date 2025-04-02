@@ -13,7 +13,6 @@ const LangSelectEditor = ({
   const [lang, setLang] = useState('en');
 
   const dataChangeHandler = (data) => {
-    console.log(data);
     lang === 'en' ? setDefLang(data) : setSecLang(data);
   };
 

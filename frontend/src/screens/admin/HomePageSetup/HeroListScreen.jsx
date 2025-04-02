@@ -53,10 +53,6 @@ const HeroListScreen = () => {
     }
   };
 
-  if (heros) {
-    console.log(heros.data);
-  }
-
   return (
     <Container className="mt-3">
       <Row className="text-center">

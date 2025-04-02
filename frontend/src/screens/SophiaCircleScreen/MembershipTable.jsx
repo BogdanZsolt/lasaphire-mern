@@ -30,7 +30,7 @@ const MembershipTable = () => {
     if (currentPrice === 0) {
       return navigate('/register');
     }
-    console.log(_id);
+
     dispatch(
       addToCart({
         cartId,
@@ -48,10 +48,6 @@ const MembershipTable = () => {
     );
     // return navigate('/cart');
   };
-
-  if (plans) {
-    console.log(plans.data);
-  }
 
   return (
     <>

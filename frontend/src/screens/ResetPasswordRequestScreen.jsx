@@ -64,8 +64,6 @@ const ResetPasswordRequestScreen = () => {
   //   });
   // }, []);
 
-  console.log(isCaptcha);
-
   return (
     <>
       <Banner

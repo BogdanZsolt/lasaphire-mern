@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import { useTranslation } from 'react-i18next';
@@ -79,9 +79,9 @@ const Hero = () => {
                       : hero.translations?.hu?.description || hero.description}
                   </p>
                   {hero.hasButton && (
-                    <Button
-                      variant="success"
-                      className="text-primary btn-lasaphire"
+                    <Link
+                      className="text-primary btn-lasaphire btn-success btn"
+                      to={hero.buttonUrl}
                     >
                       <span className="fw-500 text-white text-uppercase">
                         {i18n.language === 'en'
@@ -89,7 +89,7 @@ const Hero = () => {
                           : hero.translations?.hu?.buttonText ||
                             hero.buttonText}
                       </span>
-                    </Button>
+                    </Link>
                   )}
                 </div>
               </div>

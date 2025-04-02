@@ -84,10 +84,6 @@ const HeroEditScreen = () => {
     }
   };
 
-  if (hero) {
-    console.log(hero);
-  }
-
   return (
     <>
       {isLoadingUpdate ? (

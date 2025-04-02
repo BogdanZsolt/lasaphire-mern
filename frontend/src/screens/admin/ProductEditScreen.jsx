@@ -118,8 +118,6 @@ const ProductEditScreen = () => {
     }
   };
 
-  console.log(ingredients);
-
   return (
     <>
       {loadingUpdate && <Loader />}

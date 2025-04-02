@@ -71,8 +71,6 @@ const FaqEditScreen = () => {
     setCategory(e.target.value);
   };
 
-  console.log(category);
-
   return (
     <>
       {loadingUpdate && <Loader />}

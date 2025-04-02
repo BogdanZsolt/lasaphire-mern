@@ -12,8 +12,6 @@ const Ingredients = ({ ingredients, close }) => {
     return <Link onClick={decoratedOnClick}>{children}</Link>;
   };
 
-  console.log(ingredients);
-
   return (
     <Container>
       {/* <Row>
@@ -40,7 +38,6 @@ const Ingredients = ({ ingredients, close }) => {
                   }
                   editable={false}
                 />
-                {console.log(ingredient.products)}
                 {ingredient.products?.length > 0 && (
                   <>
                     <h5 className="m-0 mb-1 fw-semibold">{t('products')}</h5>

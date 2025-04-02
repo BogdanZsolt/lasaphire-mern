@@ -28,8 +28,6 @@ const WishListScreen = () => {
     removeFromWishListHandler(item._id);
   };
 
-  console.log(wishList);
-
   return (
     <>
       <Banner src="/uploads/image-1710576218997.webp" title={t('wishlist')} />

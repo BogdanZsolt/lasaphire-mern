@@ -33,7 +33,6 @@ const CheckoutPay = () => {
         //   : 'https://pantherstuff.com/order/complete',
       },
     });
-    console.log(error);
 
     if (error.type === 'card_error' || error.type === 'validation_error') {
       setErrorMessage(error.message);
@@ -41,8 +40,6 @@ const CheckoutPay = () => {
       setErrorMessage('An unexpected error occurred.');
     }
   };
-
-  console.log(elements);
 
   return (
     <>

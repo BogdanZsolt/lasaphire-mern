@@ -46,8 +46,6 @@ const ProductCategoryListScreen = () => {
     }
   };
 
-  console.log(productCats);
-
   return (
     <>
       <Container className="mt-5">

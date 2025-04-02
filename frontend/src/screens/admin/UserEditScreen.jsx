@@ -53,8 +53,6 @@ const UserEditScreen = () => {
     }
   };
 
-  console.log(user);
-
   return (
     <Container className="mt-5">
       <Link to="/admin/userlist" className="btn btn-primary my-3">

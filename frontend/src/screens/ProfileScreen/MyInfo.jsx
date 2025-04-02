@@ -31,8 +31,6 @@ const MyInfo = ({
     return getTimeStamp(date) > Date.now();
   };
 
-  console.log(userAuth);
-
   return (
     <Row className="flex-wrap-reverse">
       <Col md={6} className="mb-3 mb-md-0">
