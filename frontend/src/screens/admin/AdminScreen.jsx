@@ -13,13 +13,9 @@ const AdminScreen = () => {
         (userAuth?.isAdmin ? (
           <>
             <Row className="flex-nowrap">
-              <Col
-                xs={3}
-                xxl={2}
-                className="bg-secondary d-flex flex-column justify-content-between vh-100"
-              >
+              <div className="col-3 col-sm-2 col-md-3 col-xxl-2 bg-secondary d-flex">
                 <Sidebar />
-              </Col>
+              </div>
               <Col>
                 <Outlet />
               </Col>

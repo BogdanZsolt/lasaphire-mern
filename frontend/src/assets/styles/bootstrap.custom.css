@@ -124,7 +124,7 @@
   --bs-link-color-rgb: var(--bs-secondary-rgb);
   --bs-link-decoration: underline;
   --bs-link-hover-color: rgba(var(--bs-success), 1);
-  --bs-link-hover-color-rgb: var(--bs-success-rgb);
+  --bs-link-hover-color-rgb: var(--bs-primary-rgb);
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fdebd0;
   --bs-border-width: 1px;

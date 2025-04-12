@@ -10,7 +10,7 @@ import Loader from './Loader';
 import Message from './Message';
 import { useGetHerosQuery } from '../slices/herosApiSlice';
 
-const Hero = () => {
+const Hero = ({ isAutoplay = true, autoplayDelay = 5 }) => {
   const { i18n } = useTranslation(['home']);
 
   const {
@@ -55,7 +55,12 @@ const Hero = () => {
           el: '.swiper-pagination',
           clickable: true,
         }}
-        autoplay={{ delay: 10000, disableOnInteraction: false }}
+        autoplay={
+          isAutoplay
+            ? { delay: autoplayDelay * 1000, disableOnInteraction: false }
+            : false
+        }
+        // {{ delay: 10000, disableOnInteraction: false }}
         effect={'fade'}
         className="slider"
       >

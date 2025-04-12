@@ -55,10 +55,7 @@ const HeroListScreen = () => {
 
   return (
     <Container className="mt-3">
-      <Row className="text-center">
-        <h3 className="fw-semibold">Heros</h3>
-      </Row>
-      <Row className="justify-content-end align-items-center">
+      <Row className="justify-content-start align-items-center">
         <Col xs={3}>
           <Button
             className="btn m-3 d-flex justify-content-center align-items-center"

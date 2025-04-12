@@ -114,7 +114,7 @@
 .navbar-brand {
   position: absolute;
   top: 0.75rem;
-  left: 2.5rem;
+  left: 0.75rem;
   border-radius: var(--bs-border-radius-sm);
   z-index: 9999;
 }
@@ -1035,7 +1035,8 @@ table th {
 }
 
 /* PHOTO GALLERY */
-.photo-gallery .grid-container {
+.photo-gallery .grid-container,
+.photo-gallery-setup .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   grid-auto-rows: minmax(12.5rem, auto);
@@ -1044,7 +1045,8 @@ table th {
   grid-auto-flow: dense;
 }
 
-.photo-gallery .grid-item {
+.photo-gallery .grid-item,
+.photo-gallery-setup .grid-item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1056,6 +1058,21 @@ table th {
   box-shadow: var(--bs-shadow-sm);
   transition: var(--transition-filter), var(--transition-transform),
     var(--transition-shadow);
+}
+
+.photo-gallery-setup .grid-item .btn-group {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.photo-gallery-setup .grid-item .btn-group.touch {
+  opacity: 1;
+}
+
+.photo-gallery-setup .grid-item:hover .btn-group {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .photo-gallery:hover .grid-item {
@@ -2232,6 +2249,20 @@ form .nofeedback {
   --bs-btn-font-size: 0.75rem;
 }
 
+/* ADMIN SCREEN */
+
+.sidebar-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--bs-secondary);
+}
+
 /* ADMIN HERO SETUP */
 .hero-img-box {
   display: block;
@@ -2323,6 +2354,10 @@ form .nofeedback {
   .home-blog.card-group > .card {
     flex: 1 0 15.625rem;
   }
+
+  .home-page-input input[type='number'] {
+    max-width: 50%;
+  }
 }
 
 @media (min-width: 600px) {
@@ -2386,6 +2421,11 @@ form .nofeedback {
 .ps-switch-title {
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.form-check-input:checked {
+  background-color: var(--bs-secondary);
+  border-color: var(--bs-secondary);
 }
 
 @media (min-width: 768px) {
@@ -2453,6 +2493,10 @@ form .nofeedback {
 
   .data-protection .btn {
     --bs-btn-font-size: 1rem;
+  }
+
+  .navbar-brand {
+    left: 2.5rem;
   }
 }
 
@@ -2643,6 +2687,10 @@ form .nofeedback {
     transform: none !important;
     box-shadow: none;
     transition: none;
+  }
+
+  .home-page-input input[type='number'] {
+    max-width: 25%;
   }
 }
 

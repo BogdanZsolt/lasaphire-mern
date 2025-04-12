@@ -22,6 +22,7 @@ import contactMessageRoutes from './routes/contactMessageRoutes.js';
 import ingredientRoutes from './routes/ingredientRoutes.js';
 import planRoutes from './routes/planRoutes.js';
 import heroRoutes from './routes/heroRoutes.js';
+import homePageRoutes from './routes/homePageRoutes.js';
 
 // import { fileURLToPath } from 'url';
 // const __filename = fileURLToPath(import.meta.url);
@@ -58,6 +59,7 @@ app.use('/api/contact-messages', contactMessageRoutes);
 app.use('/api/ingredients', ingredientRoutes);
 app.use('/api/plans', planRoutes);
 app.use('/api/heros', heroRoutes);
+app.use('/api/homepage', homePageRoutes);
 
 const __dirname = path.resolve();
 // app.use(express.static('public'));

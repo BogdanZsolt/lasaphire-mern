@@ -43,7 +43,7 @@ const Sidebar = () => {
   };
 
   return (
-    <>
+    <div className="sidebar-container">
       <div className="mt-2 sidebar">
         <Container className="my-3" style={{ minHeight: '2rem' }}>
           <Navbar.Brand href="/" className="bg-primary">
@@ -90,7 +90,7 @@ const Sidebar = () => {
                       to="/admin/homepagesetup"
                       className="text-primary my-2"
                     >
-                      <span>Home page</span>
+                      <span className="text-primary">Home page</span>
                     </Link>
                   </Nav.Item>
                 </Nav>
@@ -489,7 +489,7 @@ const Sidebar = () => {
           <Dropdown.Item onClick={logoutHandler}>LogOut</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-    </>
+    </div>
   );
 };
 
