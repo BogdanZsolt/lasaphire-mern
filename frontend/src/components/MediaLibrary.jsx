@@ -17,7 +17,6 @@ const MediaLibrary = ({ displayMedia, setDisplayMedia, setSelectedImg }) => {
   const uploadCallback = async (file) => {
     const formData = new FormData();
     formData.append('image', file);
-    console.log(formData);
     try {
       const res = await uploadImage(formData).unwrap();
       toast.success(res.message);
@@ -45,7 +44,6 @@ const MediaLibrary = ({ displayMedia, setDisplayMedia, setSelectedImg }) => {
         toast.success(res.data.message);
         refetch();
       } catch (err) {
-        console.log(err);
         toast.error(err?.data?.message || err.error);
       }
     }
@@ -63,7 +61,6 @@ const MediaLibrary = ({ displayMedia, setDisplayMedia, setSelectedImg }) => {
         </Message>
       ) : (
         <ReactMediaLibrary
-          multiSelect
           isOpen={displayMedia}
           onClose={() => setDisplayMedia(false)}
           fileLibraryList={images.data}

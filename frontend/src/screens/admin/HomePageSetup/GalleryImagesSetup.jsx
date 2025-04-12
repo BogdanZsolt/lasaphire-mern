@@ -101,7 +101,6 @@ const GalleryImagesSetup = ({ images, setImages }) => {
                   backgroundImage: `url(${image.photo})`,
                 }}
               >
-                <div className="overlay"></div>
                 <ButtonGroup className={`gap-1 ${isTouch ? 'touch' : ''}`}>
                   <Button
                     onClick={() => handleAddImage(index)}
