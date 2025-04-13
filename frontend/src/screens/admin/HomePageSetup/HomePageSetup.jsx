@@ -89,10 +89,6 @@ const HomePageSetup = () => {
     }
   };
 
-  if (homePage) {
-    console.log(galleryImages);
-  }
-
   return (
     <>
       {isLoadingUpdate ? (

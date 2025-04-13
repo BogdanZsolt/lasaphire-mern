@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const PhotoGallery = ({ photos }) => {
   // const photos = [
   //   { photo: '/images/manopulcsi-01-450x600.webp', class: 'tail' },
@@ -23,7 +25,16 @@ const PhotoGallery = ({ photos }) => {
               style={{
                 backgroundImage: `url(${photo.photo})`,
               }}
-            ></div>
+            >
+              <div className="cover-layer">
+                <Link to={photo.link}>
+                  <div className="content">
+                    <h4>{photo.title}</h4>
+                    <p>{photo.description}</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
           ))}
       </div>
     </div>

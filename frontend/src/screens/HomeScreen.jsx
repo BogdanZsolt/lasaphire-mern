@@ -20,10 +20,6 @@ const HomeScreens = () => {
 
   const { data: homePage, isLoading, isError, error } = useGetHomePageQuery();
 
-  if (homePage) {
-    console.log(homePage);
-  }
-
   return (
     <>
       {isLoading ? (

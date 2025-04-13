@@ -86,8 +86,6 @@ const GalleryImagesSetup = ({ images, setImages }) => {
     setSetupShow(true);
   };
 
-  console.log(images);
-
   return (
     <>
       <div className="photo-gallery-setup">
@@ -101,6 +99,12 @@ const GalleryImagesSetup = ({ images, setImages }) => {
                   backgroundImage: `url(${image.photo})`,
                 }}
               >
+                <div className="cover-layer">
+                  <div className="content">
+                    <h4>{image.title}</h4>
+                    <p>{image.description}</p>
+                  </div>
+                </div>
                 <ButtonGroup className={`gap-1 ${isTouch ? 'touch' : ''}`}>
                   <Button
                     onClick={() => handleAddImage(index)}
