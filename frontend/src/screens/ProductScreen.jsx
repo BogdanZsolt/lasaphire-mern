@@ -35,6 +35,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { toCurrency, uuid } from '../utils/converter';
 import Editor from '../components/Editor.jsx';
 import Ingredients from '../components/Ingredients.jsx';
+import ProductShippingInfo from '../components/ProductShippingInfo.jsx';
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
@@ -404,7 +405,7 @@ const ProductScreen = () => {
                   </Row>
                 </Tab>
                 <Tab eventKey="shipping" title={t('shipping')}>
-                  Tab content for Contact
+                  <ProductShippingInfo />
                 </Tab>
               </Tabs>
             </div>

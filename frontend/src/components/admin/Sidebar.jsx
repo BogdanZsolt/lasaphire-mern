@@ -107,6 +107,46 @@ const Sidebar = () => {
             </div>
           </Nav.Item>
 
+          {/* Setup */}
+          <Nav.Item>
+            <Dropdown.Toggle
+              className="nav-link d-flex align-items-center text-primary"
+              onClick={() => setOpen(open === 'setup' ? '' : 'setup')}
+              aria-controls="setup-collapse"
+              aria-expanded={open}
+              title="Setup"
+            >
+              <CgWebsite className="fs-4" />
+              <span className="ms-2 fs-4 d-none d-md-inline-flex">Setup</span>
+            </Dropdown.Toggle>
+            <div className="d-none d-md-block">
+              <Collapse in={open === 'setup'}>
+                <Nav
+                  id="sitesetup-collapse"
+                  className="flex-nowrap flex-column"
+                >
+                  <Nav.Item className="ms-4 p-2">
+                    <Link
+                      to="/admin/deliverylist"
+                      className="text-primary my-2"
+                    >
+                      <span className="text-primary">Shipping setup</span>
+                    </Link>
+                  </Nav.Item>
+                </Nav>
+              </Collapse>
+            </div>
+            <div className="d-block d-md-none dropdown-menu__container">
+              <Dropdown.Menu show={open === 'setup'}>
+                <Dropdown.Item as="div">
+                  <Link to="/admin/homepagesetup">
+                    <span>Delivery setup</span>
+                  </Link>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </div>
+          </Nav.Item>
+
           {/* Products */}
           <Nav.Item>
             <Dropdown.Toggle

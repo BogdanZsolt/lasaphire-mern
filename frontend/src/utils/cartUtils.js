@@ -33,11 +33,19 @@ export const updateCart = (state) => {
   state.hasToBeDelivered = isToBeDelivered(state.cartItems);
   // Calculate shipping price (If order is over $100 then free, else $10 shipping)
   state.shippingPrice = addDecimals(
-    state.hasToBeDelivered ? (state.itemsPrice > 100 ? 0 : 10) : 0,
+    state.hasToBeDelivered
+      ? state.itemsPrice > state.shippingPriceData?.shippingFreeFrom
+        ? 0
+        : state.shippingPriceData?.shippingPrice
+      : 0,
     2
   );
   state.shippingPrice_hu = addDecimals(
-    state.hasToBeDelivered ? (state.itemsPrice_hu > 20000 ? 0 : 1990) : 0,
+    state.hasToBeDelivered
+      ? state.itemsPrice_hu > state.shippingPriceData?.shippingFreeFromHu
+        ? 0
+        : state.shippingPriceData?.shippingPriceHu
+      : 0,
     0
   );
 

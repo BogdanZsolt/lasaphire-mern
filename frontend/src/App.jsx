@@ -74,6 +74,8 @@ import {
   SccScreen,
   ShippingGuaranteeScreen,
   OrderPaymentScreen,
+  DeliveryListScreen,
+  DeliveryEditScreen,
 } from './Pages';
 import Root from './components/Root';
 import Loader from './components/Loader';
@@ -302,6 +304,14 @@ const App = () => {
             {
               path: '',
               element: <HomePageSetup />,
+            },
+            {
+              path: 'deliverylist',
+              element: <DeliveryListScreen />,
+            },
+            {
+              path: 'delivery/:country/edit',
+              element: <DeliveryEditScreen />,
             },
             {
               path: 'hero/:id/edit',

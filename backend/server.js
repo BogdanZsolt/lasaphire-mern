@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import passport from './utils/passportConfig.js';
+import convertRoutes from './routes/convertRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import productCategoryRoutes from './routes/productCategoryRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -23,6 +24,8 @@ import ingredientRoutes from './routes/ingredientRoutes.js';
 import planRoutes from './routes/planRoutes.js';
 import heroRoutes from './routes/heroRoutes.js';
 import homePageRoutes from './routes/homePageRoutes.js';
+import countryRoutes from './routes/countryRoutes.js';
+import ShippingRoutes from './routes/shippingRoutes.js';
 
 // import { fileURLToPath } from 'url';
 // const __filename = fileURLToPath(import.meta.url);
@@ -60,6 +63,9 @@ app.use('/api/ingredients', ingredientRoutes);
 app.use('/api/plans', planRoutes);
 app.use('/api/heros', heroRoutes);
 app.use('/api/homepage', homePageRoutes);
+app.use('/api/convert', convertRoutes);
+app.use('/api/countries', countryRoutes);
+app.use('/api/shippings', ShippingRoutes);
 
 const __dirname = path.resolve();
 // app.use(express.static('public'));

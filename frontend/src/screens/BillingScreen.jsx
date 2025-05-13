@@ -6,10 +6,12 @@ import { Button, Container, Form } from 'react-bootstrap';
 import Banner from '../components/Banner';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
+import SelectCountries from '../components/SelectCountries';
+import SelectCity from '../components/SelectCity';
 import { saveBillingAddress } from '../slices/cartSlice';
 
 const BillingScreen = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const cart = useSelector((state) => state.cart);
   const { billingAddress, hasToBeDelivered } = cart;
 
@@ -20,12 +22,15 @@ const BillingScreen = () => {
     billingAddress?.postalCode || ''
   );
   const [country, setCountry] = useState(billingAddress?.country || '');
+  // const [isVerifyed, setIsVerifyed] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const submitHandler = (e) => {
     const form = e.currentTarget;
+    // setIsVerifyed(true);
+    console.log(form.checkValidity());
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
@@ -46,6 +51,26 @@ const BillingScreen = () => {
           <h1>{t('billing')}</h1>
 
           <Form noValidate validated={validated} onSubmit={submitHandler}>
+            <SelectCountries
+              country={country}
+              setCountry={setCountry}
+              label={t('country')}
+              language={i18n.language}
+              isReq
+              isVerifyed={validated}
+              errorMsg={t('noCountryField')}
+            />
+
+            <SelectCity
+              country={country}
+              city={city}
+              setCity={setCity}
+              label={t('city')}
+              isReq
+              isVerifyed={validated}
+              errorMsg={t('noCityField')}
+            />
+
             <Form.Group controlId="address" className="my-2">
               <Form.Label>{t('address')}</Form.Label>
               <Form.Control
@@ -60,20 +85,6 @@ const BillingScreen = () => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group controlId="city" className="my-2">
-              <Form.Label>{t('city')}</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder={t('enterCity')}
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                {t('noCityField')}
-              </Form.Control.Feedback>
-            </Form.Group>
-
             <Form.Group controlId="postalCode" className="my-2">
               <Form.Label>{t('postalCode')}</Form.Label>
               <Form.Control
@@ -85,20 +96,6 @@ const BillingScreen = () => {
               />
               <Form.Control.Feedback type="invalid">
                 {t('noPostalCodeField')}
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group controlId="country" className="my-2">
-              <Form.Label>{t('country')}</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder={t('enterCountry')}
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                {t('noCountryField')}
               </Form.Control.Feedback>
             </Form.Group>
 

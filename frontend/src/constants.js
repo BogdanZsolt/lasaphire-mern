@@ -8,4 +8,6 @@ export const POSTS_URL = '/api/posts';
 export const MATERIALS_URL = '/api/materials';
 export const CATEGORIES_URL = '/api/categories';
 export const HEROS_URL = '/api/heros';
+export const CONVERT_URL = '/api/convert';
+export const COUNTRIES_URL = '/api/countries';
 export const UPLOAD_URL = '/api/upload';

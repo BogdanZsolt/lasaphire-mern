@@ -25,6 +25,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     language,
     orderItems,
     shippingAddress,
+    shippingPriceData,
     billingAddress,
     paymentMethod,
   } = req.body;
@@ -84,8 +85,14 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const hasToBeDelivered = toBeDeliveredSum(dbOrderItems);
 
     const taxRate = language === 'en' ? 0.15 : 0.27;
-    const freeShipping = language === 'en' ? 100 : 20000;
-    const shipping = language === 'en' ? 10 : 1990;
+    const freeShipping =
+      language === 'en'
+        ? shippingPriceData.shippingFreeFrom
+        : shippingPriceData.shippingFreeFromHu;
+    const shipping =
+      language === 'en'
+        ? shippingPriceData.shippingPrice
+        : shippingPriceData.shippingPriceHu;
 
     // calculate prices
     const { itemsPrice, taxPrice, shippingPrice, totalPrice } = calcPrices(
@@ -110,9 +117,12 @@ const addOrderItems = asyncHandler(async (req, res) => {
       hasToBeDelivered,
     });
 
+    console.log(order);
+
     const createdOrder = await order.save();
 
     res.status(201).json(createdOrder);
+    // res.status(201).json(order);
   }
 });
 

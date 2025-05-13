@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Container, Row } from 'react-bootstrap';
-import { FaTimes } from 'react-icons/fa';
+import { FaMinus, FaTimes } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import Paginate from '../../components/Paginate';
@@ -57,10 +57,14 @@ const OrderListScreen = () => {
                     )}
                   </td>
                   <td>
-                    {order.isDelivered ? (
-                      order.deliveredAt.substring(0, 10)
+                    {order.hasToBeDelivered ? (
+                      order.isDelivered ? (
+                        order.deliveredAt.substring(0, 10)
+                      ) : (
+                        <FaTimes style={{ color: 'red' }} />
+                      )
                     ) : (
-                      <FaTimes style={{ color: 'red' }} />
+                      <FaMinus />
                     )}
                   </td>
                   <td>

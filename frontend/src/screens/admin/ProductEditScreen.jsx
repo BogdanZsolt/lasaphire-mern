@@ -10,6 +10,7 @@ import SelectCategory from '../../components/SelectCategory';
 import LangSelectInput from '../../components/LangSelectInput';
 import LangSelectEditor from '../../components/LangSelectEditor.jsx';
 import SelectIngredients from '../../components/SelectIngredients.jsx';
+import LangSelectInputWithConverter from '../../components/LangSelectInputWithConverter.jsx';
 import {
   useGetProductDetailsQuery,
   useUpdateProductMutation,
@@ -185,33 +186,25 @@ const ProductEditScreen = () => {
                 />
               </Form.Group>
 
-              <div className="row">
-                <div className="col-md-6">
-                  <LangSelectInput
-                    label="Before Price"
-                    type="number"
-                    placeholder="Before Price"
-                    placeholder_hu="Előző ár"
-                    defLang={beforePrice}
-                    setDefLang={setBeforePrice}
-                    secLang={transBeforePriceHu}
-                    setSecLang={setTransBeforePriceHu}
-                  />
-                </div>
+              <LangSelectInputWithConverter
+                label="Before Price"
+                placeholder="Before Price"
+                placeholder_hu="Előző ár"
+                defLang={beforePrice}
+                setDefLang={setBeforePrice}
+                secLang={transBeforePriceHu}
+                setSecLang={setTransBeforePriceHu}
+              />
 
-                <div className="col-md-6">
-                  <LangSelectInput
-                    label="Current Price"
-                    type="number"
-                    placeholder="Current Price"
-                    placeholder_hu="Aktuális ár"
-                    defLang={currentPrice}
-                    setDefLang={setCurrentPrice}
-                    secLang={transCurrentPriceHu}
-                    setSecLang={setTransCurrentPriceHu}
-                  />
-                </div>
-              </div>
+              <LangSelectInputWithConverter
+                label="Current Price"
+                placeholder="Current Price"
+                placeholder_hu="Aktuális ár"
+                defLang={currentPrice}
+                setDefLang={setCurrentPrice}
+                secLang={transCurrentPriceHu}
+                setSecLang={setTransCurrentPriceHu}
+              />
 
               <div className="row">
                 <div className="col-md-6">

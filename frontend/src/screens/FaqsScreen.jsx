@@ -8,22 +8,9 @@ import { useTranslation } from 'react-i18next';
 import { useGetFaqCategoriesQuery } from '../slices/faqCategoriesApiSlice.js';
 
 const FaqsScreen = () => {
-  // const [fix, setFix] = useState(false);
-
   const { data: faqCats, isLoading, error } = useGetFaqCategoriesQuery();
 
   const { t, i18n } = useTranslation();
-
-  // const setFixedSidebar = () => {
-  //   console.log(window.screenY);
-  //   if (window.scrollY >= 380) {
-  //     setFix(true);
-  //   } else {
-  //     setFix(false);
-  //   }
-  // };
-
-  // window.addEventListener('scroll', setFixedSidebar);
 
   return (
     <>

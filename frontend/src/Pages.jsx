@@ -170,5 +170,11 @@ export const MessageScreen = lazy(() =>
 export const SubscriberListScreen = lazy(() =>
   import('./screens/admin/SubscriberListScreen.jsx')
 );
+export const DeliveryListScreen = lazy(() =>
+  import('./screens/admin/DeliverySetup/DeliveryListScreen.jsx')
+);
+export const DeliveryEditScreen = lazy(() =>
+  import('./screens/admin/DeliverySetup/DeliveryEditScreen.jsx')
+);
 export const ProtectRoute = lazy(() => import('./components/ProtectRoute.jsx'));
 export const PremiumRoute = lazy(() => import('./components/PremiumRoute.jsx'));
