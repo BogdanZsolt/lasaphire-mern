@@ -75,66 +75,106 @@ const Menu = () => {
           link: '/faqs',
           image: '/images/faq-menu-200x200.jpg',
         },
-      ],
-    },
-    {
-      id: 2,
-      text: t('faceYoga'),
-      link: '',
-      megaCard: [
         {
-          id: 2.1,
-          text: t('90dayProgram'),
-          link: '/90daysProgram',
-          image: '/images/ourStory-menu-200x200.jpg',
-        },
-        {
-          id: 2.2,
-          text: t('youtubeChannel'),
-          link: '/youtubechannel',
-          image: '/images/ingredients-menu-200x200.jpg',
-        },
-        {
-          id: 2.3,
-          text: t('holistic'),
-          link: '/holistic',
-          image: '/images/pepsz-yogaban-200x200.webp',
-        },
-        {
-          id: 2.4,
-          text: t('naturalBeauty'),
-          link: '/naturalbeauty',
+          id: 1.6,
+          text: t('contact'),
+          link: '/contact',
           image: '/images/our_values-150x150.jpg',
         },
-        {
-          id: 2.5,
-          text: t('sophiaCircle'),
-          link: '/sophiecircle',
-          image: '/images/faq-menu-200x200.jpg',
-        },
       ],
     },
+
     {
-      id: 3,
+      id: 2,
       text: t('shop'),
       link: '/shop',
       megaTable: [
         {
-          id: 3.1,
+          id: 2.1,
           text: t('categories'),
           column: categoriesSubMenu,
         },
       ],
     },
     {
-      id: 4,
-      text: t('blog'),
-      link: '/blog',
+      id: 3,
+      text: t('knowledge'),
+      link: '',
+      megaCard: [
+        {
+          id: 3.1,
+          text: t('membership'),
+          link: '/sophiecircle',
+          image: '/images/pepsz-yogaban-200x200.webp',
+        },
+        {
+          id: '3.2',
+          text: t('onlineCourses'),
+          link: '/onlinecourses',
+          image: '/images/ecoprint-04-200x200.webp',
+        },
+        {
+          id: '3.3',
+          text: t('retreatsAndWorkshop'),
+          link: '/event',
+          image: '/images/ecoprint-01-200x200.webp',
+        },
+        {
+          id: '3.4',
+          text: t('blog'),
+          link: '/blog',
+          image: '/images/ecoprint-05-200x200.webp',
+        },
+        {
+          id: '3.5',
+          text: t('library'),
+          link: '',
+          image: '/images/ecoprint-06-200x200.webp',
+        },
+      ],
     },
     {
+      id: 4,
+      text: t('faceYoga'),
+      link: '',
+      megaCard: [
+        {
+          id: 4.1,
+          text: t('90dayProgram'),
+          link: '/90daysProgram',
+          image: '/images/ourStory-menu-200x200.jpg',
+        },
+        {
+          id: 4.2,
+          text: t('youtubeChannel'),
+          link: '/youtubechannel',
+          image: '/images/ingredients-menu-200x200.jpg',
+        },
+        {
+          id: 4.3,
+          text: t('holistic'),
+          link: '/holistic',
+          image: '/images/pepsz-yogaban-200x200.webp',
+        },
+        {
+          id: 4.4,
+          text: t('naturalBeauty'),
+          link: '/naturalbeauty',
+          image: '/images/our_values-150x150.jpg',
+        },
+      ],
+    },
+    // {
+    //   id: 5,
+    //   text: t('blog'),
+    //   link: '/blog',
+    // },
+
+    {
       id: 5,
-      text: t('contact'),
-      link: '/contact',
+      text: t('sophiaCircle'),
+      link: '/sophiecircle',
+      image: '/images/faq-menu-200x200.jpg',
     },
   ];
 
