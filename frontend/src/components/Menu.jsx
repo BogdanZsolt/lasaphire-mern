@@ -164,12 +164,6 @@ const Menu = () => {
         },
       ],
     },
-    // {
-    //   id: 5,
-    //   text: t('blog'),
-    //   link: '/blog',
-    // },
-
     {
       id: 5,
       text: t('sophiaCircle'),
@@ -180,7 +174,7 @@ const Menu = () => {
 
   // const { menus } = mainMenus;
   const mobileShowHandler = (val) => {
-    if (window.innerWidth <= 991) {
+    if (window.innerWidth <= 1200) {
       show !== val ? setShow(val) : setShow('');
     } else {
       setShow('');

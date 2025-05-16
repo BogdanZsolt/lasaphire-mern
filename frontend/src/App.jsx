@@ -76,6 +76,8 @@ import {
   OrderPaymentScreen,
   DeliveryListScreen,
   DeliveryEditScreen,
+  OnlineCoursesScreen,
+  EventsScreen,
 } from './Pages';
 import Root from './components/Root';
 import Loader from './components/Loader';
@@ -174,6 +176,10 @@ const App = () => {
             {
               path: 'sophiecircle/:id',
               element: <SophiaCircleScreen />,
+            },
+            {
+              path: 'event',
+              element: <EventsScreen />,
             },
             {
               path: 'blog',
@@ -288,6 +294,12 @@ const App = () => {
                 {
                   path: '',
                   element: <PremiumRoute />,
+                  children: [
+                    {
+                      path: 'onlinecourses',
+                      element: <OnlineCoursesScreen />,
+                    },
+                  ],
                 },
               ],
             },

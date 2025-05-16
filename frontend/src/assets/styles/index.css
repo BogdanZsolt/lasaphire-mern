@@ -2405,94 +2405,6 @@ form .nofeedback {
   background-color: #c82f21;
 }
 
-/* Media Querys */
-@media (min-width: 481px) {
-  .product .image,
-  .supply .image {
-    position: relative;
-    max-width: 31.25rem;
-    width: 100%;
-    margin: 0 auto;
-    height: min-content;
-    overflow: hidden;
-  }
-
-  .product .outer-main,
-  .supply .outer-main {
-    width: calc(100% - 5.3125rem);
-    height: 100%;
-    margin: 0 0 0 5.3125rem;
-  }
-
-  .product .outer-thumb,
-  .supply .outer-thumb {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .product .custom-pagination,
-  .supply .custom-pagination {
-    display: none;
-  }
-
-  footer .footer-copyright {
-    justify-content: space-between;
-    flex-wrap: wrap-reverse;
-  }
-}
-
-/* LOGIN */
-.google-btn__icon svg {
-  vertical-align: unset;
-  margin-right: 0.25rem;
-}
-
-.captcha .preview {
-  display: flex;
-  color: var(--bs-secondary);
-  background-color: var(--bs-primary);
-  margin-bottom: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  height: 2.5rem;
-  padding-inline: 0.5rem;
-  letter-spacing: 0.5rem;
-  border: 1px solid var(--bs-secondary);
-}
-
-.captcha .preview span {
-  display: inline-block;
-  user-select: none;
-}
-
-@media (min-width: 576px) {
-  .blog.card-group > .card {
-    flex: 1 0 25rem;
-  }
-
-  .home-blog.card-group > .card {
-    flex: 1 0 15.625rem;
-  }
-
-  .home-page-input input[type='number'] {
-    max-width: 50%;
-  }
-}
-
-@media (min-width: 600px) {
-  .wide {
-    grid-column: span 2;
-  }
-  .tail {
-    grid-row: span 2;
-  }
-  .banner .title h3 {
-    max-width: 35.875rem;
-  }
-}
-
 /* PS SWITCH */
 .ps-switch {
   --ps-switch-width: 2.5rem;
@@ -2547,6 +2459,126 @@ form .nofeedback {
 .form-check-input:checked {
   background-color: var(--bs-secondary);
   border-color: var(--bs-secondary);
+}
+
+/* LOGIN */
+.google-btn__icon svg {
+  vertical-align: unset;
+  margin-right: 0.25rem;
+}
+
+.captcha .preview {
+  display: flex;
+  color: var(--bs-secondary);
+  background-color: var(--bs-primary);
+  margin-bottom: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  padding-inline: 0.5rem;
+  letter-spacing: 0.5rem;
+  border: 1px solid var(--bs-secondary);
+}
+
+.captcha .preview span {
+  display: inline-block;
+  user-select: none;
+}
+
+/* SOCIAL WIND MENU */
+.social-wind-menu {
+  position: absolute;
+  top: 8vh;
+  right: -80px;
+  padding: 0.625rem 0.3125rem;
+  background-color: rgba(var(--bs-primary-rgb), 0.3);
+  border-radius: 50px 0 0 50px;
+  box-shadow: var(--bs-shadow-lg);
+  transition: right 0.5s ease-in-out;
+}
+
+.social-wind-menu:hover {
+  right: 0;
+}
+
+.social-wind-menu a {
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  transition: background-color 0.5s ease-in;
+}
+
+.social-wind-menu a:hover {
+  background-color: var(--bs-secondary);
+  color: var(--bs-primary);
+}
+
+/* Media Querys */
+@media (min-width: 481px) {
+  .product .image,
+  .supply .image {
+    position: relative;
+    max-width: 31.25rem;
+    width: 100%;
+    margin: 0 auto;
+    height: min-content;
+    overflow: hidden;
+  }
+
+  .product .outer-main,
+  .supply .outer-main {
+    width: calc(100% - 5.3125rem);
+    height: 100%;
+    margin: 0 0 0 5.3125rem;
+  }
+
+  .product .outer-thumb,
+  .supply .outer-thumb {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .product .custom-pagination,
+  .supply .custom-pagination {
+    display: none;
+  }
+
+  footer .footer-copyright {
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+  }
+}
+
+@media (min-width: 576px) {
+  .blog.card-group > .card {
+    flex: 1 0 25rem;
+  }
+
+  .home-blog.card-group > .card {
+    flex: 1 0 15.625rem;
+  }
+
+  .home-page-input input[type='number'] {
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 600px) {
+  .wide {
+    grid-column: span 2;
+  }
+  .tail {
+    grid-row: span 2;
+  }
+  .banner .title h3 {
+    max-width: 35.875rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -2629,6 +2661,7 @@ form .nofeedback {
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
   .carousel-nav > div {
     width: 2.5rem;
     height: 2.5rem;

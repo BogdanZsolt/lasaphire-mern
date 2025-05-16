@@ -53,6 +53,10 @@ export const AuthorScreen = lazy(() => import('./screens/AuthorScreen.jsx'));
 export const CategoryPostScreen = lazy(() =>
   import('./screens/CategoryPostScreen.jsx')
 );
+export const OnlineCoursesScreen = lazy(() =>
+  import('./screens/OnlineCoursesScreen.jsx')
+);
+export const EventsScreen = lazy(() => import('./screens/EventsScreen.jsx'));
 export const PrivateRoute = lazy(() => import('./components/PrivateRoute.jsx'));
 export const PlaceOrderScreen = lazy(() =>
   import('./screens/PlaceOrderScreen.jsx')
